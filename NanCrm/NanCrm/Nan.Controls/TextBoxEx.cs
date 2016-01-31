@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Nan.BusinessObjects;
 
 namespace Nan.Controls
 {
@@ -15,13 +16,23 @@ namespace Nan.Controls
         public bool ShowLink 
         { 
             get {return m_showLink;} 
-            set {m_showLink = value; btnLink.Visible=value;}
+            set 
+            {
+                m_showLink = value;
+                TextBoxEx_SizeChanged(null,null);
+                btnLink.Visible=value;
+            }
         }
         private bool m_showChoose;
         public bool ShowChoose
         {
             get { return m_showChoose; }
-            set { m_showChoose = value; btnChoose.Visible = value; }
+            set 
+            { 
+                m_showChoose = value;
+                TextBoxEx_SizeChanged(null, null);
+                btnChoose.Visible = value;
+            }
         }
 
         public new string Text
@@ -35,6 +46,9 @@ namespace Nan.Controls
             get { return m_tableSource; }
             set { m_tableSource = value; }
         }
+
+        public BOIDEnum BOID { get; set; }
+        public string BOField { get; set; }
 
         public TextBoxEx()
         {

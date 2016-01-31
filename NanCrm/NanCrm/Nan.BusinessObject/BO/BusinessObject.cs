@@ -69,6 +69,10 @@ namespace Nan.BusinessObjects.BO
         {
             return 1;
         }
+        public virtual object GetBOTable()
+        {
+            return null;
+        }
         public virtual bool Add()
         {
             if (!OnIsValid())
@@ -156,12 +160,6 @@ namespace Nan.BusinessObjects.BO
             var objList = new BiggyList<T>(tbObj);
 
             return objList.GetList();
-        }
-        public virtual T ConvertBO<T>(object source) where T:new()
-        {
-            T target = new T();
-
-            return target;
         }
     }
 

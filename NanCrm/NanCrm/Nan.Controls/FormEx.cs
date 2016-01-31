@@ -112,7 +112,71 @@ namespace Nan.Controls
             }
             return true;
         }
+        protected virtual bool SaveData()
+        {
+            if(m_boId == BOIDEnum.Invalid)
+                return true;
 
+            bool result = true;
+            foreach (Control ctrl in this.Controls)
+            {
+                if (ctrl is TextBoxEx)
+                {
+                    TextBoxEx txtBox = (TextBoxEx)ctrl;
+                    if (txtBox.BOID == m_boId)
+                    {
+                        result = SetFieldData(txtBox.BOField, txtBox.Text);
+                    }
+                }
+                else if(ctrl is ComboBoxEx)
+                {
+                    ComboBoxEx cmb = (ComboBoxEx)ctrl;
+                    if (cmb.BOID == m_boId)
+                    {
+                        result = SetFieldData(cmb.BOField, cmb.SelectedValue);
+                    }
+                }
+                if (!result)
+                    break;
+            }
+            return result;
+        }
+
+        private bool SetFieldData(string fieldName, object value)
+        {
+            bool result = true;
+            object boTable = m_bo.GetBOTable();
+            var properties = boTable.GetType().GetProperties();
+            int i = 0;
+            for (; i < properties.Length; i++)
+            {
+                if (properties[i].Name == fieldName)
+                {
+                    var proType = Nullable.GetUnderlyingType(properties[i].PropertyType) ?? properties[i].PropertyType;
+                    if (proType.Equals(typeof(int)))
+                    {
+                        properties[i].SetValue(boTable, int.Parse(value.ToString()), null);
+                        break;
+                    }
+                    else if (proType.Equals(typeof(DateTime)))
+                    {
+                        properties[i].SetValue(boTable, DateTime.Parse(value.ToString()), null);
+                        break;
+                    }
+                    else
+                    {
+                        properties[i].SetValue(boTable, value.ToString(), null);
+                        break;
+                    }
+                }
+            }
+            if (i == properties.Length)
+            {
+                result = false;
+            }
+
+            return result;
+        }
     }
 
     public enum FormMode

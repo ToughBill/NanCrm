@@ -19,6 +19,12 @@ namespace Nan.BusinessObjects
                 case BOIDEnum.Market:
                     bo = new BOMarket();
                     break;
+                case BOIDEnum.Product:
+                    bo = new BOProduct();
+                    break;
+                case BOIDEnum.Texture:
+                    bo = new BOTexture();
+                    break;
                 default: break;
             }
             bo.Init();

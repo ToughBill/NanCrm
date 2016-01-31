@@ -20,19 +20,23 @@ namespace Nan.Controls
         }
 
         public BOIDEnum BOID { get; set; }
+        public string BOField { get; set; }
+
+        public BOIDEnum DataSourceBO { get; set; }
         public string DesField { get; set; }
         public string KeyField { get; set; }
+
         public bool AddEmptyRow { get; set; }
         public bool AddDefineNew { get; set; }
         private List<ValidValue> m_vv;
 
         public void InitSource()
         {
-            if (BOID == BOIDEnum.Invalid)
+            if (DataSourceBO == BOIDEnum.Invalid)
             {
                 return;
             }
-            BusinessObject bo = BOFactory.GetBO(BOID);
+            BusinessObject bo = BOFactory.GetBO(DataSourceBO);
             m_vv = bo.GetValieValue(KeyField, DesField);
             if (AddEmptyRow)
             {

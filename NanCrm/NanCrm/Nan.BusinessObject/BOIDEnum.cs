@@ -27,15 +27,28 @@ namespace Nan.BusinessObjects
         /// BOCategory
         /// </summary>
         Category,
+        /// <summary>
+        /// KeyWord
+        /// </summary>
         KeyWord,
         KeyWordList,
         KeyWordListDetail,
         SearchPlantf,
         Status,
+        /// <summary>
+        /// BP
+        /// </summary>
         BP,
         BPSearchPlan,
         BPSearchResult,
+        /// <summary>
+        /// Product
+        /// </summary>
         Product,
+        /// <summary>
+        /// Texture
+        /// </summary>
+        Texture,
         PSearchPlan,
         PSearchResult,
         BOSequence

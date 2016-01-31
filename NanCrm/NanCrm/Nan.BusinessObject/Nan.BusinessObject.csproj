@@ -59,6 +59,7 @@
     <Compile Include="BO\BOStatus.cs" />
     <Compile Include="BO\BOBPSearchResult.cs" />
     <Compile Include="BO\BOBPSearchPlan.cs" />
+    <Compile Include="BO\BOTexture.cs" />
     <Compile Include="Database\NanDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

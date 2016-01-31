@@ -15,6 +15,7 @@ using Biggy.Data.Json;
 using Nan.BusinessObjects;
 using Nan.BusinessObjects.BO;
 using System.Collections;
+using NanCrm.Product;
 
 namespace NanCrm
 {
@@ -104,6 +105,11 @@ namespace NanCrm
                     BPMD bpmd = new BPMD(BOIDEnum.BP);
                     bpmd.MdiParent = this.MdiParent;
                     bpmd.Show();
+                    break;
+                case MenuID.PR_MD:
+                    frmProduct frmPro = new frmProduct(BOIDEnum.Product);
+                    frmPro.MdiParent = this.MdiParent;
+                    frmPro.Show();
                     break;
                 default: break;
             }

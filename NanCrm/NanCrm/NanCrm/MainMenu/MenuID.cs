@@ -19,6 +19,7 @@ namespace NanCrm
         public const int BP_SearchPlanList = 2005;
         public const int BP_SearchLogList = 2006;
 
-        public const int PR_Management = 300; 
+        public const int PR_Management = 300;
+        public const int PR_MD = 3001; 
     }
 }
