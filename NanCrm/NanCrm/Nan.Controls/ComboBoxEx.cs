@@ -28,6 +28,7 @@ namespace Nan.Controls
 
         public bool AddEmptyRow { get; set; }
         public bool AddDefineNew { get; set; }
+
         private List<ValidValue> m_vv;
 
         public void InitSource()
@@ -60,8 +61,9 @@ namespace Nan.Controls
             }
             if (SelectedIndex == m_vv.Count-1)
             {
-
+                BusinessObject.DisplayBo(DataSourceBO);
             }
         }
+
     }
 }

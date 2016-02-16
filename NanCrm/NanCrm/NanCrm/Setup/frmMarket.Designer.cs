@@ -44,18 +44,23 @@
             this.objList.AllColumns.Add(this.olvId);
             this.objList.AllColumns.Add(this.olvcName);
             this.objList.AllColumns.Add(this.olvcDesc);
-            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Market;
             this.objList.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvId,
             this.olvcName,
             this.olvcDesc});
-            this.objList.Location = new System.Drawing.Point(12, 12);
+            this.objList.FullRowSelect = true;
+            this.objList.GridLines = true;
+            this.objList.HideSelection = false;
+            this.objList.Location = new System.Drawing.Point(12, 13);
             this.objList.Name = "objList";
-            this.objList.Size = new System.Drawing.Size(542, 287);
+            this.objList.ShowRowNumber = true;
+            this.objList.Size = new System.Drawing.Size(542, 311);
             this.objList.TabIndex = 2;
+            this.objList.UseAlternatingBackColors = true;
             this.objList.UseCompatibleStateImageBehavior = false;
             this.objList.View = System.Windows.Forms.View.Details;
             // 
@@ -63,11 +68,14 @@
             // 
             this.olvId.AspectName = "ID";
             this.olvId.Groupable = false;
-            this.olvId.Text = "#";
+            this.olvId.IsRowNumberColumn = false;
+            this.olvId.Text = "ID";
             // 
             // olvcName
             // 
             this.olvcName.AspectName = "Name";
+            this.olvcName.Groupable = false;
+            this.olvcName.IsRowNumberColumn = false;
             this.olvcName.Text = "名称";
             this.olvcName.Width = 156;
             // 
@@ -75,14 +83,15 @@
             // 
             this.olvcDesc.AspectName = "Desc";
             this.olvcDesc.Groupable = false;
+            this.olvcDesc.IsRowNumberColumn = false;
             this.olvcDesc.Text = "描述";
             this.olvcDesc.Width = 300;
             // 
             // frmMarket
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 337);
+            this.ClientSize = new System.Drawing.Size(566, 365);
             this.Controls.Add(this.objList);
             this.Name = "frmMarket";
             this.Text = "Market";

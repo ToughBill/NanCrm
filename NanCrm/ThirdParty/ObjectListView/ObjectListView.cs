@@ -3982,10 +3982,15 @@ namespace BrightIdeasSoftware
                 if (objectsToDisplay != null) {
                     // Build a list of all our items and then display them. (Building
                     // a list and then doing one AddRange is about 10-15% faster than individual adds)
+                    int rowNo = 1;
                     List<ListViewItem> itemList = new List<ListViewItem>(); // use ListViewItem to avoid co-variant conversion
                     foreach (object rowObject in objectsToDisplay) {
                         OLVListItem lvi = new OLVListItem(rowObject);
                         this.FillInValues(lvi, rowObject);
+                        if (this.GetColumn(0).IsRowNumberColumn)
+                        {
+                            lvi.GetSubItem(0).Text = (rowNo++).ToString();
+                        }
                         itemList.Add(lvi);
                     }
                     this.Items.AddRange(itemList.ToArray());
@@ -8215,6 +8220,10 @@ namespace BrightIdeasSoftware
                 return;
 
             OLVListSubItem subItem = this.MakeSubItem(rowObject, this.GetColumn(0));
+            if (lvi.Index > -1)
+            {
+                subItem.Text = (lvi.Index + 1).ToString();
+            }
             lvi.SubItems[0] = subItem;
             lvi.ImageSelector = subItem.ImageSelector;
 

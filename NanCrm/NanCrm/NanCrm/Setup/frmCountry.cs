@@ -27,6 +27,7 @@ namespace NanCrm.Setup
         private void Country_Load(object sender, EventArgs e)
         {
             LoadGridData();
+            BOCountry.DisplayFuncInit(DisplayCountryBo);
         }
 
         public void LoadGridData()
@@ -67,5 +68,14 @@ namespace NanCrm.Setup
             }
         }
 
+        public bool DisplayCountryBo(BOIDEnum boid, string key, bool isReport)
+        {
+            bool result = true;
+            frmCountry frmCty = new frmCountry(boid);
+            frmCty.MdiParent = FormManager.GetMainForm();
+            frmCty.Show();
+
+            return result;
+        }
     }
 }

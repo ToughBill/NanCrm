@@ -17,7 +17,7 @@ namespace Nan.BusinessObjects.BO
         private TextureTable m_boTexture;
         public BOTexture()
         {
-            base.m_boId = BOIDEnum.Market;
+            base.m_boId = BOIDEnum.Texture;
             m_boTexture = new TextureTable();
         }
 

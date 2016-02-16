@@ -107,6 +107,19 @@ namespace BrightIdeasSoftware {
         #endregion 
 
         #region Public Properties
+        /// <summary>
+        /// indicate a column is row number column
+        /// </summary>
+        /// <remarks>
+        /// If this is set, AspectName is ignored, and value will be automatically calculated.
+        /// Only one column can be set as row number in a list view.
+        /// </remarks>
+        public bool IsRowNumberColumn
+        {
+            get { return isRowNumberColumn; }
+            set { isRowNumberColumn = value; }
+        }
+        private bool isRowNumberColumn;
 
         /// <summary>
         /// This delegate will be used to extract a value to be displayed in this column.

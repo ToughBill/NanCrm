@@ -37,31 +37,6 @@ namespace Nan.BusinessObjects.BO
     {
 
         private NanCountry m_boCty;
-        //JsonStore<BOCountry> m_tbCty;
-        //protected JsonStore<BOCountry> TableCountry
-        //{
-        //    get 
-        //    {
-        //        if (m_tbCty == null)
-        //        {
-        //            m_tbCty = new JsonStore<BOCountry>(m_dbConn);
-        //        }
-        //        return m_tbCty; 
-        //    }
-        //}
-        //BiggyList<BOCountry> m_tbCtyList;
-        //protected BiggyList<BOCountry> CountryList
-        //{
-        //    get 
-        //    {
-        //        if (m_tbCtyList == null)
-        //        {
-        //            m_tbCtyList = new BiggyList<BOCountry>(m_tbCty);
-        //        }
-        //        return m_tbCtyList;
-        //    }
-        //}
-
         public BOCountry()
         {
             base.m_boId = BOIDEnum.Country;
@@ -111,6 +86,23 @@ namespace Nan.BusinessObjects.BO
                 }
             }
             return maxId;
+        }
+
+        public static event DisplayBoHandler OnDisplay;
+        public static void DisplayFuncInit(DisplayBoHandler func)
+        {
+            OnDisplay = null;
+            OnDisplay += func;
+        }
+        public static bool Display(BOIDEnum boid, string key = "", bool isReport = false)
+        {
+            bool result = true;
+            if (OnDisplay != null)
+            {
+                result = OnDisplay(boid, key, isReport);
+            }
+
+            return result;
         }
     }
 }

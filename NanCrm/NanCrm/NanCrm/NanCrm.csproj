@@ -66,6 +66,7 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Global\Datebase.cs" />
+    <Compile Include="Global\FormManager.cs" />
     <Compile Include="Global\Utilities.cs" />
     <Compile Include="MainMenu\frmMainMenu.cs">
       <SubType>Form</SubType>
@@ -94,6 +95,12 @@
     </Compile>
     <Compile Include="Setup\frmMarket.Designer.cs">
       <DependentUpon>frmMarket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\frmTexture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setup\frmTexture.Designer.cs">
+      <DependentUpon>frmTexture.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="BPMD.resx">
       <DependentUpon>BPMD.cs</DependentUpon>
@@ -125,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Setup\frmMarket.resx">
       <DependentUpon>frmMarket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setup\frmTexture.resx">
+      <DependentUpon>frmTexture.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

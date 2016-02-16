@@ -161,6 +161,20 @@ namespace Nan.BusinessObjects.BO
 
             return objList.GetList();
         }
+
+        public static bool DisplayBo(BOIDEnum boid, string key = "", bool isReport = false)
+        {
+            bool result = true;
+            switch (boid)
+            {
+                case BOIDEnum.Country:
+                    result = BOCountry.Display(boid, key, isReport);
+                    break;
+                default: break;
+            }
+
+            return result;
+        }
     }
 
     public class ValidValue
@@ -174,6 +188,8 @@ namespace Nan.BusinessObjects.BO
             Description = desc;
         }
     }
+
+    public delegate bool DisplayBoHandler(BOIDEnum boid, string key, bool isReport);
 
     public static class BOConvertor
     {
