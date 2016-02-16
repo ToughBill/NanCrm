@@ -59,13 +59,17 @@ namespace Nan.Controls
                 olvCol.Groupable = false;
                 olvCol.Text = "#";
                 olvCol.IsRowNumberColumn = true;
-                this.Columns.Add(olvCol);
+                this.Columns.Insert(0, olvCol);
             }
             else
             {
-                if (this.Columns.Count>0)
+                if (this.Columns.Count > 0)
                 {
-                    this.Columns.RemoveAt(0);
+                    OLVColumn col = (OLVColumn)this.Columns[0];
+                    if (col.IsRowNumberColumn)
+                    {
+                        this.Columns.RemoveAt(0);
+                    }
                 }
             }
             this.Invalidate();

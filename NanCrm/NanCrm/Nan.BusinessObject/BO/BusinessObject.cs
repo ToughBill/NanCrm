@@ -170,6 +170,9 @@ namespace Nan.BusinessObjects.BO
                 case BOIDEnum.Country:
                     result = BOCountry.Display(boid, key, isReport);
                     break;
+                case BOIDEnum.Texture:
+                    result = BOTexture.Display(boid, key, isReport);
+                    break;
                 default: break;
             }
 

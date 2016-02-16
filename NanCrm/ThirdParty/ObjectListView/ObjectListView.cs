@@ -4739,6 +4739,7 @@ namespace BrightIdeasSoftware
         /// Rebuild the columns based upon its current view and column visibility settings
         /// </summary>
         public virtual void RebuildColumns() {
+            Console.WriteLine("RebuildColumns");
             this.ChangeToFilteredColumns(this.View);
         }
 
