@@ -30,19 +30,20 @@ namespace NanCrm.Setup
             try
             {
                 IList ctybos = m_bo.GetDataList();
-                List<MarketMD> ctyList = Utilities.ConvertList <MarketMD> (ctybos);
+                List<MarketMD> mktList = Utilities.ConvertList <MarketMD> (ctybos);
                 MarketMD newMkt = new MarketMD();
                 newMkt.ID = BusinessObject.GetBONextID(m_boId);
-                ctyList.Add(newMkt);
+                mktList.Add(newMkt);
                 List<MarketDetaiedlMD> listObj = new List<MarketDetaiedlMD>();
                 BOMarket mktBO=(BOMarket)m_bo;
-                foreach(MarketMD mkt in ctyList)
+                foreach (MarketMD mkt in mktList)
                 {
                     MarketDetaiedlMD mktDetail = new MarketDetaiedlMD(mkt);
                     string cties=string.Empty;
                     List<MktDetailMD> detail=mktBO.GetMarketDetail(mkt.ID);
                     detail.ForEach(x => cties+=x.Country+", ");
                     mktDetail.Countries = (cties != string.Empty) ? cties.Substring(0, cties.Length - 2) : cties;
+                    listObj.Add(mktDetail);
                 }
 
                 objList.SetObjects(listObj);

@@ -74,7 +74,7 @@ namespace Nan.BusinessObjects.BO
             IEnumerator iter = mktDetailBo.GetDataList().GetEnumerator();
             while (iter.MoveNext())
             {
-                MktDetailMD bo = (MktDetailMD)iter.Current;
+                MktDetailMD bo = ((Newtonsoft.Json.Linq.JObject)iter.Current).ConvertToTarget<MktDetailMD>();
                 if (bo.MktId == mktID)
                 {
                     result.Add(bo);
