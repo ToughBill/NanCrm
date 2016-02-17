@@ -101,6 +101,11 @@ namespace NanCrm
                     mkt.MdiParent = this.MdiParent;
                     mkt.Show();
                     break;
+                case MenuID.Setup_Texture:
+                    frmTexture txt = new frmTexture(BOIDEnum.Texture);
+                    txt.MdiParent = this.MdiParent;
+                    txt.Show();
+                    break;
                 case MenuID.BP_MD:
                     BPMD bpmd = new BPMD(BOIDEnum.BP);
                     bpmd.MdiParent = this.MdiParent;

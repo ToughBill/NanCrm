@@ -1,4 +1,5 @@
-﻿namespace Nan.Controls
+﻿using Nan.Controls;
+namespace NanCrm
 {
     partial class FormEx
     {

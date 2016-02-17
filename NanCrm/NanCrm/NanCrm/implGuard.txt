@@ -1,0 +1,10 @@
+﻿1，main menu中添加新菜单
+	1)，mainMenu.txt中添加对应信息
+	2)，MenuID.cs中添加对应ID
+	3)，mainMenu_NodeMouseClick函数中添加menu处理事件
+
+2, 添加新BO
+	1)，新建BO类，继承BusinessObject
+	2)，BO类中添加自己的Display event，在InitBoDisplayFunc方法中订阅该event。
+	3)，添加对应窗体，在窗体中实现BO中display订阅的方法事件。
+	4)，实现GetValieValue方法（主要用在初始化combobox控件时）。

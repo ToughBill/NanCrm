@@ -10,6 +10,7 @@ namespace NanCrm
         public const int Setup_Management = 100;
         public const int Setup_Country = 1001;
         public const int Setup_Market = 1002;
+        public const int Setup_Texture = 1003;
 
         public const int BP_Management = 200;
         public const int BP_MD = 2001;

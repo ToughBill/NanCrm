@@ -10,6 +10,7 @@ using Nan.Controls;
 using Nan.BusinessObjects.BO;
 using Nan.BusinessObjects;
 using NanCrm.Global;
+using System.Collections;
 
 namespace NanCrm.Setup
 {
@@ -23,10 +24,20 @@ namespace NanCrm.Setup
 
         private void frmTexture_Load(object sender, EventArgs e)
         {
-            BOTexture.DisplayFuncInit(DisplayTextureBo);
+            LoadGridData();
         }
 
-        public bool DisplayTextureBo(BOIDEnum boid, string key, bool isReport)
+        public void LoadGridData()
+        {
+            IList textures = m_bo.GetDataList();
+            List<TextureMD> textureList = Utilities.ConvertList<TextureMD>(textures);
+            TextureMD newTexture = new TextureMD();
+            newTexture.ID = BusinessObject.GetBONextID(m_boId);
+            textureList.Add(newTexture);
+            objList.SetObjects(textureList);
+        }
+
+        public static bool DisplayTextureBo(BOIDEnum boid, string key, bool isReport)
         {
             bool result = true;
             frmTexture frmCty = new frmTexture(boid);
@@ -34,6 +45,18 @@ namespace NanCrm.Setup
             frmCty.Show();
 
             return result;
+        }
+
+        private bool btnOk_Clicking(object sender, EventArgs e)
+        {
+            if (this.FormMode == FormMode.Ok)
+            {
+                return true;
+            }
+            IList obj = (IList)objList.Objects;
+            BOTexture objTxt = (BOTexture)m_bo;
+            objTxt.SetDataList(obj);
+            return objTxt.Update();
         }
 
     }

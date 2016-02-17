@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using Nan.BusinessObjects.Database;
+using NanCrm.Global;
 
 namespace NanCrm
 {
@@ -24,6 +25,7 @@ namespace NanCrm
         {
             NanDataBase.InitDatabase(Path.Combine(Application.StartupPath, "../../Database"), "NanCrm_v1");
             InitMainMenu();
+            FormManager.SetMainForm(this);
         }
 
         private void InitMainMenu()

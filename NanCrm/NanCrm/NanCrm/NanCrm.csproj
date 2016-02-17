@@ -59,6 +59,12 @@
     <Compile Include="BP\frmBP.Designer.cs">
       <DependentUpon>frmBP.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEx.Designer.cs">
+      <DependentUpon>FormEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BP\frmBP.resx">
       <DependentUpon>frmBP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEx.resx">
+      <DependentUpon>FormEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -174,6 +183,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="implGuard.txt" />
     <Content Include="MainMenu\mainMenu.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

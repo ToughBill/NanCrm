@@ -52,19 +52,19 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(12, 342);
+            this.btnOk.Location = new System.Drawing.Point(12, 371);
             this.btnOk.Clicking += new Nan.Controls.ClickingEvent(this.btnOk_Clicking);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(93, 342);
+            this.btnCancel.Location = new System.Drawing.Point(93, 371);
             // 
             // lblCode
             // 
             this.lblCode.AutoSize = true;
-            this.lblCode.Location = new System.Drawing.Point(12, 15);
+            this.lblCode.Location = new System.Drawing.Point(12, 16);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(53, 12);
+            this.lblCode.Size = new System.Drawing.Size(55, 13);
             this.lblCode.TabIndex = 2;
             this.lblCode.Text = "产品编码";
             // 
@@ -72,20 +72,20 @@
             // 
             this.textBoxEx1.BOField = "Code";
             this.textBoxEx1.BOID = Nan.BusinessObjects.BOIDEnum.Product;
-            this.textBoxEx1.Location = new System.Drawing.Point(71, 9);
+            this.textBoxEx1.Location = new System.Drawing.Point(71, 10);
             this.textBoxEx1.Name = "textBoxEx1";
             this.textBoxEx1.ShowChoose = false;
             this.textBoxEx1.ShowLink = false;
-            this.textBoxEx1.Size = new System.Drawing.Size(170, 18);
+            this.textBoxEx1.Size = new System.Drawing.Size(170, 20);
             this.textBoxEx1.TabIndex = 3;
             this.textBoxEx1.TableSource = null;
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(12, 39);
+            this.lblName.Location = new System.Drawing.Point(12, 42);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(53, 12);
+            this.lblName.Size = new System.Drawing.Size(55, 13);
             this.lblName.TabIndex = 4;
             this.lblName.Text = "产品名字";
             // 
@@ -93,11 +93,11 @@
             // 
             this.textBoxEx2.BOField = "Name";
             this.textBoxEx2.BOID = Nan.BusinessObjects.BOIDEnum.Product;
-            this.textBoxEx2.Location = new System.Drawing.Point(71, 33);
+            this.textBoxEx2.Location = new System.Drawing.Point(71, 36);
             this.textBoxEx2.Name = "textBoxEx2";
             this.textBoxEx2.ShowChoose = false;
             this.textBoxEx2.ShowLink = false;
-            this.textBoxEx2.Size = new System.Drawing.Size(170, 18);
+            this.textBoxEx2.Size = new System.Drawing.Size(170, 20);
             this.textBoxEx2.TabIndex = 5;
             this.textBoxEx2.TableSource = null;
             // 
@@ -105,20 +105,20 @@
             // 
             this.txtFName.BOField = "FName";
             this.txtFName.BOID = Nan.BusinessObjects.BOIDEnum.Product;
-            this.txtFName.Location = new System.Drawing.Point(71, 57);
+            this.txtFName.Location = new System.Drawing.Point(71, 62);
             this.txtFName.Name = "txtFName";
             this.txtFName.ShowChoose = false;
             this.txtFName.ShowLink = false;
-            this.txtFName.Size = new System.Drawing.Size(170, 18);
+            this.txtFName.Size = new System.Drawing.Size(170, 20);
             this.txtFName.TabIndex = 7;
             this.txtFName.TableSource = null;
             // 
             // lblFName
             // 
             this.lblFName.AutoSize = true;
-            this.lblFName.Location = new System.Drawing.Point(12, 63);
+            this.lblFName.Location = new System.Drawing.Point(12, 68);
             this.lblFName.Name = "lblFName";
-            this.lblFName.Size = new System.Drawing.Size(53, 12);
+            this.lblFName.Size = new System.Drawing.Size(55, 13);
             this.lblFName.TabIndex = 6;
             this.lblFName.Text = "外文名字";
             // 
@@ -126,20 +126,20 @@
             // 
             this.txtPrice.BOField = "FName";
             this.txtPrice.BOID = Nan.BusinessObjects.BOIDEnum.Product;
-            this.txtPrice.Location = new System.Drawing.Point(362, 9);
+            this.txtPrice.Location = new System.Drawing.Point(362, 10);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.ShowChoose = false;
             this.txtPrice.ShowLink = false;
-            this.txtPrice.Size = new System.Drawing.Size(170, 18);
+            this.txtPrice.Size = new System.Drawing.Size(170, 20);
             this.txtPrice.TabIndex = 9;
             this.txtPrice.TableSource = null;
             // 
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(303, 15);
+            this.lblPrice.Location = new System.Drawing.Point(303, 16);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(29, 12);
+            this.lblPrice.Size = new System.Drawing.Size(31, 13);
             this.lblPrice.TabIndex = 8;
             this.lblPrice.Text = "价格";
             // 
@@ -147,20 +147,20 @@
             // 
             this.txtRefund.BOField = "Refundrate";
             this.txtRefund.BOID = Nan.BusinessObjects.BOIDEnum.Product;
-            this.txtRefund.Location = new System.Drawing.Point(362, 33);
+            this.txtRefund.Location = new System.Drawing.Point(362, 36);
             this.txtRefund.Name = "txtRefund";
             this.txtRefund.ShowChoose = false;
             this.txtRefund.ShowLink = false;
-            this.txtRefund.Size = new System.Drawing.Size(170, 18);
+            this.txtRefund.Size = new System.Drawing.Size(170, 20);
             this.txtRefund.TabIndex = 11;
             this.txtRefund.TableSource = null;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(303, 39);
+            this.label2.Location = new System.Drawing.Point(303, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "退税率";
             // 
@@ -168,29 +168,29 @@
             // 
             this.txtWeight.BOField = "Weight";
             this.txtWeight.BOID = Nan.BusinessObjects.BOIDEnum.Product;
-            this.txtWeight.Location = new System.Drawing.Point(71, 107);
+            this.txtWeight.Location = new System.Drawing.Point(71, 116);
             this.txtWeight.Name = "txtWeight";
             this.txtWeight.ShowChoose = false;
             this.txtWeight.ShowLink = false;
-            this.txtWeight.Size = new System.Drawing.Size(170, 18);
+            this.txtWeight.Size = new System.Drawing.Size(170, 20);
             this.txtWeight.TabIndex = 13;
             this.txtWeight.TableSource = null;
             // 
             // lblWeight
             // 
             this.lblWeight.AutoSize = true;
-            this.lblWeight.Location = new System.Drawing.Point(12, 113);
+            this.lblWeight.Location = new System.Drawing.Point(12, 122);
             this.lblWeight.Name = "lblWeight";
-            this.lblWeight.Size = new System.Drawing.Size(29, 12);
+            this.lblWeight.Size = new System.Drawing.Size(31, 13);
             this.lblWeight.TabIndex = 12;
             this.lblWeight.Text = "重量";
             // 
             // lblTexture
             // 
             this.lblTexture.AutoSize = true;
-            this.lblTexture.Location = new System.Drawing.Point(303, 63);
+            this.lblTexture.Location = new System.Drawing.Point(303, 68);
             this.lblTexture.Name = "lblTexture";
-            this.lblTexture.Size = new System.Drawing.Size(29, 12);
+            this.lblTexture.Size = new System.Drawing.Size(31, 13);
             this.lblTexture.TabIndex = 14;
             this.lblTexture.Text = "材质";
             // 
@@ -201,32 +201,32 @@
             this.cmbTexture.BOField = "Texture";
             this.cmbTexture.BOID = Nan.BusinessObjects.BOIDEnum.Product;
             this.cmbTexture.DataSourceBO = Nan.BusinessObjects.BOIDEnum.Texture;
-            this.cmbTexture.DesField = null;
+            this.cmbTexture.DesField = "Desc";
             this.cmbTexture.FormattingEnabled = true;
-            this.cmbTexture.KeyField = null;
-            this.cmbTexture.Location = new System.Drawing.Point(362, 55);
+            this.cmbTexture.KeyField = "Name";
+            this.cmbTexture.Location = new System.Drawing.Point(362, 60);
             this.cmbTexture.Name = "cmbTexture";
-            this.cmbTexture.Size = new System.Drawing.Size(144, 20);
+            this.cmbTexture.Size = new System.Drawing.Size(144, 21);
             this.cmbTexture.TabIndex = 15;
             // 
             // txtHeight
             // 
             this.txtHeight.BOField = "Height";
             this.txtHeight.BOID = Nan.BusinessObjects.BOIDEnum.Product;
-            this.txtHeight.Location = new System.Drawing.Point(362, 107);
+            this.txtHeight.Location = new System.Drawing.Point(362, 116);
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.ShowChoose = false;
             this.txtHeight.ShowLink = false;
-            this.txtHeight.Size = new System.Drawing.Size(170, 18);
+            this.txtHeight.Size = new System.Drawing.Size(170, 20);
             this.txtHeight.TabIndex = 17;
             this.txtHeight.TableSource = null;
             // 
             // lblHeight
             // 
             this.lblHeight.AutoSize = true;
-            this.lblHeight.Location = new System.Drawing.Point(303, 113);
+            this.lblHeight.Location = new System.Drawing.Point(303, 122);
             this.lblHeight.Name = "lblHeight";
-            this.lblHeight.Size = new System.Drawing.Size(29, 12);
+            this.lblHeight.Size = new System.Drawing.Size(31, 13);
             this.lblHeight.TabIndex = 16;
             this.lblHeight.Text = "高度";
             // 
@@ -234,20 +234,20 @@
             // 
             this.txtLength.BOField = "Length";
             this.txtLength.BOID = Nan.BusinessObjects.BOIDEnum.Product;
-            this.txtLength.Location = new System.Drawing.Point(71, 131);
+            this.txtLength.Location = new System.Drawing.Point(71, 142);
             this.txtLength.Name = "txtLength";
             this.txtLength.ShowChoose = false;
             this.txtLength.ShowLink = false;
-            this.txtLength.Size = new System.Drawing.Size(170, 18);
+            this.txtLength.Size = new System.Drawing.Size(170, 20);
             this.txtLength.TabIndex = 19;
             this.txtLength.TableSource = null;
             // 
             // lblLength
             // 
             this.lblLength.AutoSize = true;
-            this.lblLength.Location = new System.Drawing.Point(12, 137);
+            this.lblLength.Location = new System.Drawing.Point(12, 148);
             this.lblLength.Name = "lblLength";
-            this.lblLength.Size = new System.Drawing.Size(29, 12);
+            this.lblLength.Size = new System.Drawing.Size(31, 13);
             this.lblLength.TabIndex = 18;
             this.lblLength.Text = "长度";
             // 
@@ -255,28 +255,28 @@
             // 
             this.txtWidth.BOField = "Width";
             this.txtWidth.BOID = Nan.BusinessObjects.BOIDEnum.Product;
-            this.txtWidth.Location = new System.Drawing.Point(362, 131);
+            this.txtWidth.Location = new System.Drawing.Point(362, 142);
             this.txtWidth.Name = "txtWidth";
             this.txtWidth.ShowChoose = false;
             this.txtWidth.ShowLink = false;
-            this.txtWidth.Size = new System.Drawing.Size(170, 18);
+            this.txtWidth.Size = new System.Drawing.Size(170, 20);
             this.txtWidth.TabIndex = 21;
             this.txtWidth.TableSource = null;
             // 
             // lblWidth
             // 
             this.lblWidth.AutoSize = true;
-            this.lblWidth.Location = new System.Drawing.Point(303, 137);
+            this.lblWidth.Location = new System.Drawing.Point(303, 148);
             this.lblWidth.Name = "lblWidth";
-            this.lblWidth.Size = new System.Drawing.Size(29, 12);
+            this.lblWidth.Size = new System.Drawing.Size(31, 13);
             this.lblWidth.TabIndex = 20;
             this.lblWidth.Text = "宽度";
             // 
             // frmProduct
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(557, 374);
+            this.ClientSize = new System.Drawing.Size(557, 405);
             this.Controls.Add(this.txtWidth);
             this.Controls.Add(this.lblWidth);
             this.Controls.Add(this.txtLength);

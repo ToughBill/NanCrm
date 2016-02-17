@@ -87,22 +87,5 @@ namespace Nan.BusinessObjects.BO
             }
             return maxId;
         }
-
-        public static event DisplayBoHandler OnDisplay;
-        public static void DisplayFuncInit(DisplayBoHandler func)
-        {
-            OnDisplay = null;
-            OnDisplay += func;
-        }
-        public static bool Display(BOIDEnum boid, string key = "", bool isReport = false)
-        {
-            bool result = true;
-            if (OnDisplay != null)
-            {
-                result = OnDisplay(boid, key, isReport);
-            }
-
-            return result;
-        }
     }
 }

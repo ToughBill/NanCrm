@@ -8,8 +8,10 @@ using System.Text;
 using System.Windows.Forms;
 using Nan.BusinessObjects;
 using Nan.BusinessObjects.BO;
+using Nan.Controls;
+using NanCrm.Global;
 
-namespace Nan.Controls
+namespace NanCrm
 {
     public partial class FormEx : Form
     {
@@ -27,6 +29,8 @@ namespace Nan.Controls
             get { return m_formMode; }
             set { m_formMode = value; }
         }
+
+        public DeleReturnProc UpdateProc;
 
         public FormEx()
         {
@@ -79,11 +83,18 @@ namespace Nan.Controls
                 if (ctrl is ComboBoxEx)
                 {
                     ComboBoxEx comb = (ComboBoxEx)ctrl;
+                    comb.DefineNewProc = new DeleDefineNewProc(ComboBoxDefineNewProc);
                     comb.InitSource();
                 }
             }
 
             base.OnLoad(e);
+        }
+
+        protected virtual void ComboBoxDefineNewProc(object sender, DeleReturnProc retProc)
+        {
+            ComboBoxEx comb = (ComboBoxEx)sender;
+            FormManager.DisplayForm(comb.DataSourceBO, "", FormMode.Ok, false, retProc);
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -101,10 +112,19 @@ namespace Nan.Controls
 
         private bool btnOk_Clicked(object sender, ClickedEventArgs e)
         {
+            if (m_formMode == FormMode.Ok)
+            {
+                this.Close();
+                return true;
+            }
             if (e.Result)
             {
                 m_formMode = FormMode.Ok;
                 btnOk.Text = "确定";
+                if (UpdateProc != null)
+                {
+                    UpdateProc(this,null);
+                }
             }
             else
             {
@@ -178,7 +198,7 @@ namespace Nan.Controls
             return result;
         }
     }
-
+    //public delegate void DeleReturnProc(Form form, object data);
     public enum FormMode
     {
         Ok,

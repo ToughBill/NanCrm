@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
+using Newtonsoft.Json.Linq;
 
 namespace Nan.BusinessObjects.BO
 {
-    public class TextureTable
+    public class TextureMD
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -14,11 +16,11 @@ namespace Nan.BusinessObjects.BO
 
     public class BOTexture : BusinessObject
     {
-        private TextureTable m_boTexture;
+        private TextureMD m_boTexture;
         public BOTexture()
         {
             base.m_boId = BOIDEnum.Texture;
-            m_boTexture = new TextureTable();
+            m_boTexture = new TextureMD();
         }
 
         public override bool Init()
@@ -28,21 +30,5 @@ namespace Nan.BusinessObjects.BO
             return base.Init();
         }
 
-        public static event DisplayBoHandler OnDisplay;
-        public static void DisplayFuncInit(DisplayBoHandler func)
-        {
-            OnDisplay = null;
-            OnDisplay += func;
-        }
-        public static bool Display(BOIDEnum boid, string key = "", bool isReport = false)
-        {
-            bool result = true;
-            if (OnDisplay != null)
-            {
-                result = OnDisplay(boid, key, isReport);
-            }
-
-            return result;
-        }
     }
 }

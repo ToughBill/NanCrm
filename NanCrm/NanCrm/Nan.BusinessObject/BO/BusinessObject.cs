@@ -21,7 +21,17 @@ namespace Nan.BusinessObjects.BO
 
         public virtual List<ValidValue> GetValieValue(string keyField, string descField)
         {
-            return new List<ValidValue>();
+            List<ValidValue> result = new List<ValidValue>();
+
+            IList source = GetDataList();
+            foreach (var item in source)
+            {
+                JObject jObj = (JObject)item;
+                ValidValue vv = new ValidValue(jObj.GetValue(keyField).ToString(), jObj.GetValue(descField).ToString());
+                result.Add(vv);
+            }
+
+            return result;
         }
 
         public BusinessObject()
@@ -161,23 +171,6 @@ namespace Nan.BusinessObjects.BO
 
             return objList.GetList();
         }
-
-        public static bool DisplayBo(BOIDEnum boid, string key = "", bool isReport = false)
-        {
-            bool result = true;
-            switch (boid)
-            {
-                case BOIDEnum.Country:
-                    result = BOCountry.Display(boid, key, isReport);
-                    break;
-                case BOIDEnum.Texture:
-                    result = BOTexture.Display(boid, key, isReport);
-                    break;
-                default: break;
-            }
-
-            return result;
-        }
     }
 
     public class ValidValue
@@ -193,6 +186,7 @@ namespace Nan.BusinessObjects.BO
     }
 
     public delegate bool DisplayBoHandler(BOIDEnum boid, string key, bool isReport);
+    
 
     public static class BOConvertor
     {

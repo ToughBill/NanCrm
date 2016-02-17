@@ -20,5 +20,6 @@ namespace NanCrm.Global
             }
             return list;
         }
+
     }
 }

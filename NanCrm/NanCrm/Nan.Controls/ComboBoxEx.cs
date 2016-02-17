@@ -28,6 +28,7 @@ namespace Nan.Controls
 
         public bool AddEmptyRow { get; set; }
         public bool AddDefineNew { get; set; }
+        public DeleDefineNewProc DefineNewProc{get;set;}
 
         private List<ValidValue> m_vv;
 
@@ -61,9 +62,19 @@ namespace Nan.Controls
             }
             if (SelectedIndex == m_vv.Count-1)
             {
-                BusinessObject.DisplayBo(DataSourceBO);
+                //BusinessObject.DisplayBo(DataSourceBO);
+                if (DefineNewProc != null)
+                {
+                    DefineNewProc(this, DefineNewReturnProc);
+                }
             }
         }
 
+        protected virtual void DefineNewReturnProc(Form form, object data)
+        {
+            InitSource();
+        }
     }
+    public delegate void DeleReturnProc(Form form, object data);
+    public delegate void DeleDefineNewProc(object sender, DeleReturnProc retProc);
 }
