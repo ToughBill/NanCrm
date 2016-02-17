@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nan.BusinessObjects.BO
 {
-    public class NanCountry
+    public class CountryMD
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -25,7 +25,7 @@ namespace Nan.BusinessObjects.BO
             if (this.GetType() != obj.GetType())
                 return false;
 
-            NanCountry cty = (NanCountry)obj;
+            CountryMD cty = (CountryMD)obj;
             return (cty.ID == this.ID
                     && cty.Name == this.Name
                     && cty.ForeName == this.ForeName
@@ -36,11 +36,11 @@ namespace Nan.BusinessObjects.BO
     public class BOCountry : BusinessObject
     {
 
-        private NanCountry m_boCty;
+        private CountryMD m_boCty;
         public BOCountry()
         {
             base.m_boId = BOIDEnum.Country;
-            m_boCty = new NanCountry();
+            m_boCty = new CountryMD();
         }
         public override bool Init()
         {
@@ -53,7 +53,7 @@ namespace Nan.BusinessObjects.BO
         {
             bool isValid = true;
             //ArrayList list = ArrayList.Adapter(m_newDataList);
-            List<NanCountry> list = new List<NanCountry>((IEnumerable<NanCountry>)m_newDataList);
+            List<CountryMD> list = new List<CountryMD>((IEnumerable<CountryMD>)m_newDataList);
             int i = 0;
             for (; i < list.Count;i++ )
             {
@@ -79,7 +79,7 @@ namespace Nan.BusinessObjects.BO
             int maxId = 1;
             foreach (var item in m_newDataList)
             {
-                NanCountry cty = (NanCountry)item;
+                CountryMD cty = (CountryMD)item;
                 if (cty.ID > maxId)
                 {
                     maxId = cty.ID;

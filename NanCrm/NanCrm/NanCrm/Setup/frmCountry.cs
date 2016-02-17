@@ -34,8 +34,8 @@ namespace NanCrm.Setup
             try
             {
                 IList ctybos = m_bo.GetDataList();
-                List<NanCountry> ctyList = Utilities.ConvertList<NanCountry>(ctybos);
-                NanCountry newCty = new NanCountry();
+                List<CountryMD> ctyList = Utilities.ConvertList<CountryMD>(ctybos);
+                CountryMD newCty = new CountryMD();
                 newCty.ID = BusinessObject.GetBONextID(m_boId);
                 ctyList.Add(newCty);
                 objList.SetObjects(ctyList);

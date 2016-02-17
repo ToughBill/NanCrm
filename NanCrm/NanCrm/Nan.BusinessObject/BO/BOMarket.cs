@@ -2,22 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 namespace Nan.BusinessObjects.BO
 {
-    public class Market
+    public class MarketMD
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }
     }
+    public class MarketDetaiedlMD
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Desc { get; set; }
+        public string Countries { get; set; }
+
+        public MarketDetaiedlMD(MarketMD mkt)
+        {
+            this.ID = mkt.ID;
+            this.Name = mkt.Name;
+            this.Desc = mkt.Desc;
+        }
+    }
     public class BOMarket : BusinessObject
     {
-        private Market m_boMkt;
+        private MarketMD m_boMkt;
         public BOMarket()
         {
             base.m_boId = BOIDEnum.Market;
-            m_boMkt = new Market();
+            m_boMkt = new MarketMD();
+            m_relatedBO.Add(BOIDEnum.MarketDetail);
         }
 
         public override bool Init()
@@ -30,7 +46,7 @@ namespace Nan.BusinessObjects.BO
         public override bool OnIsValid()
         {
             bool isValid = true;
-            List<Market> list = new List<Market>((IEnumerable<Market>)m_newDataList);
+            List<MarketMD> list = new List<MarketMD>((IEnumerable<MarketMD>)m_newDataList);
             int i = 0;
             for (; i < list.Count; i++)
             {
@@ -49,6 +65,23 @@ namespace Nan.BusinessObjects.BO
                 }
             }
             return isValid;
+        }
+
+        public List<MktDetailMD> GetMarketDetail(int mktID)
+        {
+            List<MktDetailMD> result = new List<MktDetailMD>();
+            BOMarketDetail mktDetailBo = new BOMarketDetail();
+            IEnumerator iter = mktDetailBo.GetDataList().GetEnumerator();
+            while (iter.MoveNext())
+            {
+                MktDetailMD bo = (MktDetailMD)iter.Current;
+                if (bo.MktId == mktID)
+                {
+                    result.Add(bo);
+                }
+            }
+
+            return result;
         }
     }
 }

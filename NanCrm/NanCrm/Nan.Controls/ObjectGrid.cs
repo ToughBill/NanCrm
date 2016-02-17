@@ -90,5 +90,24 @@ namespace Nan.Controls
 //                 item.SubItems[0].Text = (i + 1).ToString();
 //             }
         }
+        public event DeleRowNoColumnClick RowNumberDblClick;
+        protected override bool ProcessLButtonDoubleClick(OlvListViewHitTestInfo hti)
+        {
+            if (hti.HitTestLocation == HitTestLocation.CheckBox)
+            {
+                return true;
+            }
+            if (!hti.Column.IsRowNumberColumn || hti.Item == null || hti.Item.Index < 0)
+            {
+                return true;
+            }
+            if (RowNumberDblClick != null)
+            {
+                RowNumberDblClick(hti);
+            }
+            return true;
+        }
     }
+
+    public delegate void DeleRowNoColumnClick(OlvListViewHitTestInfo hti);
 }

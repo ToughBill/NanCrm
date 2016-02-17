@@ -44,8 +44,8 @@
             this.objList.AllColumns.Add(this.olvId);
             this.objList.AllColumns.Add(this.olvcName);
             this.objList.AllColumns.Add(this.olvcDesc);
-            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Market;
             this.objList.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -54,10 +54,10 @@
             this.objList.FullRowSelect = true;
             this.objList.GridLines = true;
             this.objList.HideSelection = false;
-            this.objList.Location = new System.Drawing.Point(12, 12);
+            this.objList.Location = new System.Drawing.Point(12, 13);
             this.objList.Name = "objList";
             this.objList.ShowRowNumber = true;
-            this.objList.Size = new System.Drawing.Size(542, 287);
+            this.objList.Size = new System.Drawing.Size(542, 311);
             this.objList.TabIndex = 2;
             this.objList.UseAlternatingBackColors = true;
             this.objList.UseCompatibleStateImageBehavior = false;
@@ -89,9 +89,9 @@
             // 
             // frmMarket
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 337);
+            this.ClientSize = new System.Drawing.Size(566, 365);
             this.Controls.Add(this.objList);
             this.Name = "frmMarket";
             this.Text = "Market";
