@@ -7,17 +7,18 @@ namespace Nan.BusinessObjects.BO
 {
     public class MktDetailMD : BusinessObject
     {
-        public int      ID { get; set; }
-        public int   MktId { get; set; }
-        public string   Country { get; set; }
+        public int ID { get; set; }
+        public int MktId { get; set; }
+        public int CountryId { get; set; }
     }
     public class BOMarketDetail : BusinessObject
     {
         private MktDetailMD m_boMktDetail;
         public BOMarketDetail()
         {
-            base.m_boId = BOIDEnum.Market;
+            base.m_boId = BOIDEnum.MarketDetail;
             m_boMktDetail = new MktDetailMD();
+            m_relatedBO.Add(BOIDEnum.Country);
         }
 
         public override bool Init()

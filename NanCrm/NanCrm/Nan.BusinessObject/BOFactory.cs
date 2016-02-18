@@ -13,11 +13,17 @@ namespace Nan.BusinessObjects
             BusinessObject bo = null;
             switch (boid)
             {
+                case BOIDEnum.BOSequence:
+                    bo = new BOSequence();
+                    break;
                 case BOIDEnum.Country:
                     bo = new BOCountry();
                     break;
                 case BOIDEnum.Market:
                     bo = new BOMarket();
+                    break;
+                case BOIDEnum.MarketDetail:
+                    bo = new BOMarketDetail();
                     break;
                 case BOIDEnum.Product:
                     bo = new BOProduct();

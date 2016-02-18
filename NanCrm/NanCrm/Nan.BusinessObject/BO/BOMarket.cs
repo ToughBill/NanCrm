@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using Newtonsoft.Json.Linq;
 
 namespace Nan.BusinessObjects.BO
 {
@@ -67,19 +68,49 @@ namespace Nan.BusinessObjects.BO
             return isValid;
         }
 
-        public List<MktDetailMD> GetMarketDetail(int mktID)
+        public List<JObject> GetMktCountry(int mktId)
         {
-            List<MktDetailMD> result = new List<MktDetailMD>();
-            BOMarketDetail mktDetailBo = new BOMarketDetail();
-            IEnumerator iter = mktDetailBo.GetDataList().GetEnumerator();
-            while (iter.MoveNext())
+            List<JObject> result = new List<JObject>();
+            List<JObject> mktList = BusinessObject.BODataPool[BOIDEnum.Market].Cast<JObject>().ToList();
+            JObject jo = mktList.Find(x => int.Parse(x.GetValue("ID").ToString()) == mktId);
+            if (jo == null)
             {
-                MktDetailMD bo = ((Newtonsoft.Json.Linq.JObject)iter.Current).ConvertToTarget<MktDetailMD>();
-                if (bo.MktId == mktID)
-                {
-                    result.Add(bo);
-                }
+                return result;
             }
+            List<JObject> mktDataillist = BusinessObject.BODataPool[BOIDEnum.MarketDetail].Cast<JObject>().ToList();
+            result = mktDataillist.Where(x => int.Parse(x.GetValue("MktId").ToString()) == mktId).ToList();
+            return result;
+        }
+
+        public List<MarketDetaiedlMD> GetDetailedMarketMD()
+        {
+            List<MarketDetaiedlMD> result = new List<MarketDetaiedlMD>();
+            List<JObject> mktDataillist = BusinessObject.BODataPool[BOIDEnum.MarketDetail].Cast<JObject>().ToList();
+            List<JObject> ctyList = BusinessObject.BODataPool[BOIDEnum.Country].Cast<JObject>().ToList();
+            IEnumerator iterMkt = BusinessObject.BODataPool[BOIDEnum.Market].GetEnumerator();
+            IEnumerator iterMktDel = BusinessObject.BODataPool[BOIDEnum.MarketDetail].GetEnumerator();
+            while(iterMkt.MoveNext())
+            {
+                MarketMD mktMD = ((Newtonsoft.Json.Linq.JObject)iterMkt.Current).ConvertToTarget<MarketMD>();
+                MarketDetaiedlMD bo = new MarketDetaiedlMD(mktMD);
+                List<JObject> detail = mktDataillist.Where(x=>int.Parse(x.GetValue("MktId").ToString()) == mktMD.ID).ToList<JObject>();
+                string counties=string.Empty;
+                if (detail.Count > 0)
+                {
+                    List<int> ctyId = new List<int>();
+                    detail.ForEach(x => ctyId.Add(int.Parse(x.GetValue("CountryId").ToString())));
+                    ctyList.ForEach(new Action<JObject>(delegate(JObject jo)
+                    {
+                        if (ctyId.Contains(int.Parse(jo.GetValue("ID").ToString())))
+                        {
+                            counties += jo.GetValue("Name").ToString() + ", ";
+                        }
+                    }));
+                    counties = counties.Substring(0, counties.Length - 2);
+                }
+                bo.Countries = counties;
+            }
+
 
             return result;
         }
