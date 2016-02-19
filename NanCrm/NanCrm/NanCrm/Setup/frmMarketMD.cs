@@ -11,12 +11,14 @@ using System.Collections;
 using Nan.BusinessObjects.BO;
 using BrightIdeasSoftware;
 using NanCrm.Properties;
+using Nan.BusinessObjects;
 
 namespace NanCrm.Setup
 {
     public partial class frmMarketMD : FormBase
     {
-        public frmMarketMD()
+        List<CountryMD> m_ctyList;
+        public frmMarketMD(BOIDEnum boId):base(boId)
         {
             InitializeComponent();
         }
@@ -24,16 +26,31 @@ namespace NanCrm.Setup
         private void frmMarketMD_Load(object sender, EventArgs e)
         {
             this.FormMode = FormMode.Add;
+            m_ctyList = new List<CountryMD>();
             InitCountryGrid();
         }
 
         private void InitCountryGrid()
         {
-            this.olvcName.AspectGetter = delegate(object row)
+            BOMarket mktBo = (BOMarket)m_bo;
+            mktBo.Init();
+            UpdateData(false);
+
+            //this.olvcName.AspectGetter = delegate(object row)
+            //{
+            //    return "cfl";
+            //};
+            //this.olvcName.Renderer = new MappedImageRenderer(new Object[] { "cfl", Resources.ButtonChoose });
+            objList.SmallImageList = imageList;
+            this.olvcName.ImageGetter = delegate(object row)
             {
-                return "cfl";
+                return 0;
             };
-            this.olvcName.Renderer = new MappedImageRenderer(new Object[] { "cfl", Resources.ButtonChoose });
+
+            CountryMD cty = new CountryMD();
+            cty.ID = BusinessObject.GetBONextID(BOIDEnum.Country);
+            m_ctyList.Add(cty);
+            objList.SetObjects(m_ctyList);
         }
 
         private bool btnOk_Clicking(object sender, EventArgs e)
@@ -48,7 +65,7 @@ namespace NanCrm.Setup
 
         private void objList_CellClick(object sender, CellClickEventArgs e)
         {
-            if (e.Column.Name != "olvcName")
+            if (e.Column==null || e.Column.AspectName != "Name")
             {
                 return;
             }

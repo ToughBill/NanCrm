@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMarketMD));
             this.txtName = new Nan.Controls.TextBoxEx();
             this.lblCode = new System.Windows.Forms.Label();
             this.txtId = new Nan.Controls.TextBoxEx();
@@ -41,36 +43,37 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.objList)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(12, 457);
+            this.btnOk.Location = new System.Drawing.Point(12, 423);
             this.btnOk.Clicking += new Nan.Controls.ClickingEvent(this.btnOk_Clicking);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(93, 457);
+            this.btnCancel.Location = new System.Drawing.Point(93, 423);
             // 
             // txtName
             // 
             this.txtName.BOField = "Name";
             this.txtName.BOID = Nan.BusinessObjects.BOIDEnum.Market;
-            this.txtName.Location = new System.Drawing.Point(66, 12);
+            this.txtName.Location = new System.Drawing.Point(66, 11);
             this.txtName.Name = "txtName";
             this.txtName.ShowChoose = false;
             this.txtName.ShowLink = false;
-            this.txtName.Size = new System.Drawing.Size(170, 20);
+            this.txtName.Size = new System.Drawing.Size(170, 18);
             this.txtName.TabIndex = 5;
             this.txtName.TableSource = null;
             // 
             // lblCode
             // 
             this.lblCode.AutoSize = true;
-            this.lblCode.Location = new System.Drawing.Point(7, 18);
+            this.lblCode.Location = new System.Drawing.Point(7, 17);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(31, 13);
+            this.lblCode.Size = new System.Drawing.Size(29, 12);
             this.lblCode.TabIndex = 4;
             this.lblCode.Text = "市场";
             // 
@@ -79,11 +82,11 @@
             this.txtId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtId.BOField = "ID";
             this.txtId.BOID = Nan.BusinessObjects.BOIDEnum.Market;
-            this.txtId.Location = new System.Drawing.Point(462, 12);
+            this.txtId.Location = new System.Drawing.Point(507, 11);
             this.txtId.Name = "txtId";
             this.txtId.ShowChoose = false;
             this.txtId.ShowLink = false;
-            this.txtId.Size = new System.Drawing.Size(170, 20);
+            this.txtId.Size = new System.Drawing.Size(170, 18);
             this.txtId.TabIndex = 7;
             this.txtId.TableSource = null;
             // 
@@ -91,9 +94,9 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(425, 18);
+            this.label1.Location = new System.Drawing.Point(470, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 6;
             this.label1.Text = "编号";
             // 
@@ -104,10 +107,11 @@
             this.objList.AllColumns.Add(this.olvcFName);
             this.objList.AllColumns.Add(this.olvcAlias);
             this.objList.AllColumns.Add(this.olvcCapital);
-            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Market;
+            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Country;
+            this.objList.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvcName,
             this.olvcFName,
@@ -116,10 +120,11 @@
             this.objList.FullRowSelect = true;
             this.objList.GridLines = true;
             this.objList.HideSelection = false;
-            this.objList.Location = new System.Drawing.Point(10, 62);
+            this.objList.Location = new System.Drawing.Point(10, 57);
             this.objList.Name = "objList";
+            this.objList.OwnerDraw = true;
             this.objList.ShowRowNumber = true;
-            this.objList.Size = new System.Drawing.Size(622, 269);
+            this.objList.Size = new System.Drawing.Size(667, 250);
             this.objList.TabIndex = 8;
             this.objList.UseAlternatingBackColors = true;
             this.objList.UseCompatibleStateImageBehavior = false;
@@ -168,38 +173,44 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 46);
+            this.label2.Location = new System.Drawing.Point(9, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 9;
             this.label2.Text = "国家：";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 344);
+            this.label3.Location = new System.Drawing.Point(12, 318);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 10;
             this.label3.Text = "备注：";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(10, 360);
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(10, 332);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(622, 91);
+            this.richTextBox1.Size = new System.Drawing.Size(667, 85);
             this.richTextBox1.TabIndex = 11;
             this.richTextBox1.Text = "";
             // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "ButtonChoose.png");
+            // 
             // frmMarketMD
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BOID = Nan.BusinessObjects.BOIDEnum.Market;
-            this.ClientSize = new System.Drawing.Size(644, 499);
+            this.ClientSize = new System.Drawing.Size(689, 462);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -242,5 +253,6 @@
         private BrightIdeasSoftware.OLVColumn olvcFName;
         private BrightIdeasSoftware.OLVColumn olvcAlias;
         private BrightIdeasSoftware.OLVColumn olvcCapital;
+        private System.Windows.Forms.ImageList imageList;
     }
 }

@@ -31,7 +31,7 @@ namespace NanCrm.Product
 
         private bool btnOk_Clicking(object sender, EventArgs e)
         {
-            return  SaveData();
+            return UpdateData();
         }
     }
 }

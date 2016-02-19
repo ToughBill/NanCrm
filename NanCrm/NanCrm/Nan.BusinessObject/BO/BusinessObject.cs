@@ -52,18 +52,18 @@ namespace Nan.BusinessObjects.BO
         public virtual int GetNextID()
         {
             int maxId = GetMaxId();
-            return maxId++;
+            return ++maxId;
         }
 
         public static int GetBONextID(BOIDEnum boId)
         {
             string tbPath = Path.Combine(NanDataBase.GetInstance().GetDBPath(), BusinessObject.GetEnumDescription(boId));
-            if (!File.Exists(tbPath))
+            if (!Directory.Exists(tbPath))
             {
                 return 1;
             }
-            int maxId = Directory.GetFiles(tbPath).Max(x => int.Parse(x));
-            return maxId++;
+            int maxId = Directory.GetFiles(tbPath).Max(x => int.Parse(Path.GetFileName(x)));
+            return ++maxId;
         }
 
         public virtual int GetMaxId()
@@ -77,7 +77,7 @@ namespace Nan.BusinessObjects.BO
             string[] files = Directory.GetFiles(tbPath);
             if(files.Length > 0)
             {
-                maxId = files.Max(x => int.Parse(x));
+                maxId = files.Max(x => int.Parse(Path.GetFileName(x)));
             }
 
             return maxId;

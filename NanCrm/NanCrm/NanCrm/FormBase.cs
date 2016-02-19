@@ -154,7 +154,12 @@ namespace NanCrm
             }
             return true;
         }
-        protected virtual bool SaveData()
+        /// <summary>
+        /// 更新数据后刷新BO或者Form
+        /// </summary>
+        /// <param name="toForm">true:将界面数据保存至BO; false:根据BO中的值刷新界面</param>
+        /// <returns></returns>
+        public virtual bool UpdateData(bool saveData = true)
         {
             if (m_boId == BOIDEnum.Invalid)
                 return true;
@@ -167,7 +172,14 @@ namespace NanCrm
                     TextBoxEx txtBox = (TextBoxEx)ctrl;
                     if (txtBox.BOID == m_boId)
                     {
-                        result = SetFieldData(txtBox.BOField, txtBox.Text);
+                        if (saveData)
+                        {
+                            result = SetFieldData(txtBox.BOField, txtBox.Text);
+                        }
+                        else
+                        {
+                            txtBox.Text = GetFieldData(txtBox.BOField).ToString();
+                        }
                     }
                 }
                 else if (ctrl is ComboBoxEx)
@@ -175,7 +187,14 @@ namespace NanCrm
                     ComboBoxEx cmb = (ComboBoxEx)ctrl;
                     if (cmb.BOID == m_boId)
                     {
-                        result = SetFieldData(cmb.BOField, cmb.SelectedValue);
+                        if (saveData)
+                        {
+                            result = SetFieldData(cmb.BOField, cmb.SelectedValue);
+                        }
+                        else
+                        {
+                            cmb.SelectedValue = GetFieldData(cmb.BOField).ToString();
+                        }
                     }
                 }
                 if (!result)
@@ -215,6 +234,23 @@ namespace NanCrm
             if (i == properties.Length)
             {
                 result = false;
+            }
+
+            return result;
+        }
+
+        private object GetFieldData(string fieldName)
+        {
+            object result = null;
+            object boTable = m_bo.GetBOTable();
+            var properties = boTable.GetType().GetProperties();
+            for (int i = 0; i < properties.Length; i++)
+            {
+                if (properties[i].Name == fieldName)
+                {
+                    result = properties[i].GetValue(boTable, null);
+                    break;
+                }
             }
 
             return result;

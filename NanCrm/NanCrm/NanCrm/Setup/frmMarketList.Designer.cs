@@ -56,7 +56,6 @@
             this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Market;
             this.objList.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvId,
             this.olvcName,
             this.olvColCties,
             this.olvcDesc});
@@ -71,14 +70,16 @@
             this.objList.UseAlternatingBackColors = true;
             this.objList.UseCompatibleStateImageBehavior = false;
             this.objList.View = System.Windows.Forms.View.Details;
+            this.objList.RowNumberDblClick += new Nan.Controls.DeleRowNoColumnClick(this.objList_RowNumberDblClick);
             // 
             // olvId
             // 
             this.olvId.AspectName = "ID";
+            this.olvId.DisplayIndex = 1;
             this.olvId.Groupable = false;
             this.olvId.IsRowNumberColumn = false;
-            this.olvId.Text = "ID";
             this.olvId.IsVisible = false;
+            this.olvId.Text = "ID";
             // 
             // olvcName
             // 
@@ -102,15 +103,15 @@
             this.olvcDesc.Groupable = false;
             this.olvcDesc.IsRowNumberColumn = false;
             this.olvcDesc.Text = "描述";
-            this.olvcDesc.Width = 273;
+            this.olvcDesc.Width = 250;
             // 
-            // frmMarket
+            // frmMarketList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(758, 464);
             this.Controls.Add(this.objList);
-            this.Name = "frmMarket";
+            this.Name = "frmMarketList";
             this.Text = "Market";
             this.Load += new System.EventHandler(this.Market_Load);
             this.Controls.SetChildIndex(this.objList, 0);

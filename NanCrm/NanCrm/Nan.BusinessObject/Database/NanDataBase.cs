@@ -47,7 +47,7 @@ namespace Nan.BusinessObjects.Database
         {
             IList list = new List<JObject>();
             string filePath = Path.Combine(Path.Combine(m_dbPath, m_dbName),tbName);
-            if (!File.Exists(filePath))
+            if (!Directory.Exists(filePath))
             {
                 return list;
             }
@@ -80,6 +80,10 @@ namespace Nan.BusinessObjects.Database
             try
             {
                 string filePath = Path.Combine(Path.Combine(m_dbPath, m_dbName), tbName);
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
                 IEnumerator iter =  dataList.GetEnumerator();
                 while (iter.MoveNext())
                 {
@@ -115,6 +119,10 @@ namespace Nan.BusinessObjects.Database
             try
             {
                 string filePath = Path.Combine(Path.Combine(m_dbPath, m_dbName), tbName);
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
                 JObject jo = JObject.FromObject(data);
                 string id = jo.GetValue("ID").ToString();
                 using (var tempStream = new StreamWriter(Path.Combine(filePath, id)))

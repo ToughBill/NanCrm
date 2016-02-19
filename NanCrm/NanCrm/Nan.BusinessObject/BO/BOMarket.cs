@@ -15,6 +15,8 @@ namespace Nan.BusinessObjects.BO
         public List<int> CountryIds { get; set; }
         public MarketMD()
         {
+            Name = string.Empty;
+            Desc = string.Empty;
             CountryIds = new List<int>();
         }
     }

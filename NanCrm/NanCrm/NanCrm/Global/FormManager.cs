@@ -26,7 +26,7 @@ namespace NanCrm.Global
                     cty.Show();
                     break;
                 case BOIDEnum.Market:
-                    frmMarketList mkt = new frmMarketList(BOIDEnum.Market);
+                    frmMarketList mkt = new frmMarketList();
                     mkt.MdiParent = mainForm;
                     mkt.UpdateProc = retProc;
                     mkt.Show();

@@ -101,7 +101,7 @@ namespace Nan.Controls
             {
                 return true;
             }
-            if (!hti.Column.IsRowNumberColumn || hti.Item == null || hti.Item.Index < 0)
+            if (hti.Column == null || !hti.Column.IsRowNumberColumn || hti.Item == null || hti.Item.Index < 0)
             {
                 return true;
             }
