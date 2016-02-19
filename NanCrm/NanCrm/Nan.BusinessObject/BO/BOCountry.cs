@@ -74,18 +74,18 @@ namespace Nan.BusinessObjects.BO
             return isValid;
         }
 
-        public override int GetMaxId()
-        {
-            int maxId = 1;
-            foreach (var item in m_newDataList)
-            {
-                CountryMD cty = (CountryMD)item;
-                if (cty.ID > maxId)
-                {
-                    maxId = cty.ID;
-                }
-            }
-            return maxId;
-        }
+        //public override int GetMaxId()
+        //{
+        //    int maxId = 1;
+        //    foreach (var item in m_newDataList)
+        //    {
+        //        CountryMD cty = (CountryMD)item;
+        //        if (cty.ID > maxId)
+        //        {
+        //            maxId = cty.ID;
+        //        }
+        //    }
+        //    return maxId;
+        //}
     }
 }

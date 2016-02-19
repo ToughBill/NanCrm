@@ -20,7 +20,6 @@ namespace Nan.BusinessObjects.BO
         {
             base.m_boId = BOIDEnum.BOSequence;
             m_seqMD = new SequenceMD();
-            HasSequence = false;
         }
 
         public override bool Init()

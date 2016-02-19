@@ -7,6 +7,7 @@ using Biggy.Core;
 using System.Collections;
 using Nan.BusinessObjects.Database;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Nan.BusinessObjects.BO
 {
@@ -15,27 +16,9 @@ namespace Nan.BusinessObjects.BO
         protected BOIDEnum m_boId;
         protected string m_tbName;
         protected NanDataBase m_dbConn;
-        protected bool m_hasSequence;
-        public bool HasSequence
-        {
-            get { return m_hasSequence; }
-            set 
-            { 
-                m_hasSequence = value;
-                if (m_hasSequence)
-                {
-                    if (!m_relatedBO.Contains(BOIDEnum.BOSequence))
-                    {
-                        m_relatedBO.Add(BOIDEnum.BOSequence);
-                    }
-                }
-                else
-                {
-                    m_relatedBO.Remove(BOIDEnum.BOSequence);
-                }
-            }
-        }
+
         protected List<BOIDEnum> m_relatedBO;
+        protected JObject m_bo;
         protected IList m_dataList;
         protected IList m_newDataList;
         public static Dictionary<BOIDEnum, IList> BODataPool = new Dictionary<BOIDEnum, IList>();
@@ -58,7 +41,7 @@ namespace Nan.BusinessObjects.BO
         public BusinessObject()
         {
             m_dbConn = NanDataBase.GetInstance();
-            m_relatedBO = new List<BOIDEnum>() { BOIDEnum.BOSequence };
+            m_relatedBO = new List<BOIDEnum>();
         }
 
         public virtual bool Init()
@@ -68,37 +51,36 @@ namespace Nan.BusinessObjects.BO
 
         public virtual int GetNextID()
         {
-            JsonStore<SequenceMD> tbID = (JsonStore<SequenceMD>)m_dbConn.CreateStoreFor<SequenceMD>();
-            var boIdList = new BiggyList<SequenceMD>(tbID);
-            var boid = boIdList.Find(x => x.BOID == (int)m_boId);
-            if (boid != null)
-            {
-                return boid.NextID;
-            }
-            else
-            {
-                return 1;
-            }
+            int maxId = GetMaxId();
+            return maxId++;
         }
 
         public static int GetBONextID(BOIDEnum boId)
         {
-            JsonStore<SequenceMD> tbID = (JsonStore<SequenceMD>)NanDataBase.GetInstance().CreateStoreFor<SequenceMD>();
-            var boIdList = new BiggyList<SequenceMD>(tbID);
-            var boid = boIdList.Find(x => x.BOID == (int)boId);
-            if (boid != null)
-            {
-                return boid.NextID;
-            }
-            else
+            string tbPath = Path.Combine(NanDataBase.GetInstance().GetDBPath(), BusinessObject.GetEnumDescription(boId));
+            if (!File.Exists(tbPath))
             {
                 return 1;
             }
+            int maxId = Directory.GetFiles(tbPath).Max(x => int.Parse(x));
+            return maxId++;
         }
 
         public virtual int GetMaxId()
         {
-            return 1;
+            int maxId = 0;
+            string tbPath = Path.Combine(m_dbConn.GetDBPath(), GetTableName());
+            if (!File.Exists(tbPath))
+            {
+                return maxId;
+            }
+            string[] files = Directory.GetFiles(tbPath);
+            if(files.Length > 0)
+            {
+                maxId = files.Max(x => int.Parse(x));
+            }
+
+            return maxId;
         }
         public virtual object GetBOTable()
         {
@@ -108,7 +90,7 @@ namespace Nan.BusinessObjects.BO
         {
             if (!OnIsValid())
                 return false;
-            bool ret = m_dbConn.SaveTableData(m_tbName, m_dataList);
+            bool ret = m_dbConn.SaveTableData(m_tbName, m_bo);
             return ret;
         }
         public bool Update()
@@ -118,13 +100,22 @@ namespace Nan.BusinessObjects.BO
             if (!OnUpdate())
                 return false;
 
-            bool ret = UpdateNextID();
-            if (ret)
+            bool ret = true;
+            if (m_dataList != null)
             {
                 ret = m_dbConn.SaveTableData(m_tbName, m_newDataList);
-                if (ret)
+                if (!ret)
                 {
-                    m_dataList = m_newDataList;
+                    return false;
+                }
+                m_dataList = m_newDataList;
+            }
+            if (m_bo != null)
+            {
+                ret = m_dbConn.SaveTableData(m_tbName, m_bo);
+                if (!ret)
+                {
+                    return false;
                 }
             }
 
@@ -138,24 +129,6 @@ namespace Nan.BusinessObjects.BO
         {
             return true;
         }
-        public virtual bool UpdateNextID()
-        {
-            int maxId = GetMaxId();
-
-            JsonStore<SequenceMD> tbID = (JsonStore<SequenceMD>)m_dbConn.CreateStoreFor<SequenceMD>();
-            var boIdList = new BiggyList<SequenceMD>(tbID);
-            SequenceMD objId = boIdList.Find(x => { return x.BOID == (int)m_boId; });
-            if (objId == null)
-            {
-                boIdList.Add(new SequenceMD() { BOID = (int)m_boId, NextID = maxId + 1 });
-            }
-            else
-            {
-                objId.NextID = maxId+1;
-                boIdList.Update(objId);
-            }
-            return true;
-        }
         public virtual string GetTableName()
         {
             if (m_tbName == null)
@@ -164,7 +137,7 @@ namespace Nan.BusinessObjects.BO
             }
             return m_tbName;
         }
-        public string GetEnumDescription(Enum enumValue)
+        public static string GetEnumDescription(Enum enumValue)
         {
             string str = enumValue.ToString();
             System.Reflection.FieldInfo field = enumValue.GetType().GetField(str);
@@ -173,6 +146,14 @@ namespace Nan.BusinessObjects.BO
             System.ComponentModel.DescriptionAttribute da = (System.ComponentModel.DescriptionAttribute)objs[0];
             return da.Description;
         }
+
+        public bool GetById(int id)
+        {
+            m_bo = m_dbConn.GetTableData(m_tbName, id);
+
+            return m_bo == null;
+        }
+
         public IList GetDataList()
         {
             if (m_dataList == null)
@@ -188,7 +169,7 @@ namespace Nan.BusinessObjects.BO
                     if (!BusinessObject.BODataPool.ContainsKey(id))
                     {
                         BusinessObject bo = BOFactory.GetBO(id);
-                        BusinessObject.BODataPool[m_boId] = bo.GetDataList();
+                        BusinessObject.BODataPool[id] = bo.GetDataList();
                     }
                 }
                 
@@ -199,13 +180,6 @@ namespace Nan.BusinessObjects.BO
         {
             m_newDataList = list;
         }
-//         public virtual List<T> GetDataList<T>() where T : new()
-//         {
-//             JsonStore<T> tbObj = new JsonStore<T>(m_dbConn);
-//             var objList = new BiggyList<T>(tbObj);
-// 
-//             return objList.GetList();
-//         }
     }
 
     public class ValidValue

@@ -14,9 +14,9 @@ using NanCrm.Global;
 
 namespace NanCrm.Setup
 {
-    public partial class frmMarket : FormEx
+    public partial class frmMarketList : FormBase
     {
-        public frmMarket(BOIDEnum boid):base(boid)
+        public frmMarketList(BOIDEnum boid):base(boid)
         {
             InitializeComponent();
         }
@@ -24,6 +24,7 @@ namespace NanCrm.Setup
         private void Market_Load(object sender, EventArgs e)
         {
             LoadGridData();
+            objList.RebuildColumns();
         }
         public void LoadGridData()
         {
@@ -34,7 +35,7 @@ namespace NanCrm.Setup
                 
                 //mktList.Add(newMkt);
                 BOMarket mktBO=(BOMarket)m_bo;
-                mktBO.GetDataList();
+                //mktBO.GetDataList();
                 List<MarketDetaiedlMD> listObj = mktBO.GetDetailedMarketMD();
                 MarketMD newMkt = new MarketMD();
                 newMkt.ID = BusinessObject.GetBONextID(m_boId);

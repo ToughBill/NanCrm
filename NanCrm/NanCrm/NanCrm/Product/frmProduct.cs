@@ -11,7 +11,7 @@ using Nan.BusinessObjects;
 
 namespace NanCrm.Product
 {
-    public partial class frmProduct : FormEx
+    public partial class frmProduct : FormBase
     {
         public frmProduct(BOIDEnum boId)
             : base(boId)

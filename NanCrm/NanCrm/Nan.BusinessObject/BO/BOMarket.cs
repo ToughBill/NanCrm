@@ -12,6 +12,11 @@ namespace Nan.BusinessObjects.BO
         public int ID { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }
+        public List<int> CountryIds { get; set; }
+        public MarketMD()
+        {
+            CountryIds = new List<int>();
+        }
     }
     public class MarketDetaiedlMD
     {
@@ -34,7 +39,7 @@ namespace Nan.BusinessObjects.BO
         {
             base.m_boId = BOIDEnum.Market;
             m_boMkt = new MarketMD();
-            m_relatedBO.Add(BOIDEnum.MarketDetail);
+            m_relatedBO.Add(BOIDEnum.Country);
         }
 
         public override bool Init()
@@ -43,7 +48,10 @@ namespace Nan.BusinessObjects.BO
 
             return base.Init();
         }
-
+        public override object GetBOTable()
+        {
+            return m_boMkt;
+        }
         public override bool OnIsValid()
         {
             bool isValid = true;
@@ -85,33 +93,32 @@ namespace Nan.BusinessObjects.BO
         public List<MarketDetaiedlMD> GetDetailedMarketMD()
         {
             List<MarketDetaiedlMD> result = new List<MarketDetaiedlMD>();
-            List<JObject> mktDataillist = BusinessObject.BODataPool[BOIDEnum.MarketDetail].Cast<JObject>().ToList();
+            if (m_dataList == null)
+            {
+                m_dataList = GetDataList();
+            }
             List<JObject> ctyList = BusinessObject.BODataPool[BOIDEnum.Country].Cast<JObject>().ToList();
-            IEnumerator iterMkt = BusinessObject.BODataPool[BOIDEnum.Market].GetEnumerator();
-            IEnumerator iterMktDel = BusinessObject.BODataPool[BOIDEnum.MarketDetail].GetEnumerator();
-            while(iterMkt.MoveNext())
+            IEnumerator iterMkt = m_dataList.GetEnumerator();
+            while (iterMkt.MoveNext())
             {
                 MarketMD mktMD = ((Newtonsoft.Json.Linq.JObject)iterMkt.Current).ConvertToTarget<MarketMD>();
                 MarketDetaiedlMD bo = new MarketDetaiedlMD(mktMD);
-                List<JObject> detail = mktDataillist.Where(x=>int.Parse(x.GetValue("MktId").ToString()) == mktMD.ID).ToList<JObject>();
-                string counties=string.Empty;
-                if (detail.Count > 0)
+
+                List<JObject> detail = ctyList.Where(x => mktMD.CountryIds.Contains(int.Parse(x.GetValue("ID").ToString()))).ToList();
+                string counties = string.Empty;
+                detail.ForEach(new Action<JObject>(delegate(JObject jo)
                 {
-                    List<int> ctyId = new List<int>();
-                    detail.ForEach(x => ctyId.Add(int.Parse(x.GetValue("CountryId").ToString())));
-                    ctyList.ForEach(new Action<JObject>(delegate(JObject jo)
-                    {
-                        if (ctyId.Contains(int.Parse(jo.GetValue("ID").ToString())))
-                        {
-                            counties += jo.GetValue("Name").ToString() + ", ";
-                        }
-                    }));
+                    counties += jo.GetValue("Name").ToString() + ", ";
+
+                }));
+                if (counties.Length > 0)
+                {
                     counties = counties.Substring(0, counties.Length - 2);
                 }
                 bo.Countries = counties;
+
+                result.Add(bo);
             }
-
-
             return result;
         }
     }

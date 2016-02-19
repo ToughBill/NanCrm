@@ -10,7 +10,7 @@ using Nan.Controls;
 
 namespace NanCrm.BP
 {
-    public partial class frmBP : FormEx
+    public partial class frmBP : FormBase
     {
         public frmBP()
         {

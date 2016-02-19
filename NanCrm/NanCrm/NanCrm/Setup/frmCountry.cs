@@ -16,7 +16,7 @@ using NanCrm.Global;
 
 namespace NanCrm.Setup
 {
-    public partial class frmCountry : FormEx
+    public partial class frmCountry : FormBase
     {
         public frmCountry(BOIDEnum boId)
             : base(boId)

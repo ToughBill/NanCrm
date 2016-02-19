@@ -12,7 +12,7 @@ using Nan.BusinessObjects.BO;
 
 namespace NanCrm
 {
-    public partial class BPMD : FormEx
+    public partial class BPMD : FormBase
     {
         private BOBP m_boBP;
  

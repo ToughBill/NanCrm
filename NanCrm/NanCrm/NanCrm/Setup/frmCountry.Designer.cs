@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.objList = new BrightIdeasSoftware.ObjectListView();
+            this.objList = new Nan.Controls.ObjectGrid();
             this.olvcID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvcName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvcFName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -126,7 +126,7 @@
 
         #endregion
 
-        private BrightIdeasSoftware.ObjectListView objList;
+        private Nan.Controls.ObjectGrid objList;
         private BrightIdeasSoftware.OLVColumn olvcID;
         private BrightIdeasSoftware.OLVColumn olvcName;
         private BrightIdeasSoftware.OLVColumn olvcFName;

@@ -1,13 +1,13 @@
 ﻿namespace NanCrm
 {
-    partial class FormEx
+    partial class FormBase
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,17 +20,19 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.btnOk = new Nan.Controls.ButtonEx();
             this.btnCancel = new Nan.Controls.ButtonEx();
+
             this.SuspendLayout();
+
             // 
             // btnOk
             // 
@@ -54,8 +56,9 @@
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Clicked += new Nan.Controls.ClickedEvent(this.btnCancel_Clicked);
+
             // 
-            // FormEx
+            // FormBase
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -67,7 +70,7 @@
             this.KeyPreview = true;
             this.Name = "FormEx";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Caption";
+            this.Text = "FormBase";
             this.ResumeLayout(false);
 
         }
@@ -76,6 +79,5 @@
 
         public Nan.Controls.ButtonEx btnOk;
         public Nan.Controls.ButtonEx btnCancel;
-
     }
 }

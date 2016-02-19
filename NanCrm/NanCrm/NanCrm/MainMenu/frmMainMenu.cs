@@ -97,7 +97,7 @@ namespace NanCrm
                     cty.Show();
                     break;
                 case MenuID.Setup_Market:
-                    frmMarket mkt = new frmMarket(BOIDEnum.Market);
+                    frmMarketList mkt = new frmMarketList(BOIDEnum.Market);
                     mkt.MdiParent = this.MdiParent;
                     mkt.Show();
                     break;

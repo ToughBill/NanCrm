@@ -1,6 +1,6 @@
 ﻿namespace NanCrm.Setup
 {
-    partial class frmMarket
+    partial class frmMarketList
     {
         /// <summary>
         /// Required designer variable.

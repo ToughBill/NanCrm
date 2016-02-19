@@ -23,7 +23,7 @@ namespace NanCrm
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            NanDataBase.InitDatabase(Path.Combine(Application.StartupPath, "../../Database"), "NanCrm_v1");
+            NanDataBase.InitDatabase(Path.Combine(Application.StartupPath, "../../Database"), "NanCrm_v2");
             InitMainMenu();
             FormManager.SetMainForm(this);
         }

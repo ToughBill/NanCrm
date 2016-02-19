@@ -5,6 +5,6 @@
 
 2, 添加新BO
 	1)，新建BO类，继承BusinessObject
-	2)，BO类中添加自己的Display event，在InitBoDisplayFunc方法中订阅该event。
-	3)，添加对应窗体，在窗体中实现BO中display订阅的方法事件。
-	4)，实现GetValieValue方法（主要用在初始化combobox控件时）。
+	2)，实现GetValieValue方法（主要用在初始化combobox控件时）。
+
+3, 存储数据：

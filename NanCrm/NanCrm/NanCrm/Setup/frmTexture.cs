@@ -14,7 +14,7 @@ using System.Collections;
 
 namespace NanCrm.Setup
 {
-    public partial class frmTexture : FormEx
+    public partial class frmTexture : FormBase
     {
         public frmTexture(BOIDEnum boId)
             : base(boId)

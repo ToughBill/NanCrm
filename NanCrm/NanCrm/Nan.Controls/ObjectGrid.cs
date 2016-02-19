@@ -60,6 +60,7 @@ namespace Nan.Controls
                 olvCol.Text = "#";
                 olvCol.IsRowNumberColumn = true;
                 this.AllColumns.Insert(0, olvCol);
+                this.Columns.Insert(0, olvCol);
                 this.RebuildColumns();
             }
             else
@@ -70,6 +71,7 @@ namespace Nan.Controls
                     if (col.IsRowNumberColumn)
                     {
                         this.AllColumns.RemoveAt(0);
+                        this.Columns.RemoveAt(0);
                         this.RebuildColumns();
                     }
                 }
