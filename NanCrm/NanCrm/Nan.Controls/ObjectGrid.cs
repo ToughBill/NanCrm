@@ -187,6 +187,19 @@ namespace Nan.Controls
         public event DeleContextMenuClick DeleteRowMenuClick;
         private void sys_tsmDelRow_Click(object sender, EventArgs e)
         {
+            if (base.SelectedObjects != null)
+            {
+                base.RemoveObjects(base.SelectedObjects);
+            }
+            else if (base.SelectedObject != null)
+            {
+                base.RemoveObject(base.SelectedObject);
+            }
+            else if (base.LastHitInfo.RowObject != null)
+            {
+                base.RemoveObject(base.LastHitInfo.RowObject);
+            }
+
             if (DeleteRowMenuClick != null)
             {
                 OLVContextMenuClickArgs args = new OLVContextMenuClickArgs(base.LastHitInfo);

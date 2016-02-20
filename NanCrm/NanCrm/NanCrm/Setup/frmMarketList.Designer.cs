@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMarketList));
             this.objList = new Nan.Controls.ObjectGrid();
             this.olvId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvcName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColCties = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvcDesc = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.btnNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.objList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,9 +64,15 @@
             this.objList.FullRowSelect = true;
             this.objList.GridLines = true;
             this.objList.HideSelection = false;
+            this.objList.LastHitInfo = null;
             this.objList.Location = new System.Drawing.Point(12, 12);
             this.objList.Name = "objList";
+            this.objList.RemovedObject = null;
+            this.objList.RemovedObjects = ((System.Collections.IList)(resources.GetObject("objList.RemovedObjects")));
+            this.objList.ShowAddRowMenu = false;
+            this.objList.ShowDeleteRowMenu = true;
             this.objList.ShowRowNumber = true;
+            this.objList.ShowSysMenu = true;
             this.objList.Size = new System.Drawing.Size(734, 414);
             this.objList.TabIndex = 2;
             this.objList.UseAlternatingBackColors = true;
@@ -105,15 +113,27 @@
             this.olvcDesc.Text = "描述";
             this.olvcDesc.Width = 250;
             // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(671, 432);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 28);
+            this.btnNew.TabIndex = 3;
+            this.btnNew.Text = "新建";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
             // frmMarketList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(758, 464);
             this.Controls.Add(this.objList);
+            this.Controls.Add(this.btnNew);
             this.Name = "frmMarketList";
-            this.Text = "Market";
+            this.Text = "市场列表";
             this.Load += new System.EventHandler(this.Market_Load);
+            this.Controls.SetChildIndex(this.btnNew, 0);
             this.Controls.SetChildIndex(this.objList, 0);
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnCancel, 0);
@@ -129,5 +149,6 @@
         private BrightIdeasSoftware.OLVColumn olvcName;
         private BrightIdeasSoftware.OLVColumn olvcDesc;
         private BrightIdeasSoftware.OLVColumn olvColCties;
+        private System.Windows.Forms.Button btnNew;
     }
 }

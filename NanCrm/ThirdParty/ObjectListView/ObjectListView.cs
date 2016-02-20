@@ -857,7 +857,14 @@ namespace BrightIdeasSoftware
         [Browsable(false)]
         public IList RemovedObjects
         {
-            get { return m_removedObjects; }
+            get 
+            {
+                if (m_removedObjects == null)
+                {
+                    m_removedObjects = new ArrayList();
+                }
+                return m_removedObjects; 
+            }
             set { m_removedObjects = value; }
         }
         private OlvListViewHitTestInfo m_lastHitInfo;
@@ -4825,7 +4832,10 @@ namespace BrightIdeasSoftware
 // ReSharper disable PossibleMultipleEnumeration
                         int i = ourObjects.IndexOf(modelObject);
                         if (i >= 0)
+                        {
+                            RemovedObjects.Add(ourObjects[i]);
                             ourObjects.RemoveAt(i);
+                        }
 // ReSharper restore PossibleMultipleEnumeration
                         i = this.IndexOf(modelObject);
                         if (i >= 0)

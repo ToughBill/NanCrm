@@ -49,6 +49,8 @@ namespace NanCrm.Setup
 
         private bool btnOk_Clicking(object sender, EventArgs e)
         {
+            if (this.FormMode == NanCrm.FormMode.Ok)
+                return true;
             IList obj = (IList)objList.Objects;
             //BOMarket objMkt = (BOMarket)m_bo;
             //m_mktBO.SetDataList(obj);
@@ -82,6 +84,24 @@ namespace NanCrm.Setup
             }
             
             objList.RefreshSelectedObjects();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            frmMarketMD frmMktMd = new frmMarketMD(BOIDEnum.Market);
+            frmMktMd.MdiParent = this.MdiParent;
+            frmMktMd.FormMode = NanCrm.FormMode.Add;
+            frmMktMd.ReturnProc = NewMarketRetProc;
+            frmMktMd.Show();
+        }
+
+        private void NewMarketRetProc(Form form, object data)
+        {
+            BOMarket mktBo = (BOMarket)data;
+            MarketDetaiedlMD detailedMkt = new MarketDetaiedlMD((MarketMD)mktBo.GetBOTable());
+            List<CountryMD> cty = mktBo.GetMktCountry();
+            detailedMkt.Countries = mktBo.GetCountryString();
+            objList.AddObject(detailedMkt);
         }
     }
 

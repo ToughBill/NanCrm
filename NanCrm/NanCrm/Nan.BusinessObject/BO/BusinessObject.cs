@@ -70,7 +70,7 @@ namespace Nan.BusinessObjects.BO
         {
             int maxId = 0;
             string tbPath = Path.Combine(m_dbConn.GetDBPath(), GetTableName());
-            if (!File.Exists(tbPath))
+            if (!Directory.Exists(tbPath))
             {
                 return maxId;
             }

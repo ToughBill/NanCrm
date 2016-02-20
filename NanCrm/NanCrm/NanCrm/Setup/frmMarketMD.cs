@@ -26,7 +26,6 @@ namespace NanCrm.Setup
 
         private void frmMarketMD_Load(object sender, EventArgs e)
         {
-            this.FormMode = FormMode.Add;
             m_ctyList = new List<CountryMD>();
             InitCountryGrid();
         }
@@ -34,7 +33,10 @@ namespace NanCrm.Setup
         private void InitCountryGrid()
         {
             BOMarket mktBo = (BOMarket)m_bo;
-            //mktBo.Init();
+            if (base.FormMode == NanCrm.FormMode.Add)
+            {
+                mktBo.Init();
+            }
             UpdateData(false);
 
             //this.olvcName.AspectGetter = delegate(object row)
@@ -96,9 +98,5 @@ namespace NanCrm.Setup
 
         }
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
