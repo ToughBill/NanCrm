@@ -36,43 +36,55 @@ namespace Nan.BusinessObjects.BO
     }
     public class BOMarket : BusinessObject
     {
-        private MarketMD m_boMkt;
+        //private MarketMD m_bo;
         public BOMarket()
         {
             base.m_boId = BOIDEnum.Market;
-            m_boMkt = new MarketMD();
+            m_boTable = new MarketMD();
             m_relatedBO.Add(BOIDEnum.Country);
         }
 
         public override bool Init()
         {
-            m_boMkt.ID = GetNextID();
+            MarketMD mktBo = (MarketMD)m_boTable;
+            mktBo.ID = GetNextID();
 
             return base.Init();
         }
-        public override object GetBOTable()
-        {
-            return m_boMkt;
-        }
+        //public override object GetBOTable()
+        //{
+        //    return m_bo;
+        //}
         public override bool OnIsValid()
         {
             bool isValid = true;
-            List<MarketMD> list = new List<MarketMD>((IEnumerable<MarketMD>)m_newDataList);
-            int i = 0;
-            for (; i < list.Count; i++)
+            if (m_newDataList != null)
             {
-                if (string.IsNullOrEmpty(list[i].Name))
+                List<MarketMD> list = new List<MarketMD>((IEnumerable<MarketMD>)m_newDataList);
+                int i = 0;
+                for (; i < list.Count; i++)
                 {
-                    if (i < list.Count - 1)
+                    if (string.IsNullOrEmpty(list[i].Name))
                     {
-                        isValid = false;
+                        if (i < list.Count - 1)
+                        {
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            m_newDataList.RemoveAt(i);
+                        }
                         break;
                     }
-                    else
-                    {
-                        m_newDataList.RemoveAt(i);
-                    }
-                    break;
+                }
+            }
+            if (m_boTable != null)
+            {
+                MarketMD mktBo = (MarketMD)m_boTable;
+                if (string.IsNullOrEmpty(mktBo.Name))
+                {
+                    isValid = false;
                 }
             }
             return isValid;
@@ -99,20 +111,19 @@ namespace Nan.BusinessObjects.BO
             {
                 m_dataList = GetDataList();
             }
-            List<JObject> ctyList = BusinessObject.BODataPool[BOIDEnum.Country].Cast<JObject>().ToList();
+            /*List<JObject> ctyList = BusinessObject.BODataPool[BOIDEnum.Country].Cast<JObject>().ToList();*/
             IEnumerator iterMkt = m_dataList.GetEnumerator();
+            string ctyTbName = GetTableName(BOIDEnum.Country);
             while (iterMkt.MoveNext())
             {
                 MarketMD mktMD = ((Newtonsoft.Json.Linq.JObject)iterMkt.Current).ConvertToTarget<MarketMD>();
                 MarketDetaiedlMD bo = new MarketDetaiedlMD(mktMD);
-
-                List<JObject> detail = ctyList.Where(x => mktMD.CountryIds.Contains(int.Parse(x.GetValue("ID").ToString()))).ToList();
                 string counties = string.Empty;
-                detail.ForEach(new Action<JObject>(delegate(JObject jo)
+                foreach (int ctyId in mktMD.CountryIds)
                 {
+                    JObject jo = m_dbConn.GetTableData(ctyTbName, ctyId);
                     counties += jo.GetValue("Name").ToString() + ", ";
-
-                }));
+                }
                 if (counties.Length > 0)
                 {
                     counties = counties.Substring(0, counties.Length - 2);

@@ -18,7 +18,7 @@ namespace Nan.BusinessObjects.BO
         protected NanDataBase m_dbConn;
 
         protected List<BOIDEnum> m_relatedBO;
-        protected JObject m_bo;
+        protected object m_boTable;
         protected IList m_dataList;
         protected IList m_newDataList;
         public static Dictionary<BOIDEnum, IList> BODataPool = new Dictionary<BOIDEnum, IList>();
@@ -84,13 +84,13 @@ namespace Nan.BusinessObjects.BO
         }
         public virtual object GetBOTable()
         {
-            return null;
+            return m_boTable;
         }
         public virtual bool Add()
         {
             if (!OnIsValid())
                 return false;
-            bool ret = m_dbConn.SaveTableData(m_tbName, m_bo);
+            bool ret = m_dbConn.SaveTableData(m_tbName, m_boTable);
             return ret;
         }
         public bool Update()
@@ -110,9 +110,9 @@ namespace Nan.BusinessObjects.BO
                 }
                 m_dataList = m_newDataList;
             }
-            if (m_bo != null)
+            if (m_boTable != null)
             {
-                ret = m_dbConn.SaveTableData(m_tbName, m_bo);
+                ret = m_dbConn.SaveTableData(m_tbName, m_boTable);
                 if (!ret)
                 {
                     return false;
@@ -129,6 +129,10 @@ namespace Nan.BusinessObjects.BO
         {
             return true;
         }
+        public virtual string GetTableName(BOIDEnum boid)
+        {
+            return GetEnumDescription(boid);
+        }
         public virtual string GetTableName()
         {
             if (m_tbName == null)
@@ -137,6 +141,7 @@ namespace Nan.BusinessObjects.BO
             }
             return m_tbName;
         }
+
         public static string GetEnumDescription(Enum enumValue)
         {
             string str = enumValue.ToString();
@@ -149,9 +154,9 @@ namespace Nan.BusinessObjects.BO
 
         public bool GetById(int id)
         {
-            m_bo = m_dbConn.GetTableData(m_tbName, id);
+            m_boTable = m_dbConn.GetTableData(m_tbName, id);
 
-            return m_bo == null;
+            return m_boTable == null;
         }
 
         public IList GetDataList()
@@ -159,19 +164,19 @@ namespace Nan.BusinessObjects.BO
             if (m_dataList == null)
             {
                 m_dataList = m_dbConn.GetTableData(GetTableName());
-                if (!BusinessObject.BODataPool.ContainsKey(m_boId))
-                {
-                    BusinessObject.BODataPool[m_boId] = m_dataList;
-                }
+                //if (!BusinessObject.BODataPool.ContainsKey(m_boId))
+                //{
+                //    BusinessObject.BODataPool[m_boId] = m_dataList;
+                //}
                 
-                foreach (BOIDEnum id in m_relatedBO)
-                {
-                    if (!BusinessObject.BODataPool.ContainsKey(id))
-                    {
-                        BusinessObject bo = BOFactory.GetBO(id);
-                        BusinessObject.BODataPool[id] = bo.GetDataList();
-                    }
-                }
+                //foreach (BOIDEnum id in m_relatedBO)
+                //{
+                //    if (!BusinessObject.BODataPool.ContainsKey(id))
+                //    {
+                //        BusinessObject bo = BOFactory.GetBO(id);
+                //        BusinessObject.BODataPool[id] = bo.GetDataList();
+                //    }
+                //}
                 
             }
             return m_dataList;
@@ -216,6 +221,17 @@ namespace Nan.BusinessObjects.BO
                             break;
                         case JTokenType.Date:
                             tPro.SetValue(result, DateTime.Parse(pro.Value.ToString()), null);
+                            break;
+                        case JTokenType.Array:
+                            if (tPro.PropertyType.IsGenericType)
+                            {
+                                Type t = tPro.PropertyType.GetGenericArguments()[0];
+                                if(t == typeof(int))
+                                {
+                                    tPro.SetValue(result, pro.Value.Select(x => int.Parse(x.ToString())).ToList(), null);
+                                }
+                            }
+                            
                             break;
                         default: break;
                     }

@@ -12,6 +12,7 @@ using Nan.BusinessObjects.BO;
 using BrightIdeasSoftware;
 using NanCrm.Properties;
 using Nan.BusinessObjects;
+using NanCrm.Global;
 
 namespace NanCrm.Setup
 {
@@ -48,19 +49,21 @@ namespace NanCrm.Setup
             };
 
             CountryMD cty = new CountryMD();
-            cty.ID = BusinessObject.GetBONextID(BOIDEnum.Country);
+            cty.ID = -1;
             m_ctyList.Add(cty);
             objList.SetObjects(m_ctyList);
         }
 
         private bool btnOk_Clicking(object sender, EventArgs e)
         {
+            UpdateData(true);
             IList list = (IList)objList.Objects;
             List<int> cties = list.Cast<CountryMD>().Select(x=>x.ID).ToList();
+            cties = cties.Where(x => x > 0).ToList();
             MarketMD mkt = (MarketMD)m_bo.GetBOTable();
             mkt.CountryIds = cties;
 
-            return true;
+            return m_bo.Add();
         }
 
         private void objList_CellClick(object sender, CellClickEventArgs e)
@@ -69,10 +72,22 @@ namespace NanCrm.Setup
             {
                 return;
             }
-            if (e.HitTest.HitTestLocation != HitTestLocation.Image)
+            if (e.HitTest.HitTestLocation == HitTestLocation.Image)
             {
-                return;
+                frmCFL cfl = new frmCFL(objList.BOID);
+                cfl.ReturnProc = CountryRetProc;
+                cfl.MdiParent = this.MdiParent;
+                cfl.Show();
             }
+        }
+
+        private void CountryRetProc(Form form, object data)
+        {
+            IList list = (IList)data;
+            List<CountryMD> ctyList = Utilities.ConvertList<CountryMD>(list);
+            objList.InsertObjects(objList.SelectedIndex, ctyList);
+            this.Refresh();
+
         }
     }
 }

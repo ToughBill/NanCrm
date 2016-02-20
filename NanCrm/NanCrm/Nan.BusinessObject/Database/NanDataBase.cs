@@ -65,7 +65,7 @@ namespace Nan.BusinessObjects.Database
         public JObject GetTableData(string tbName, int id)
         {
             string filePath = Path.Combine(Path.Combine(m_dbPath, m_dbName), tbName);
-            if (!File.Exists(filePath))
+            if (!Directory.Exists(filePath))
             {
                 return null;
             }

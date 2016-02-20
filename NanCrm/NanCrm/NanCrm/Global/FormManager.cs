@@ -11,7 +11,7 @@ using Nan.BusinessObjects.BO;
 
 namespace NanCrm.Global
 {
-    class FormManager
+    public class FormManager
     {
         public static bool DisplayForm(BOIDEnum boid, string key, FormMode formMode, bool isReport = false, DeleReturnProc retProc = null)
         {

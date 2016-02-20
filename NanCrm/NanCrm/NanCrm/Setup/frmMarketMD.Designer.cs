@@ -42,7 +42,7 @@
             this.olvcCapital = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTxtDesc = new Nan.Controls.RichTextBoxEx();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.objList)).BeginInit();
             this.SuspendLayout();
@@ -142,6 +142,7 @@
             // olvcName
             // 
             this.olvcName.AspectName = "Name";
+            this.olvcName.Groupable = false;
             this.olvcName.IsRowNumberColumn = false;
             this.olvcName.Text = "国家";
             this.olvcName.Width = 169;
@@ -188,16 +189,18 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "备注：";
             // 
-            // richTextBox1
+            // richTxtDesc
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.richTxtDesc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(10, 332);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(667, 85);
-            this.richTextBox1.TabIndex = 11;
-            this.richTextBox1.Text = "";
+            this.richTxtDesc.BOField = "Desc";
+            this.richTxtDesc.BOID = Nan.BusinessObjects.BOIDEnum.Market;
+            this.richTxtDesc.Location = new System.Drawing.Point(10, 332);
+            this.richTxtDesc.Name = "richTxtDesc";
+            this.richTxtDesc.Size = new System.Drawing.Size(667, 85);
+            this.richTxtDesc.TabIndex = 11;
+            this.richTxtDesc.Text = "";
             // 
             // imageList
             // 
@@ -211,7 +214,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BOID = Nan.BusinessObjects.BOIDEnum.Market;
             this.ClientSize = new System.Drawing.Size(689, 462);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.richTxtDesc);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.objList);
@@ -231,7 +234,7 @@
             this.Controls.SetChildIndex(this.objList, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.richTextBox1, 0);
+            this.Controls.SetChildIndex(this.richTxtDesc, 0);
             ((System.ComponentModel.ISupportInitialize)(this.objList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -247,7 +250,7 @@
         private Nan.Controls.ObjectGrid objList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private Nan.Controls.RichTextBoxEx richTxtDesc;
         private BrightIdeasSoftware.OLVColumn olvcID;
         private BrightIdeasSoftware.OLVColumn olvcName;
         private BrightIdeasSoftware.OLVColumn olvcFName;

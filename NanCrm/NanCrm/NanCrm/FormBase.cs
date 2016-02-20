@@ -45,6 +45,7 @@ namespace NanCrm
         }
 
         public DeleReturnProc UpdateProc;
+        public DeleReturnProc ReturnProc;
 
         public FormBase()
         {
@@ -87,11 +88,32 @@ namespace NanCrm
                     TextBoxEx txt = (TextBoxEx)ctrl;
                     txt.TableSource = m_tableSource;
                 }
+                else if (ctrl is RichTextBoxEx)
+                {
+                    RichTextBoxEx richTxt = (RichTextBoxEx)ctrl;
+                    richTxt.BOID = m_boId;
+                }
             }
         }
         public event DeleFormModeChange OnModeChange;
         protected virtual void ModeChange(FormMode oldMode,FormMode newMode) 
         {
+            switch (newMode)
+            {
+                case NanCrm.FormMode.Add:
+                    btnOk.Text = "添加";
+                    break;
+                case NanCrm.FormMode.Find:
+                    btnOk.Text = "查找";
+                    break;
+                case NanCrm.FormMode.Ok:
+                    btnOk.Text = "确定";
+                    break;
+                case NanCrm.FormMode.Update:
+                    btnOk.Text = "更新";
+                    break;
+                default: break;
+            }
             FormModeChangeArgs args = new FormModeChangeArgs(oldMode, newMode);
             if (OnModeChange != null)
             {
@@ -156,6 +178,7 @@ namespace NanCrm
         }
         /// <summary>
         /// 更新数据后刷新BO或者Form
+        /// true:将界面数据保存至BO; false:根据BO中的值刷新界面
         /// </summary>
         /// <param name="toForm">true:将界面数据保存至BO; false:根据BO中的值刷新界面</param>
         /// <returns></returns>
@@ -194,6 +217,21 @@ namespace NanCrm
                         else
                         {
                             cmb.SelectedValue = GetFieldData(cmb.BOField).ToString();
+                        }
+                    }
+                }
+                else if (ctrl is RichTextBoxEx)
+                {
+                    RichTextBoxEx richTxt = (RichTextBoxEx)ctrl;
+                    if (richTxt.BOID == m_boId)
+                    {
+                        if (saveData)
+                        {
+                            result = SetFieldData(richTxt.BOField, richTxt.Text);
+                        }
+                        else
+                        {
+                            richTxt.Text = GetFieldData(richTxt.BOField).ToString();
                         }
                     }
                 }

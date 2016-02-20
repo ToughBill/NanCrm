@@ -4381,6 +4381,10 @@ namespace BrightIdeasSoftware
                             ourObjects.Insert(i, modelObject);
                             OLVListItem lvi = new OLVListItem(modelObject);
                             this.FillInValues(lvi, modelObject);
+                            if (this.GetColumn(0).IsRowNumberColumn)
+                            {
+                                lvi.GetSubItem(0).Text = (i+1).ToString();
+                            }
                             this.Items.Insert(i, lvi);
                             i++;
                         }
@@ -7712,6 +7716,11 @@ namespace BrightIdeasSoftware
             olvi.UseItemStyleForSubItems = true;
             olvi.SubItems.Clear();
             this.FillInValues(olvi, olvi.RowObject);
+            if (this.GetColumn(0).IsRowNumberColumn)
+            {
+                int idx = olvi.Index;
+                olvi.GetSubItem(0).Text = (++idx).ToString();
+            }
             this.PostProcessOneRow(olvi.Index, this.GetDisplayOrderOfItemIndex(olvi.Index), olvi);
         }
 

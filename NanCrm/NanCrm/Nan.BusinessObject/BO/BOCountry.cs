@@ -6,15 +6,20 @@ using Biggy.Data.Json;
 using Biggy.Core;
 using System.Collections;
 using Newtonsoft.Json.Linq;
+using Nan.BusinessObjects;
 
 namespace Nan.BusinessObjects.BO
 {
     public class CountryMD
     {
         public int ID { get; set; }
+        [BOFieldAttribute(CFL=true,Desc="国家")]
         public string Name { get; set; }
+        [BOFieldAttribute(CFL = true, Desc = "外文名")]
         public string ForeName { get; set; }
+        [BOFieldAttribute(CFL = true, Desc = "缩写")]
         public string Alias { get; set; }
+        [BOFieldAttribute(CFL = true, Desc = "首都")]
         public string Capital { get; set; }
 
         public override bool Equals(object obj)
@@ -73,7 +78,10 @@ namespace Nan.BusinessObjects.BO
             }
             return isValid;
         }
-
+        public override object GetBOTable()
+        {
+            return m_boCty;
+        }
         //public override int GetMaxId()
         //{
         //    int maxId = 1;
