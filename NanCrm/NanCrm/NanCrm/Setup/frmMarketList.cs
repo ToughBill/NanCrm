@@ -32,17 +32,12 @@ namespace NanCrm.Setup
         {
             try
             {
-                //IList ctybos = m_bo.GetDataList();
-                //List<MarketMD> mktList = Utilities.ConvertList <MarketMD> (ctybos);
-                
-                //mktList.Add(newMkt);
                 m_mktBO = (BOMarket)BOFactory.GetBO(BOIDEnum.Market);
-                //mktBO.GetDataList();
                 List<MarketDetaiedlMD> listObj = m_mktBO.GetDetailedMarketMD();
-                MarketMD newMkt = new MarketMD();
-                newMkt.ID = BusinessObject.GetBONextID(m_boId);
-                MarketDetaiedlMD newObj = new MarketDetaiedlMD(newMkt);
-                listObj.Add(newObj);
+                //MarketMD newMkt = new MarketMD();
+                //newMkt.ID = BusinessObject.GetBONextID(m_boId);
+                //MarketDetaiedlMD newObj = new MarketDetaiedlMD(newMkt);
+                //listObj.Add(newObj);
 
                 objList.SetObjects(listObj);
             }
@@ -56,8 +51,10 @@ namespace NanCrm.Setup
         {
             IList obj = (IList)objList.Objects;
             //BOMarket objMkt = (BOMarket)m_bo;
-            m_mktBO.SetDataList(obj);
-            return m_mktBO.Update();
+            //m_mktBO.SetDataList(obj);
+            List<MarketMD> mktList = obj.Cast<MarketDetaiedlMD>().Select(x => x.GetOrignalMD()).ToList();
+            m_mktBO.SetDataList(mktList);
+            return m_mktBO.UpdateBatch();
         }
 
         private void objList_RowNumberDblClick(BrightIdeasSoftware.OlvListViewHitTestInfo hti)
@@ -65,14 +62,26 @@ namespace NanCrm.Setup
             MarketDetaiedlMD obj = (MarketDetaiedlMD)hti.RowObject;
             frmMarketMD frmMktMd = new frmMarketMD(BOIDEnum.Market);
             frmMktMd.MdiParent = this.MdiParent;
-            frmMktMd.FormMode = NanCrm.FormMode.Add;
-            frmMktMd.UpdateProc = MarketMDRetProc;
+            frmMktMd.FormMode = NanCrm.FormMode.Ok;
+            frmMktMd.UpdateProc = MarketMDUpdateProc;
+            //int id = ((MarketDetaiedlMD)hti.RowObject).ID;
+            //frmMktMd.LoadDataById(id);
+            frmMktMd.SetBOTable(((MarketDetaiedlMD)hti.RowObject).GetOrignalMD());
             frmMktMd.Show();
         }
 
-        private void MarketMDRetProc(Form form, object data)
+        private void MarketMDUpdateProc(Form form, object data)
         {
-
+            BOMarket mktBo = (BOMarket)data;
+            MarketDetaiedlMD detailedMkt = new MarketDetaiedlMD((MarketMD)mktBo.GetBOTable());
+            List<CountryMD> cty = mktBo.GetMktCountry();
+            detailedMkt.Countries = mktBo.GetCountryString();
+            if(objList.FocusedItem != null)
+            {
+                objList.GetItem(objList.FocusedItem.Index).RowObject = detailedMkt;
+            }
+            
+            objList.RefreshSelectedObjects();
         }
     }
 

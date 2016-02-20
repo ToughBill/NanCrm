@@ -838,6 +838,38 @@ namespace BrightIdeasSoftware
         #endregion
         
         #region Public properties
+
+        private object m_removedObject;
+        /// <summary>
+        /// save the removed object
+        /// </summary>
+        [Browsable(false)]
+        public object RemovedObject
+        {
+            get { return m_removedObject; }
+            set { m_removedObject = value; }
+        }
+
+        private IList m_removedObjects;
+        /// <summary>
+        /// save the removed objects
+        /// </summary>
+        [Browsable(false)]
+        public IList RemovedObjects
+        {
+            get { return m_removedObjects; }
+            set { m_removedObjects = value; }
+        }
+        private OlvListViewHitTestInfo m_lastHitInfo;
+        /// <summary>
+        /// save the click(left or right) hit info
+        /// </summary>
+        [Browsable(false)]
+        public OlvListViewHitTestInfo LastHitInfo
+        {
+            get { return m_lastHitInfo; }
+            set {  m_lastHitInfo = value; }
+        }
         /// <summary>
         /// Gets or sets an model filter that is combined with any column filtering that the end-user specifies.
         /// </summary>
@@ -6082,7 +6114,7 @@ namespace BrightIdeasSoftware
         /// <param name="hti"></param>
         /// <returns>True if the message has been handled</returns>
         protected virtual bool ProcessLButtonDown(OlvListViewHitTestInfo hti) {
-
+            m_lastHitInfo = hti;
             if (hti.Item == null)
                 return false;
 
@@ -6169,6 +6201,7 @@ namespace BrightIdeasSoftware
         /// <param name="hti"></param>
         /// <returns>True if the message has been handled</returns>
         protected virtual bool ProcessRButtonDown(OlvListViewHitTestInfo hti) {
+            m_lastHitInfo = hti;
             if (hti.Item == null)
                 return false;
 
@@ -6195,7 +6228,7 @@ namespace BrightIdeasSoftware
         /// <param name="hti"></param>
         /// <returns>True if the message has been handled</returns>
         protected virtual bool ProcessLButtonDoubleClick(OlvListViewHitTestInfo hti) {
-
+            m_lastHitInfo = hti;
             // If the user double clicked on a checkbox, ignore it
             return (hti.HitTestLocation == HitTestLocation.CheckBox);
         }
@@ -6219,7 +6252,7 @@ namespace BrightIdeasSoftware
         /// <param name="hti"></param>
         /// <returns>True if the message has been handled</returns>
         protected virtual bool ProcessRButtonDoubleClick(OlvListViewHitTestInfo hti) {
-
+            m_lastHitInfo = hti;
             // If the user double clicked on a checkbox, ignore it
             return (hti.HitTestLocation == HitTestLocation.CheckBox);
         }

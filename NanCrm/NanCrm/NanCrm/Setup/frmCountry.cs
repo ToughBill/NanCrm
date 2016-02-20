@@ -55,7 +55,7 @@ namespace NanCrm.Setup
             IList obj = (IList)objList.Objects;
             BOCountry objCty = (BOCountry)m_bo;
             objCty.SetDataList(obj);
-            return objCty.Update();
+            return objCty.UpdateBatch();
         }
 
         private void objList_CellEditValidating(object sender, CellEditEventArgs e)

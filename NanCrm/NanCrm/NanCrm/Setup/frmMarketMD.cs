@@ -34,7 +34,7 @@ namespace NanCrm.Setup
         private void InitCountryGrid()
         {
             BOMarket mktBo = (BOMarket)m_bo;
-            mktBo.Init();
+            //mktBo.Init();
             UpdateData(false);
 
             //this.olvcName.AspectGetter = delegate(object row)
@@ -47,7 +47,13 @@ namespace NanCrm.Setup
             {
                 return 0;
             };
-
+            MarketMD mkt = (MarketMD)mktBo.GetBOTable();
+            foreach (int id in mkt.CountryIds)
+            {
+                BOCountry ctyBo = new BOCountry();
+                ctyBo.GetById(id);
+                m_ctyList.Add((CountryMD)ctyBo.GetBOTable());
+            }
             CountryMD cty = new CountryMD();
             cty.ID = -1;
             m_ctyList.Add(cty);
@@ -87,6 +93,11 @@ namespace NanCrm.Setup
             List<CountryMD> ctyList = Utilities.ConvertList<CountryMD>(list);
             objList.InsertObjects(objList.SelectedIndex, ctyList);
             this.Refresh();
+
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -41,15 +41,16 @@ namespace Nan.BusinessObjects.BO
     public class BOCountry : BusinessObject
     {
 
-        private CountryMD m_boCty;
+        //private CountryMD m_boCty;
         public BOCountry()
         {
             base.m_boId = BOIDEnum.Country;
-            m_boCty = new CountryMD();
+            m_boTable = new CountryMD();
         }
         public override bool Init()
         {
-            m_boCty.ID = GetNextID();
+            CountryMD ctyTb = (CountryMD)m_boTable;
+            ctyTb.ID = GetNextID();
 
             return base.Init();
         }
@@ -57,43 +58,42 @@ namespace Nan.BusinessObjects.BO
         public override bool OnIsValid()
         {
             bool isValid = true;
-            //ArrayList list = ArrayList.Adapter(m_newDataList);
-            List<CountryMD> list = new List<CountryMD>((IEnumerable<CountryMD>)m_newDataList);
-            int i = 0;
-            for (; i < list.Count;i++ )
+            
+            //List<CountryMD> list = new List<CountryMD>((IEnumerable<CountryMD>)m_newDataList);
+            //int i = 0;
+            //for (; i < list.Count;i++ )
+            //{
+            //    if (string.IsNullOrEmpty(list[i].Name))
+            //    {
+            //        if (i < list.Count - 1)
+            //        {
+            //            isValid = false;
+            //            break;
+            //        }
+            //        else
+            //        {
+            //            m_newDataList.RemoveAt(i);
+            //        }
+            //        break;
+            //    }
+            //}
+            CountryMD ctyTb = (CountryMD)m_boTable;
+            if (string.IsNullOrEmpty(ctyTb.Name))
             {
-                if (string.IsNullOrEmpty(list[i].Name))
-                {
-                    if (i < list.Count - 1)
-                    {
-                        isValid = false;
-                        break;
-                    }
-                    else
-                    {
-                        m_newDataList.RemoveAt(i);
-                    }
-                    break;
-                }
+                isValid = false;
             }
             return isValid;
         }
-        public override object GetBOTable()
-        {
-            return m_boCty;
-        }
-        //public override int GetMaxId()
+        //public override object GetBOTable()
         //{
-        //    int maxId = 1;
-        //    foreach (var item in m_newDataList)
-        //    {
-        //        CountryMD cty = (CountryMD)item;
-        //        if (cty.ID > maxId)
-        //        {
-        //            maxId = cty.ID;
-        //        }
-        //    }
-        //    return maxId;
+        //    return m_boCty;
         //}
+        public override bool GetById(int id)
+        {
+            CountryMD mkt = m_dbConn.GetTableData(GetTableName(), id).ConvertToTarget<CountryMD>();
+            m_boTable = mkt;
+
+            return m_boTable == null;
+        }
     }
 }

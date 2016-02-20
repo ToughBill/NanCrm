@@ -86,6 +86,10 @@ namespace Nan.BusinessObjects.BO
         {
             return m_boTable;
         }
+        public virtual void SetBOTable(object table)
+        {
+            m_boTable = table;
+        }
         public virtual bool Add()
         {
             if (!OnIsValid())
@@ -101,15 +105,6 @@ namespace Nan.BusinessObjects.BO
                 return false;
 
             bool ret = true;
-            if (m_dataList != null)
-            {
-                ret = m_dbConn.SaveTableData(m_tbName, m_newDataList);
-                if (!ret)
-                {
-                    return false;
-                }
-                m_dataList = m_newDataList;
-            }
             if (m_boTable != null)
             {
                 ret = m_dbConn.SaveTableData(m_tbName, m_boTable);
@@ -121,6 +116,22 @@ namespace Nan.BusinessObjects.BO
 
             return ret; 
         }
+
+        public virtual bool UpdateBatch()
+        {
+            bool ret = true;
+            if (m_dataList != null)
+            {
+                ret = m_dbConn.SaveTableData(m_tbName, m_newDataList);
+                if (!ret)
+                {
+                    return false;
+                }
+                m_dataList = m_newDataList;
+            }
+            return ret;
+        }
+
         public virtual bool OnUpdate()
         {
             return true;
@@ -152,7 +163,7 @@ namespace Nan.BusinessObjects.BO
             return da.Description;
         }
 
-        public bool GetById(int id)
+        public virtual bool GetById(int id)
         {
             m_boTable = m_dbConn.GetTableData(m_tbName, id);
 

@@ -44,6 +44,7 @@ namespace NanCrm
             }
         }
 
+        private bool m_needCallRetProc;
         public DeleReturnProc UpdateProc;
         public DeleReturnProc ReturnProc;
 
@@ -53,6 +54,7 @@ namespace NanCrm
             m_boId = BOIDEnum.Invalid;
             m_bo = null;
             m_formMode = FormMode.Ok;
+            m_needCallRetProc = true;
         }
 
         public FormBase(BOIDEnum boId)
@@ -61,6 +63,7 @@ namespace NanCrm
             m_boId = boId;
             m_bo = BOFactory.GetBO(m_boId);
             m_formMode = FormMode.Ok;
+            m_needCallRetProc = true;
         }
 
         private string m_tableSource;
@@ -150,7 +153,9 @@ namespace NanCrm
 
         protected virtual bool btnCancel_Clicked(object sender, ClickedEventArgs e)
         {
+            m_needCallRetProc = false;
             this.Close();
+            m_needCallRetProc = true;
             return true;
         }
 
@@ -167,7 +172,7 @@ namespace NanCrm
                 btnOk.Text = "确定";
                 if (UpdateProc != null)
                 {
-                    UpdateProc(this, null);
+                    UpdateProc(this, BuildUpdateParams());
                 }
             }
             else
@@ -176,6 +181,38 @@ namespace NanCrm
             }
             return true;
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (ReturnProc != null && m_needCallRetProc)
+            {
+                ReturnProc(this, BuildReturnParams());
+            }
+            base.OnFormClosing(e); 
+        }
+
+        protected virtual object BuildReturnParams()
+        {
+            return m_bo;
+        }
+        protected virtual object BuildUpdateParams()
+        {
+            return m_bo;
+        }
+
+        public virtual bool LoadDataById(int id)
+        {
+            bool ret = m_bo.GetById(id);
+            if (!ret)
+                return ret;
+            return UpdateData(false);
+        }
+
+        public virtual void SetBOTable(object bo)
+        {
+            m_bo.SetBOTable(bo);
+        }
+
         /// <summary>
         /// 更新数据后刷新BO或者Form
         /// true:将界面数据保存至BO; false:根据BO中的值刷新界面

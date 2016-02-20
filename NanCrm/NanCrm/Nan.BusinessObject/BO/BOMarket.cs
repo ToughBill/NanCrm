@@ -26,12 +26,18 @@ namespace Nan.BusinessObjects.BO
         public string Name { get; set; }
         public string Desc { get; set; }
         public string Countries { get; set; }
+        private MarketMD m_mkt;
 
         public MarketDetaiedlMD(MarketMD mkt)
         {
             this.ID = mkt.ID;
             this.Name = mkt.Name;
             this.Desc = mkt.Desc;
+            m_mkt = mkt;
+        }
+        public MarketMD GetOrignalMD()
+        {
+            return m_mkt;
         }
     }
     public class BOMarket : BusinessObject
@@ -58,27 +64,6 @@ namespace Nan.BusinessObjects.BO
         public override bool OnIsValid()
         {
             bool isValid = true;
-            if (m_newDataList != null)
-            {
-                List<MarketMD> list = new List<MarketMD>((IEnumerable<MarketMD>)m_newDataList);
-                int i = 0;
-                for (; i < list.Count; i++)
-                {
-                    if (string.IsNullOrEmpty(list[i].Name))
-                    {
-                        if (i < list.Count - 1)
-                        {
-                            isValid = false;
-                            break;
-                        }
-                        else
-                        {
-                            m_newDataList.RemoveAt(i);
-                        }
-                        break;
-                    }
-                }
-            }
             if (m_boTable != null)
             {
                 MarketMD mktBo = (MarketMD)m_boTable;
@@ -90,18 +75,31 @@ namespace Nan.BusinessObjects.BO
             return isValid;
         }
 
-        public List<JObject> GetMktCountry(int mktId)
+        public List<CountryMD> GetMktCountry()
         {
-            List<JObject> result = new List<JObject>();
-            List<JObject> mktList = BusinessObject.BODataPool[BOIDEnum.Market].Cast<JObject>().ToList();
-            JObject jo = mktList.Find(x => int.Parse(x.GetValue("ID").ToString()) == mktId);
-            if (jo == null)
+            List<CountryMD> result = new List<CountryMD>();
+            string ctyTbName = GetTableName(BOIDEnum.Country);
+            string counties = string.Empty;
+            MarketMD mkt = (MarketMD)m_boTable;
+            foreach (int ctyId in mkt.CountryIds)
             {
-                return result;
+                CountryMD cty = m_dbConn.GetTableData(ctyTbName, ctyId).ConvertToTarget<CountryMD>();
+                result.Add(cty);
             }
-            List<JObject> mktDataillist = BusinessObject.BODataPool[BOIDEnum.MarketDetail].Cast<JObject>().ToList();
-            result = mktDataillist.Where(x => int.Parse(x.GetValue("MktId").ToString()) == mktId).ToList();
+            
             return result;
+        }
+
+        public string GetCountryString()
+        {
+            List<CountryMD> cty = GetMktCountry();
+            string counties = string.Empty;
+            cty.ForEach(x=>counties+=x.Name+", ");
+            if(counties.Length > 0)
+            {
+                counties = counties.Substring(0, counties.Length - 2);
+            }
+            return counties;
         }
 
         public List<MarketDetaiedlMD> GetDetailedMarketMD()
@@ -133,6 +131,14 @@ namespace Nan.BusinessObjects.BO
                 result.Add(bo);
             }
             return result;
+        }
+
+        public override bool GetById(int id)
+        {
+            MarketMD mkt = m_dbConn.GetTableData(m_tbName, id).ConvertToTarget<MarketMD>();
+            m_boTable = mkt;
+
+            return m_boTable == null;
         }
     }
 }

@@ -39,6 +39,58 @@ namespace Nan.Controls
             }
         }
 
+        private ContextMenuStrip m_contxtMenu;
+        public ContextMenuStrip SysContextMenu
+        {
+            get { return m_contxtMenu; }
+            set
+            {
+                m_contxtMenu = value;
+                
+            }
+        }
+        ToolStripMenuItem m_tsmAddRow;
+        ToolStripMenuItem m_tsmDelRow;
+        private bool m_showSysMenu;
+        public bool ShowSysMenu
+        {
+            get { return m_showSysMenu; }
+            set 
+            { 
+                m_showSysMenu = value;
+                if (m_showSysMenu)
+                {
+                    base.ContextMenuStrip = SysContextMenu;
+                    m_tsmAddRow.Visible = true;
+                    m_tsmDelRow.Visible = true;
+                }
+                else
+                {
+                    base.ContextMenuStrip = null;
+                }
+            }
+        }
+        private bool m_showAddRowMenu;
+        public bool ShowAddRowMenu
+        {
+            get { return m_showAddRowMenu; }
+            set
+            {
+                m_showAddRowMenu = value;
+                m_tsmAddRow.Visible = value;
+            }
+        }
+        private bool m_showDelRowMenu;
+        public bool ShowDeleteRowMenu
+        {
+            get { return m_showDelRowMenu; }
+            set
+            {
+                m_showDelRowMenu = value;
+                m_tsmDelRow.Visible = value;
+            }
+        }
+
         public ObjectGrid()
         {
             InitializeComponent();
@@ -47,10 +99,30 @@ namespace Nan.Controls
             this.HideSelection = false;
             this.View = View.Details;
             this.UseAlternatingBackColors = true;
-
+            
             ShowRowNumber = true;
+
+            InitSysMenu();
         }
 
+        private void InitSysMenu()
+        {
+            if (m_contxtMenu == null)
+            {
+                m_contxtMenu = new ContextMenuStrip();
+            }
+            m_tsmAddRow = new ToolStripMenuItem();
+            m_tsmAddRow.Name = "sys_tsmAddRow";
+            m_tsmAddRow.Text = "添加";
+            m_tsmAddRow.Click += new System.EventHandler(this.sys_tsmAddRow_Click);
+            m_contxtMenu.Items.Add(m_tsmAddRow);
+
+            m_tsmDelRow = new ToolStripMenuItem();
+            m_tsmDelRow.Name = "sys_tsmDelRow";
+            m_tsmDelRow.Text = "删除";
+            m_tsmDelRow.Click += new System.EventHandler(this.sys_tsmDelRow_Click);
+            m_contxtMenu.Items.Add(m_tsmDelRow);
+        }
         protected void InitRowNumberColumn()
         {
             if (m_showRowNumber)
@@ -111,7 +183,34 @@ namespace Nan.Controls
             }
             return true;
         }
+        public event DeleContextMenuClick AddRowMenuClick;
+        public event DeleContextMenuClick DeleteRowMenuClick;
+        private void sys_tsmDelRow_Click(object sender, EventArgs e)
+        {
+            if (DeleteRowMenuClick != null)
+            {
+                OLVContextMenuClickArgs args = new OLVContextMenuClickArgs(base.LastHitInfo);
+                DeleteRowMenuClick(sender, args);
+            }
+        }
+        private void sys_tsmAddRow_Click(object sender, EventArgs e)
+        {
+            if (AddRowMenuClick != null)
+            {
+                OLVContextMenuClickArgs args = new OLVContextMenuClickArgs(base.LastHitInfo);
+                AddRowMenuClick(sender, args);
+            }
+        }
     }
 
     public delegate void DeleRowNoColumnClick(OlvListViewHitTestInfo hti);
+    public delegate void DeleContextMenuClick(object sender, OLVContextMenuClickArgs args);
+    public class OLVContextMenuClickArgs : EventArgs
+    {
+        public OlvListViewHitTestInfo HitInfo { get; set; }
+        public OLVContextMenuClickArgs(OlvListViewHitTestInfo hitInfo)
+        {
+            HitInfo = hitInfo;
+        }
+    }
 }

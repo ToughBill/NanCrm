@@ -67,16 +67,21 @@ namespace NanCrm
             {
                 return true;
             }
-            if(ReturnProc!=null)
-            {
-                ReturnProc(this, objList.SelectedObjects);
-            }
+            //if(ReturnProc!=null)
+            //{
+            //    ReturnProc(this, objList.SelectedObjects);
+            //}
             return true;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
             FormManager.DisplayForm(m_boId, "", FormMode.Add, true);
+        }
+
+        protected override object BuildReturnParams()
+        {
+            return objList.SelectedObjects;
         }
     }
 }

@@ -123,7 +123,10 @@
             this.objList.Location = new System.Drawing.Point(10, 57);
             this.objList.Name = "objList";
             this.objList.OwnerDraw = true;
+            this.objList.ShowAddRowMenu = true;
+            this.objList.ShowDeleteRowMenu = true;
             this.objList.ShowRowNumber = true;
+            this.objList.ShowSysMenu = true;
             this.objList.Size = new System.Drawing.Size(667, 250);
             this.objList.TabIndex = 8;
             this.objList.UseAlternatingBackColors = true;
@@ -176,9 +179,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 9;
-            this.label2.Text = "国家：";
+            this.label2.Text = "包含国家：";
             // 
             // label3
             // 
