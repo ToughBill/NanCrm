@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using Nan.BusinessObjects.Database;
 using NanCrm.Global;
+using Nan.Controls;
 
 namespace NanCrm
 {
@@ -36,6 +37,11 @@ namespace NanCrm
                 m_frmMainMenu.MdiParent = this;
                 m_frmMainMenu.Show();
             }
+        }
+
+        public StatusBarEx GetStatusBar()
+        {
+            return statusBar;
         }
     }
 }

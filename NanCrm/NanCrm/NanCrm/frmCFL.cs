@@ -24,6 +24,7 @@ namespace NanCrm
         private void frmCFL_Load(object sender, EventArgs e)
         {
             LoadGrid();
+            this.Text = BusinessObject.GetBOName(m_boId) + "列表";
         }
 
         private void LoadGrid()

@@ -5,6 +5,12 @@ using System.Text;
 
 namespace Nan.BusinessObjects
 {
+    [AttributeUsage(AttributeTargets.Class)]
+    public class BOAttribute : Attribute
+    {
+        public string Name { get; set; }
+    }
+
     [AttributeUsage(AttributeTargets.Property)]
     public class BOFieldAttribute : Attribute
     {

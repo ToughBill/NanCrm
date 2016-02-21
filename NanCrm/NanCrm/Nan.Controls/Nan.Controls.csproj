@@ -72,6 +72,12 @@
     <Compile Include="RichTextBoxEx.Designer.cs">
       <DependentUpon>RichTextBoxEx.cs</DependentUpon>
     </Compile>
+    <Compile Include="StatusBarEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StatusBarEx.Designer.cs">
+      <DependentUpon>StatusBarEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextBoxEx.cs">
       <SubType>UserControl</SubType>
     </Compile>

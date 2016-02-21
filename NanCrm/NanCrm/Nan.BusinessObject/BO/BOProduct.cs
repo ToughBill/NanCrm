@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nan.BusinessObjects.BO
 {
-    public class ProductTable
+    public class ProductMD
     {
         public int ID { get; set; }
         public string Code { get; set; }
@@ -18,21 +18,37 @@ namespace Nan.BusinessObjects.BO
         public string Width { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }
-        public string Texture { get; set; }
+        public int Texture { get; set; }
         public string Remark { get; set; }
+
+        public ProductMD()
+        {
+            Code = Name = FName = Refundrate
+                = Price = Length = Width = Height
+                = Weight = Remark = string.Empty;
+        }
     }
     public class BOProduct : BusinessObject
     {
-        private ProductTable m_boPro;
         public BOProduct()
         {
             base.m_boId = BOIDEnum.Product;
-            m_boPro = new ProductTable();
+            m_boTable = new ProductMD();
         }
 
-        public override object GetBOTable()
+//         public override object GetBOTable()
+//         {
+//             return boPro;
+//         }
+
+        public override bool Init()
         {
-            return m_boPro;
+            base.Init();
+            ProductMD boPro = (ProductMD)m_boTable;
+            boPro.ID = GetNextID();
+            
+
+            return true;
         }
     }
 }

@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BOFieldAttribute.cs" />
+    <Compile Include="BOAttribute.cs" />
     <Compile Include="BO\BOBP.cs" />
     <Compile Include="BOFactory.cs" />
     <Compile Include="BOIDEnum.cs" />

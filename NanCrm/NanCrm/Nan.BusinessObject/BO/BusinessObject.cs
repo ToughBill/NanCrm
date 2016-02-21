@@ -21,6 +21,7 @@ namespace Nan.BusinessObjects.BO
         protected object m_boTable;
         protected IList m_dataList;
         protected IList m_newDataList;
+        protected IList m_removedDataList;
         public static Dictionary<BOIDEnum, IList> BODataPool = new Dictionary<BOIDEnum, IList>();
 
         public virtual List<ValidValue> GetValieValue(string keyField, string descField)
@@ -120,7 +121,7 @@ namespace Nan.BusinessObjects.BO
         public virtual bool UpdateBatch()
         {
             bool ret = true;
-            if (m_dataList != null)
+            if (m_dataList != null && m_dataList.Count > 0)
             {
                 ret = m_dbConn.SaveTableData(m_tbName, m_newDataList);
                 if (!ret)
@@ -128,6 +129,15 @@ namespace Nan.BusinessObjects.BO
                     return false;
                 }
                 m_dataList = m_newDataList;
+            }
+            if (m_removedDataList != null && m_removedDataList.Count > 0)
+            {
+                ret = m_dbConn.RemoveTableData(m_tbName, m_removedDataList);
+                if (!ret)
+                {
+                    return false;
+                }
+                m_removedDataList.Clear();
             }
             return ret;
         }
@@ -163,6 +173,18 @@ namespace Nan.BusinessObjects.BO
             return da.Description;
         }
 
+        public static string GetBOName(BOIDEnum boid)
+        {
+            string name = string.Empty;
+            BusinessObject bo = BOFactory.GetBO(boid);
+            var attr = bo.GetType().GetCustomAttributes(typeof(BOAttribute), false).First();
+            if (attr == null)
+            {
+                return name;
+            }
+            return ((BOAttribute)attr).Name;
+        }
+
         public virtual bool GetById(int id)
         {
             m_boTable = m_dbConn.GetTableData(m_tbName, id);
@@ -195,6 +217,10 @@ namespace Nan.BusinessObjects.BO
         public virtual void SetDataList(IList list)
         {
             m_newDataList = list;
+        }
+        public virtual void SetRemovedDataList(IList list)
+        {
+            m_removedDataList = list;
         }
     }
 

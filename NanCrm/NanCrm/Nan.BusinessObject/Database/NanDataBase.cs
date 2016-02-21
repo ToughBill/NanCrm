@@ -140,5 +140,57 @@ namespace Nan.BusinessObjects.Database
 
             return result;
         }
+
+        public bool RemoveTableData(string tbName, object data)
+        {
+            bool result = true;
+            try
+            {
+                string filePath = Path.Combine(Path.Combine(m_dbPath, m_dbName), tbName);
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                JObject jo = JObject.FromObject(data);
+                string id = jo.GetValue("ID").ToString();
+                string path = Path.Combine(filePath, id);
+                if (File.Exists(path))
+                     File.Delete(path);
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        public bool RemoveTableData(string tbName, IList dataList)
+        {
+            bool result = true;
+            try
+            {
+                string filePath = Path.Combine(Path.Combine(m_dbPath, m_dbName), tbName);
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                IEnumerator iter = dataList.GetEnumerator();
+                while (iter.MoveNext())
+                {
+                    JObject jo = JObject.FromObject(iter.Current);
+                    string id = jo.GetValue("ID").ToString();
+                    string path = Path.Combine(filePath, id);
+                    if (File.Exists(path))
+                        File.Delete(path);
+                }
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+        }
     }
 }

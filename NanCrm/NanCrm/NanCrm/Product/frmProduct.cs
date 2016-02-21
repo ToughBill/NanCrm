@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Nan.Controls;
 using Nan.BusinessObjects;
+using Nan.BusinessObjects.BO;
 
 namespace NanCrm.Product
 {
@@ -21,17 +22,47 @@ namespace NanCrm.Product
 
         private void frmProduct_Load(object sender, EventArgs e)
         {
-            
-        }
-
-        private void LoadData()
-        {
-
+            BOProduct mktBo = (BOProduct)m_bo;
+            if (this.ExchangeParam == null)
+            {
+                mktBo.Init();
+                this.FormMode = NanCrm.FormMode.Add;
+            }
+            else
+            {
+                this.FormMode = this.ExchangeParam.Mode;
+            }
+            UpdateData(false);
         }
 
         private bool btnOk_Clicking(object sender, EventArgs e)
         {
-            return UpdateData();
+            if (!ValidateData())
+                return false;
+            if (!UpdateData())
+            {
+                return false;
+            }
+            if (this.FormMode == NanCrm.FormMode.Add)
+            {
+                m_bo.Add();
+            }
+            else if (this.FormMode == NanCrm.FormMode.Update)
+            {
+                m_bo.Update();
+            }
+            return true;
+        }
+
+        private bool ValidateData()
+        {
+            bool result = true;
+            if (string.IsNullOrEmpty(txtCode.Text))
+            {
+                GetStatusBar().DisplayMessage(MessageType.Error,"编号为空！");
+                result = false;
+            }
+            return result;
         }
     }
 }

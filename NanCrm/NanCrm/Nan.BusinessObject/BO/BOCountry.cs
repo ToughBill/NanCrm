@@ -38,6 +38,7 @@ namespace Nan.BusinessObjects.BO
                     && cty.Capital == this.Capital);
         }
     }
+    [BOAttribute(Name="城市")]
     public class BOCountry : BusinessObject
     {
 

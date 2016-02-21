@@ -56,6 +56,8 @@ namespace NanCrm.Setup
             //m_mktBO.SetDataList(obj);
             List<MarketMD> mktList = obj.Cast<MarketDetaiedlMD>().Select(x => x.GetOrignalMD()).ToList();
             m_mktBO.SetDataList(mktList);
+
+            m_mktBO.SetRemovedDataList(objList.RemovedObjects.Cast<MarketDetaiedlMD>().ToList().Select(x => x.GetOrignalMD()).ToList());
             return m_mktBO.UpdateBatch();
         }
 

@@ -44,6 +44,13 @@ namespace NanCrm
             }
         }
 
+        protected FormExchangeParams m_exchParam;
+        public FormExchangeParams ExchangeParam
+        {
+            get { return m_exchParam; }
+            set { m_exchParam = value; }
+        }
+
         private bool m_needCallRetProc;
         public DeleReturnProc UpdateProc;
         public DeleReturnProc ReturnProc;
@@ -133,9 +140,24 @@ namespace NanCrm
                     comb.DefineNewProc = new DeleDefineNewProc(ComboBoxDefineNewProc);
                     comb.InitSource();
                 }
+                
             }
 
             base.OnLoad(e);
+
+            foreach (Control ctrl in this.Controls)
+            {
+                if (ctrl is ObjectGrid)
+                {
+                    ObjectGrid objGrid = (ObjectGrid)ctrl;
+                    objGrid.ItemsChanged += new EventHandler<BrightIdeasSoftware.ItemsChangedEventArgs>(objGrid_ItemsChanged);
+                }
+            }
+        }
+
+        private void objGrid_ItemsChanged(object sender, BrightIdeasSoftware.ItemsChangedEventArgs e)
+        {
+            this.FormMode = NanCrm.FormMode.Update;
         }
 
         protected virtual void ComboBoxDefineNewProc(object sender, DeleReturnProc retProc)
@@ -146,8 +168,12 @@ namespace NanCrm
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            m_formMode = FormMode.Update;
-            btnOk.Text = "更新";
+            if (m_formMode == NanCrm.FormMode.Ok)
+            {
+                m_formMode = FormMode.Update;
+                btnOk.Text = "更新";
+            }
+            
             base.OnKeyDown(e);
         }
 
@@ -330,6 +356,16 @@ namespace NanCrm
 
             return result;
         }
+
+        public void SetFormExchangeParams(FormExchangeParams param)
+        {
+            m_exchParam = param;
+        }
+
+        public StatusBarEx GetStatusBar()
+        {
+            return FormManager.GetMainForm().GetStatusBar();
+        } 
     }
 
     public class FormModeChangeArgs:EventArgs
@@ -350,5 +386,10 @@ namespace NanCrm
         Add,
         Update,
         Find
+    }
+    public class FormExchangeParams
+    {
+        public FormMode Mode;
+        public object Data;
     }
 }

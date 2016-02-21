@@ -40,9 +40,9 @@ namespace Nan.BusinessObjects.BO
             return m_mkt;
         }
     }
+    [BOAttribute(Name = "城市")]
     public class BOMarket : BusinessObject
     {
-        //private MarketMD m_bo;
         public BOMarket()
         {
             base.m_boId = BOIDEnum.Market;
@@ -54,13 +54,12 @@ namespace Nan.BusinessObjects.BO
         {
             MarketMD mktBo = (MarketMD)m_boTable;
             mktBo.ID = GetNextID();
+            mktBo.Name = mktBo.Desc = string.Empty;
+
 
             return base.Init();
         }
-        //public override object GetBOTable()
-        //{
-        //    return m_bo;
-        //}
+
         public override bool OnIsValid()
         {
             bool isValid = true;

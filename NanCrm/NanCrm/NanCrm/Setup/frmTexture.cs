@@ -56,7 +56,7 @@ namespace NanCrm.Setup
             IList obj = (IList)objList.Objects;
             BOTexture objTxt = (BOTexture)m_bo;
             objTxt.SetDataList(obj);
-            return objTxt.Update();
+            return objTxt.UpdateBatch();
         }
 
     }
