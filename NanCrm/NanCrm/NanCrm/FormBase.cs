@@ -391,5 +391,6 @@ namespace NanCrm
     {
         public FormMode Mode;
         public object Data;
+        public DeleReturnProc ReturnProc;
     }
 }
