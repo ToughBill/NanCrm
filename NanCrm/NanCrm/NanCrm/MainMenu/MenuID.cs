@@ -11,6 +11,7 @@ namespace NanCrm
         public const int Setup_Country = 1001;
         public const int Setup_Market = 1002;
         public const int Setup_Texture = 1003;
+        public const int Setup_ProductGroup = 1004;
 
         public const int BP_Management = 200;
         public const int BP_MD = 2001;
@@ -21,6 +22,7 @@ namespace NanCrm
         public const int BP_SearchLogList = 2006;
 
         public const int PR_Management = 300;
-        public const int PR_MD = 3001; 
+        public const int PR_MD = 3001;
+        public const int PR_MDList = 3002; 
     }
 }

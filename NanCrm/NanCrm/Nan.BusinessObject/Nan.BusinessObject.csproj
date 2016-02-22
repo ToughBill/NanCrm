@@ -56,7 +56,7 @@
     <Compile Include="BO\BOKeyWord.cs" />
     <Compile Include="BO\BOKWLDetail.cs" />
     <Compile Include="BO\BOCountry.cs" />
-    <Compile Include="BO\BOCategory.cs" />
+    <Compile Include="BO\BOProductGroup.cs" />
     <Compile Include="BO\BOStatus.cs" />
     <Compile Include="BO\BOBPSearchResult.cs" />
     <Compile Include="BO\BOBPSearchPlan.cs" />

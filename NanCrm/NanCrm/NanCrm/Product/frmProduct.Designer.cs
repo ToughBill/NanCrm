@@ -52,6 +52,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.rtxtRemark = new Nan.Controls.RichTextBoxEx();
+            this.cmbGroup = new Nan.Controls.ComboBoxEx();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnOk
@@ -196,7 +198,7 @@
             // lblTexture
             // 
             this.lblTexture.AutoSize = true;
-            this.lblTexture.Location = new System.Drawing.Point(12, 89);
+            this.lblTexture.Location = new System.Drawing.Point(327, 89);
             this.lblTexture.Name = "lblTexture";
             this.lblTexture.Size = new System.Drawing.Size(29, 12);
             this.lblTexture.TabIndex = 14;
@@ -213,9 +215,9 @@
             this.cmbTexture.DesField = "Name";
             this.cmbTexture.FormattingEnabled = true;
             this.cmbTexture.KeyField = "ID";
-            this.cmbTexture.Location = new System.Drawing.Point(71, 81);
+            this.cmbTexture.Location = new System.Drawing.Point(386, 81);
             this.cmbTexture.Name = "cmbTexture";
-            this.cmbTexture.Size = new System.Drawing.Size(178, 20);
+            this.cmbTexture.Size = new System.Drawing.Size(186, 20);
             this.cmbTexture.TabIndex = 15;
             // 
             // txtHeight
@@ -329,11 +331,38 @@
             this.rtxtRemark.TabIndex = 25;
             this.rtxtRemark.Text = "";
             // 
+            // cmbGroup
+            // 
+            this.cmbGroup.AddDefineNew = true;
+            this.cmbGroup.AddEmptyRow = true;
+            this.cmbGroup.BOField = "Group";
+            this.cmbGroup.BOID = Nan.BusinessObjects.BOIDEnum.Product;
+            this.cmbGroup.DataSourceBO = Nan.BusinessObjects.BOIDEnum.ProductGroup;
+            this.cmbGroup.DefineNewProc = null;
+            this.cmbGroup.DesField = "Name";
+            this.cmbGroup.FormattingEnabled = true;
+            this.cmbGroup.KeyField = "ID";
+            this.cmbGroup.Location = new System.Drawing.Point(71, 81);
+            this.cmbGroup.Name = "cmbGroup";
+            this.cmbGroup.Size = new System.Drawing.Size(177, 20);
+            this.cmbGroup.TabIndex = 27;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 89);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "分组";
+            // 
             // frmProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(611, 389);
+            this.Controls.Add(this.cmbGroup);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.rtxtRemark);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtID);
@@ -387,6 +416,8 @@
             this.Controls.SetChildIndex(this.txtID, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.rtxtRemark, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.cmbGroup, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -418,5 +449,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private Nan.Controls.RichTextBoxEx rtxtRemark;
+        private Nan.Controls.ComboBoxEx cmbGroup;
+        private System.Windows.Forms.Label label4;
     }
 }

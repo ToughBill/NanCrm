@@ -63,7 +63,13 @@ namespace Nan.BusinessObjects.BO
             {
                 return 1;
             }
-            int maxId = Directory.GetFiles(tbPath).Max(x => int.Parse(Path.GetFileName(x)));
+
+            int maxId = 0;
+            string[] files = Directory.GetFiles(tbPath);
+            if (files.Length > 0)
+            {
+                maxId = files.Max(x => int.Parse(Path.GetFileName(x)));
+            }
             return ++maxId;
         }
 
@@ -121,7 +127,7 @@ namespace Nan.BusinessObjects.BO
         public virtual bool UpdateBatch()
         {
             bool ret = true;
-            if (m_dataList != null && m_dataList.Count > 0)
+            if (m_newDataList != null && m_newDataList.Count > 0)
             {
                 ret = m_dbConn.SaveTableData(m_tbName, m_newDataList);
                 if (!ret)
@@ -217,6 +223,12 @@ namespace Nan.BusinessObjects.BO
         public virtual void SetDataList(IList list)
         {
             m_newDataList = list;
+
+        }
+        public virtual void SetDataList(IList list, IList removedList)
+        {
+            m_newDataList = list;
+            m_removedDataList = removedList;
         }
         public virtual void SetRemovedDataList(IList list)
         {

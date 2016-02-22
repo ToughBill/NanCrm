@@ -12,21 +12,21 @@ namespace Nan.BusinessObjects
         /// </summary>
         Invalid = 0,
         /// <summary>
-        /// BOCountry
+        /// Country
         /// </summary>
         Country,
         /// <summary>
-        /// BOMarket
+        /// Market
         /// </summary>
         Market,
         /// <summary>
-        /// BOMktDetail
+        /// MktDetail
         /// </summary>
         MarketDetail,
         /// <summary>
-        /// BOCategory
+        /// ProductCategory
         /// </summary>
-        Category,
+        ProductGroup,
         /// <summary>
         /// KeyWord
         /// </summary>

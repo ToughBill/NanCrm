@@ -121,6 +121,12 @@
     <Compile Include="Setup\frmMarketMD.Designer.cs">
       <DependentUpon>frmMarketMD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setup\frmProductGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setup\frmProductGroup.Designer.cs">
+      <DependentUpon>frmProductGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Setup\frmTexture.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Setup\frmMarketMD.resx">
       <DependentUpon>frmMarketMD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setup\frmProductGroup.resx">
+      <DependentUpon>frmProductGroup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Setup\frmTexture.resx">
       <DependentUpon>frmTexture.cs</DependentUpon>

@@ -14,6 +14,7 @@ namespace NanCrm.Product
 {
     public partial class frmProductList : FormBase
     {
+        private BOProduct m_proList;
         public frmProductList()
         {
             InitializeComponent();
@@ -28,8 +29,8 @@ namespace NanCrm.Product
         {
             try
             {
-                BOProduct proBo = (BOProduct)m_bo;
-                IList listObj = proBo.GetDataList();
+                m_proList = (BOProduct)BOFactory.GetBO(BOIDEnum.Product);
+                IList listObj = m_proList.GetDataList();
                 objList.SetObjects(listObj);
             }
             catch (Exception e)
@@ -52,6 +53,19 @@ namespace NanCrm.Product
         private void ProductMDRetProc(Form form, object data)
         {
 
+        }
+
+        private void objList_RowNumberDblClick(BrightIdeasSoftware.OlvListViewHitTestInfo hti)
+        {
+            //MarketDetaiedlMD obj = (MarketDetaiedlMD)hti.RowObject;
+            //frmMarketMD frmMktMd = new frmMarketMD(BOIDEnum.Market);
+            //frmMktMd.MdiParent = this.MdiParent;
+            //frmMktMd.FormMode = NanCrm.FormMode.Ok;
+            //frmMktMd.UpdateProc = MarketMDUpdateProc;
+            ////int id = ((MarketDetaiedlMD)hti.RowObject).ID;
+            ////frmMktMd.LoadDataById(id);
+            //frmMktMd.SetBOTable(((MarketDetaiedlMD)hti.RowObject).GetOrignalMD());
+            //frmMktMd.Show();
         }
     }
 }

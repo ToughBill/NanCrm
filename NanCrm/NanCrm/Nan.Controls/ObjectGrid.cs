@@ -61,8 +61,8 @@ namespace Nan.Controls
                 if (m_showSysMenu)
                 {
                     base.ContextMenuStrip = SysContextMenu;
-                    m_tsmAddRow.Visible = true;
-                    m_tsmDelRow.Visible = true;
+                    m_tsmAddRow.Visible = ShowAddRowMenu;
+                    m_tsmDelRow.Visible = ShowDeleteRowMenu;
                 }
                 else
                 {
@@ -99,6 +99,7 @@ namespace Nan.Controls
             this.HideSelection = false;
             this.View = View.Details;
             this.UseAlternatingBackColors = true;
+            this.ShowGroups = false;
             
             ShowRowNumber = true;
 
@@ -213,6 +214,47 @@ namespace Nan.Controls
                 OLVContextMenuClickArgs args = new OLVContextMenuClickArgs(base.LastHitInfo);
                 AddRowMenuClick(sender, args);
             }
+        }
+        private Type m_dataSourceType;
+        public Type DataSourceType
+        {
+            get { return m_dataSourceType; }
+            set { m_dataSourceType = value; }
+        }
+        private Dictionary<object, bool> m_isEmptyRowMap;
+        public Dictionary<object, bool> EmptyRowMap
+        {
+            get 
+            {
+                if (m_isEmptyRowMap == null)
+                {
+                    m_isEmptyRowMap = new Dictionary<object, bool>();
+                }
+                return m_isEmptyRowMap;
+            }
+        }
+        public object AddEmptyRow()
+        {
+            if (this.DataSourceType == null)
+                return null;
+            object newObj = Activator.CreateInstance(this.DataSourceType);
+            if (newObj == null)
+                return null;
+            base.AddObject(newObj);
+            //var method = newObj.GetType().GetMethod("Init");
+            //method.Invoke(newObj,null);
+            EmptyRowMap.Add(newObj, true);
+            return newObj;
+
+        }
+        public bool IsEmptyRow(int rowIndex)
+        {
+            IList list = (IList)base.Objects;
+            return EmptyRowMap.ContainsKey(list[rowIndex]);
+        }
+        public bool IsEmptyRow(object rowObject)
+        {
+            return EmptyRowMap.ContainsKey(rowObject);
         }
     }
 

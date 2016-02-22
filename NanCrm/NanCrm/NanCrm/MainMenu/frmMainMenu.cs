@@ -106,15 +106,25 @@ namespace NanCrm
                     txt.MdiParent = this.MdiParent;
                     txt.Show();
                     break;
+                case MenuID.Setup_ProductGroup:
+                    frmProductGroup frmProGrp = new frmProductGroup();
+                    frmProGrp.MdiParent = this.MdiParent;
+                    frmProGrp.Show();
+                    break;
                 case MenuID.BP_MD:
                     BPMD bpmd = new BPMD(BOIDEnum.BP);
                     bpmd.MdiParent = this.MdiParent;
                     bpmd.Show();
                     break;
                 case MenuID.PR_MD:
-                    frmProduct frmPro = new frmProduct(BOIDEnum.Product);
-                    frmPro.MdiParent = this.MdiParent;
-                    frmPro.Show();
+                     frmProduct frmPro = new frmProduct(BOIDEnum.Product);
+                     frmPro.MdiParent = this.MdiParent;
+                     frmPro.Show();
+                    break;
+                case MenuID.PR_MDList:
+                    frmProductList frmProList = new frmProductList();
+                    frmProList.MdiParent = this.MdiParent;
+                    frmProList.Show();
                     break;
                 default: break;
             }

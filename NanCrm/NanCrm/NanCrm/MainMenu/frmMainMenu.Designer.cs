@@ -50,18 +50,18 @@
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.ShowLines = false;
-            this.mainMenu.Size = new System.Drawing.Size(236, 445);
+            this.mainMenu.Size = new System.Drawing.Size(236, 411);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.mainMenu_NodeMouseClick);
             // 
             // frmMainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(236, 445);
+            this.ClientSize = new System.Drawing.Size(236, 411);
             this.Controls.Add(this.mainMenu);
             this.Name = "frmMainMenu";
-            this.Text = "frmMainMenu";
+            this.Text = "主菜单";
             this.Load += new System.EventHandler(this.frmMainMenu_Load);
             this.ResumeLayout(false);
 

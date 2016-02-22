@@ -20,6 +20,13 @@ namespace NanCrm.Global
             }
             return list;
         }
+    }
 
+    public class MessageBuilder
+    {
+        //public static string BuildMessage()
+        //{
+
+        //}
     }
 }

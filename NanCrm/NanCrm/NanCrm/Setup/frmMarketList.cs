@@ -28,7 +28,7 @@ namespace NanCrm.Setup
             LoadGridData();
             objList.RebuildColumns();
         }
-        public void LoadGridData()
+        private void LoadGridData()
         {
             try
             {

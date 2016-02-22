@@ -11,7 +11,7 @@ namespace Nan.BusinessObjects.BO
         public string Code { get; set; }
         public string Name { get; set; }
         public string FName { get; set; }
-        public int Category { get; set; }
+        public int Group { get; set; }
         public string Refundrate { get; set; }
         public string Price { get; set; }
         public string Length { get; set; }

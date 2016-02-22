@@ -19,6 +19,9 @@ namespace Nan.BusinessObjects
                 case BOIDEnum.Country:
                     bo = new BOCountry();
                     break;
+                case BOIDEnum.ProductGroup:
+                    bo = new BOProductGroup();
+                    break;
                 case BOIDEnum.Market:
                     bo = new BOMarket();
                     break;

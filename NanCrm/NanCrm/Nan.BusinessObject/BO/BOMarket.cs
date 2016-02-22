@@ -134,7 +134,7 @@ namespace Nan.BusinessObjects.BO
 
         public override bool GetById(int id)
         {
-            MarketMD mkt = m_dbConn.GetTableData(m_tbName, id).ConvertToTarget<MarketMD>();
+            MarketMD mkt = m_dbConn.GetTableData(GetTableName(), id).ConvertToTarget<MarketMD>();
             m_boTable = mkt;
 
             return m_boTable == null;

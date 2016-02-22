@@ -37,6 +37,11 @@ namespace NanCrm.Global
                     bpmd.UpdateProc = retProc;
                     bpmd.Show();
                     break;
+                case BOIDEnum.ProductGroup:
+                    frmProductGroup frmProGrp = new frmProductGroup();
+                    frmProGrp.MdiParent = mainForm;
+                    frmProGrp.Show();
+                    break;
                 case BOIDEnum.Product:
                     frmProduct frmPro = new frmProduct(BOIDEnum.Product);
                     frmPro.MdiParent = mainForm;
@@ -54,18 +59,11 @@ namespace NanCrm.Global
             return result;
         }
 
+        private static frmMain m_mainForm;
         public static frmMain GetMainForm()
         {
-            //Form frm = Form.ActiveForm;
-            //while (!(frm != null && frm is frmMain))
-            //{
-            //    frm = frm.MdiParent;
-            //}
-            //return frm;
             return m_mainForm;
         }
-
-        private static frmMain m_mainForm;
         public static void SetMainForm(frmMain form)
         {
             m_mainForm = form;
