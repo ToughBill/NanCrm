@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Nan.BusinessObjects.BO;
 using Nan.BusinessObjects;
 using System.Collections;
+using NanCrm.Global;
 
 namespace NanCrm.Product
 {
@@ -30,7 +31,7 @@ namespace NanCrm.Product
             try
             {
                 m_proList = (BOProduct)BOFactory.GetBO(BOIDEnum.Product);
-                IList listObj = m_proList.GetDataList();
+                List<ProductMD> listObj = Utilities.ConvertList<ProductMD>(m_proList.GetDataList());
                 objList.SetObjects(listObj);
             }
             catch (Exception e)
@@ -57,6 +58,14 @@ namespace NanCrm.Product
 
         private void objList_RowNumberDblClick(BrightIdeasSoftware.OlvListViewHitTestInfo hti)
         {
+            frmProduct frmPro = new frmProduct(BOIDEnum.Product);
+            frmPro.MdiParent = this.MdiParent;
+            FormExchangeParams args = new FormExchangeParams();
+            args.Data = hti.RowObject;
+            args.Mode = FormMode.Ok;
+            frmPro.SetFormExchangeParams(args);
+            frmPro.Show();
+
             //MarketDetaiedlMD obj = (MarketDetaiedlMD)hti.RowObject;
             //frmMarketMD frmMktMd = new frmMarketMD(BOIDEnum.Market);
             //frmMktMd.MdiParent = this.MdiParent;

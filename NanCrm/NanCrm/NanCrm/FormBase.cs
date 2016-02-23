@@ -140,7 +140,6 @@ namespace NanCrm
                     comb.DefineNewProc = new DeleDefineNewProc(ComboBoxDefineNewProc);
                     comb.InitSource();
                 }
-                
             }
 
             base.OnLoad(e);
@@ -152,12 +151,47 @@ namespace NanCrm
                     ObjectGrid objGrid = (ObjectGrid)ctrl;
                     objGrid.ItemsChanged += new EventHandler<BrightIdeasSoftware.ItemsChangedEventArgs>(objGrid_ItemsChanged);
                 }
+                else if (ctrl is ComboBoxEx)
+                {
+                    ComboBoxEx comb = (ComboBoxEx)ctrl;
+                    comb.SelectedValueChanged += new EventHandler(comb_SelectedIndexChanged);
+                }
+                else if (ctrl is TextBoxEx)
+                {
+                    TextBoxEx txt = (TextBoxEx)ctrl;
+                    txt.TextChanged += new EventHandler(txt_TextChanged);
+                }
+                else if (ctrl is RichTextBoxEx)
+                {
+                    RichTextBoxEx rtxt = (RichTextBoxEx)ctrl;
+                    rtxt.TextChanged += new EventHandler(rtxt_TextChanged);
+                }
             }
         }
 
+        private void comb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeInternal();
+        }
+        private void txt_TextChanged(object sender, EventArgs e)
+        {
+            ChangeInternal();
+        }
+        private void rtxt_TextChanged(object sender, EventArgs e)
+        {
+            ChangeInternal();
+        }
+        private void ChangeInternal()
+        {
+            if (this.FormMode == FormMode.Ok)
+            {
+                ModeChange(this.FormMode, FormMode.Update);
+            }
+        }
         private void objGrid_ItemsChanged(object sender, BrightIdeasSoftware.ItemsChangedEventArgs e)
         {
-            this.FormMode = NanCrm.FormMode.Update;
+            //this.FormMode = NanCrm.FormMode.Update;
+            ChangeInternal();
         }
 
         protected virtual void ComboBoxDefineNewProc(object sender, DeleReturnProc retProc)
@@ -168,11 +202,11 @@ namespace NanCrm
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (m_formMode == NanCrm.FormMode.Ok)
-            {
-                m_formMode = FormMode.Update;
-                btnOk.Text = "更新";
-            }
+//             if (m_formMode == NanCrm.FormMode.Ok)
+//             {
+//                 m_formMode = FormMode.Update;
+//                 btnOk.Text = "更新";
+//             }
             
             base.OnKeyDown(e);
         }

@@ -31,6 +31,8 @@ namespace NanCrm.Product
             else
             {
                 this.FormMode = this.ExchangeParam.Mode;
+                ProductMD md= (ProductMD)this.ExchangeParam.Data;
+                mktBo.SetBOTable(md);
             }
             UpdateData(false);
         }
