@@ -32,17 +32,29 @@ namespace NanCrm.Setup
             List<KeyWordMD> listObj = Utilities.ConvertList<KeyWordMD>(m_kwBo.GetDataList());
             objList.SetObjects(listObj);
             objList.DataSourceType = typeof(KeyWordMD);
-            objList.AddEmptyRow();
+            KeyWordMD newKw = (KeyWordMD)objList.AddEmptyRow();
+            newKw.ID = BusinessObject.GetBONextID(BOIDEnum.KeyWord);
         }
 
         private bool btnOk_Clicking(object sender, EventArgs e)
         {
+            if (this.FormMode == NanCrm.FormMode.Ok)
+                return true;
+
             IList obj = (IList)objList.Objects;
             if (!ValidateData())
             {
                 return false;
             }
-            m_kwBo.SetDataList(obj);
+            if (objList.EmptyObject != null)
+            {
+                KeyWordMD temp = (KeyWordMD)objList.EmptyObject;
+                if (string.IsNullOrWhiteSpace(temp.Name))
+                {
+                    obj.Remove(objList.EmptyObject);
+                }
+            }
+            m_kwBo.SetDataList(obj, objList.RemovedObjects);
             return m_kwBo.UpdateBatch();
         }
         private bool ValidateData()
@@ -61,6 +73,14 @@ namespace NanCrm.Setup
                 }
             }
             return result;
+        }
+
+        private void frmKeyWrod_OnModeChange(FormModeChangeArgs args)
+        {
+            if (args.NewMode == NanCrm.FormMode.Ok)
+            {
+                LoadGridData();
+            }
         }
     }
 }

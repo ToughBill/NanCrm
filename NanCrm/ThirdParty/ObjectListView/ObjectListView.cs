@@ -9756,11 +9756,37 @@ namespace BrightIdeasSoftware
 
             // If someone doesn't cancel the editing process, write the value back into the model
             if (!this.CellEditEventArgs.Cancel) {
+                object oldValue = GetValueFormRowObject(this.CellEditEventArgs.RowObject, this.CellEditEventArgs.Column.AspectName);
                 this.CellEditEventArgs.Column.PutValue(this.CellEditEventArgs.RowObject, this.CellEditEventArgs.NewValue);
                 this.RefreshItem(this.CellEditEventArgs.ListViewItem);
+                if (oldValue.ToString() != this.CellEditEventArgs.NewValue.ToString())
+                {
+                    this.OnItemsChanged(new ItemsChangedEventArgs());
+                }
             }
 
             this.CleanupCellEdit(expectingCellEdit, this.CellEditEventArgs.AutoDispose);
+        }
+
+        /// <summary>
+        /// get value from row object
+        /// </summary>
+        /// <param name="rowObject"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        private object GetValueFormRowObject(object rowObject, string name)
+        {
+            object result = null;
+            var properties = rowObject.GetType().GetProperties();
+            foreach (var pro in properties)
+            {
+                if (pro.Name == name)
+                {
+                    result = pro.GetValue(rowObject, null);
+                    break;
+                }
+            }
+            return result;
         }
 
         /// <summary>

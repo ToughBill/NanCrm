@@ -10,6 +10,11 @@ namespace Nan.BusinessObjects.BO
         public int      ID { get; set; }
         [BOFieldAttribute(CFL=true,Desc="关键字")]
         public string   Name { get; set; }
+
+        public KeyWordMD()
+        {
+            Name = string.Empty;
+        }
     }
     public class BOKeyWord : BusinessObject
     {

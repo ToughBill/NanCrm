@@ -221,40 +221,50 @@ namespace Nan.Controls
             get { return m_dataSourceType; }
             set { m_dataSourceType = value; }
         }
-        private Dictionary<object, bool> m_isEmptyRowMap;
-        public Dictionary<object, bool> EmptyRowMap
+        //private Dictionary<object, bool> m_isEmptyRowMap;
+        //public Dictionary<object, bool> EmptyRowMap
+        //{
+        //    get 
+        //    {
+        //        if (m_isEmptyRowMap == null)
+        //        {
+        //            m_isEmptyRowMap = new Dictionary<object, bool>();
+        //        }
+        //        return m_isEmptyRowMap;
+        //    }
+        //}
+        private object m_emptyObject;
+        public object EmptyObject
         {
-            get 
-            {
-                if (m_isEmptyRowMap == null)
-                {
-                    m_isEmptyRowMap = new Dictionary<object, bool>();
-                }
-                return m_isEmptyRowMap;
-            }
+            get { return m_emptyObject; }
+            set { m_emptyObject = value; }
         }
         public object AddEmptyRow()
         {
             if (this.DataSourceType == null)
                 return null;
+            if (EmptyObject != null)
+            {
+                return EmptyObject;
+            }
             object newObj = Activator.CreateInstance(this.DataSourceType);
             if (newObj == null)
                 return null;
             base.AddObject(newObj);
             //var method = newObj.GetType().GetMethod("Init");
             //method.Invoke(newObj,null);
-            EmptyRowMap.Add(newObj, true);
+            EmptyObject = newObj;
             return newObj;
 
         }
         public bool IsEmptyRow(int rowIndex)
         {
             IList list = (IList)base.Objects;
-            return EmptyRowMap.ContainsKey(list[rowIndex]);
+            return IsEmptyRow(list[rowIndex]);
         }
         public bool IsEmptyRow(object rowObject)
         {
-            return EmptyRowMap.ContainsKey(rowObject);
+            return EmptyObject == rowObject;
         }
     }
 

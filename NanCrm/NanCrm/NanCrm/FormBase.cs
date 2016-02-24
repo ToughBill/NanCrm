@@ -185,7 +185,7 @@ namespace NanCrm
         {
             if (this.FormMode == FormMode.Ok)
             {
-                ModeChange(this.FormMode, FormMode.Update);
+                this.FormMode = FormMode.Update;
             }
         }
         private void objGrid_ItemsChanged(object sender, BrightIdeasSoftware.ItemsChangedEventArgs e)
@@ -228,8 +228,7 @@ namespace NanCrm
             }
             if (e.Result)
             {
-                m_formMode = FormMode.Ok;
-                btnOk.Text = "确定";
+                this.FormMode = NanCrm.FormMode.Ok;
                 if (UpdateProc != null)
                 {
                     UpdateProc(this, BuildUpdateParams());

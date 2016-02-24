@@ -37,6 +37,9 @@ namespace Nan.BusinessObjects
                 case BOIDEnum.KeyWord:
                     bo = new BOKeyWord();
                     break;
+                case BOIDEnum.KeyWordList:
+                    bo = new BOKWList();
+                    break;
                 default: break;
             }
             bo.Init();
