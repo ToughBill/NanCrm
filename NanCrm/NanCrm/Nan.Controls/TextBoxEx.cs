@@ -72,6 +72,7 @@ namespace Nan.Controls
 
         public event PickerClickHandler LinkClick;
         public event PickerClickHandler ChooseClick;
+        public event EventHandler TextChanged;
 
         private void btnLink_Click(object sender, EventArgs e)
         {
@@ -90,6 +91,14 @@ namespace Nan.Controls
                 ChooseClick(this, args);
             }
 
+        }
+
+        private void txtBox_TextChanged(object sender, EventArgs e)
+        {
+            if (TextChanged != null)
+            {
+                TextChanged(this,e);
+            }
         }
     }
 

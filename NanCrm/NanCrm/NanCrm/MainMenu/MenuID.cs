@@ -12,6 +12,8 @@ namespace NanCrm
         public const int Setup_Market = 1002;
         public const int Setup_Texture = 1003;
         public const int Setup_ProductGroup = 1004;
+        public const int Setup_KeyWord = 1005;
+        public const int Setup_KeyWordList = 1006;
 
         public const int BP_Management = 200;
         public const int BP_MD = 2001;

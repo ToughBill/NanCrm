@@ -68,6 +68,8 @@ namespace Nan.Controls
                     DefineNewProc(this, DefineNewReturnProc);
                 }
             }
+            base.OnSelectedIndexChanged(e);
+            
         }
 
         protected virtual void DefineNewReturnProc(Form form, object data)

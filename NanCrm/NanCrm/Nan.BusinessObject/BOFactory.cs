@@ -34,6 +34,9 @@ namespace Nan.BusinessObjects
                 case BOIDEnum.Texture:
                     bo = new BOTexture();
                     break;
+                case BOIDEnum.KeyWord:
+                    bo = new BOKeyWord();
+                    break;
                 default: break;
             }
             bo.Init();

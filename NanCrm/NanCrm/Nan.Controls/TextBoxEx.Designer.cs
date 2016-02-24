@@ -41,6 +41,7 @@
             this.txtBox.Name = "txtBox";
             this.txtBox.Size = new System.Drawing.Size(140, 20);
             this.txtBox.TabIndex = 1;
+            this.txtBox.TextChanged += new System.EventHandler(this.txtBox_TextChanged);
             // 
             // btnChoose
             // 

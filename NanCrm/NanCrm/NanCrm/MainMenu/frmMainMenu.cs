@@ -111,6 +111,16 @@ namespace NanCrm
                     frmProGrp.MdiParent = this.MdiParent;
                     frmProGrp.Show();
                     break;
+                case MenuID.Setup_KeyWord:
+                    frmKeyWrod frmkw = new frmKeyWrod();
+                    frmkw.MdiParent = this.MdiParent;
+                    frmkw.Show();
+                    break;
+                case MenuID.Setup_KeyWordList:
+                    frmKeyWordList frmKwl = new frmKeyWordList();
+                    frmKwl.MdiParent = this.MdiParent;
+                    frmKwl.Show();
+                    break;
                 case MenuID.BP_MD:
                     BPMD bpmd = new BPMD(BOIDEnum.BP);
                     bpmd.MdiParent = this.MdiParent;

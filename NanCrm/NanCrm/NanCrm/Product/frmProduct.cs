@@ -25,14 +25,17 @@ namespace NanCrm.Product
             BOProduct mktBo = (BOProduct)m_bo;
             if (this.ExchangeParam == null)
             {
-                mktBo.Init();
+                //mktBo.Init();
                 this.FormMode = NanCrm.FormMode.Add;
             }
             else
             {
                 this.FormMode = this.ExchangeParam.Mode;
-                ProductMD md= (ProductMD)this.ExchangeParam.Data;
-                mktBo.SetBOTable(md);
+                if (this.ExchangeParam.Data != null)
+                {
+                    ProductMD md = (ProductMD)this.ExchangeParam.Data;
+                    mktBo.SetBOTable(md);
+                }
             }
             UpdateData(false);
         }
@@ -65,6 +68,11 @@ namespace NanCrm.Product
                 result = false;
             }
             return result;
+        }
+
+        private void cmbGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -109,6 +109,24 @@
     <Compile Include="Setup\frmCountry.Designer.cs">
       <DependentUpon>frmCountry.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setup\frmKeyWordList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setup\frmKeyWordList.Designer.cs">
+      <DependentUpon>frmKeyWordList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\frmKeyWordListMD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setup\frmKeyWordListMD.Designer.cs">
+      <DependentUpon>frmKeyWordListMD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\frmKeyWrod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setup\frmKeyWrod.Designer.cs">
+      <DependentUpon>frmKeyWrod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Setup\frmMarketList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +187,12 @@
     </Compile>
     <EmbeddedResource Include="Setup\frmCountry.resx">
       <DependentUpon>frmCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setup\frmKeyWordList.resx">
+      <DependentUpon>frmKeyWordList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setup\frmKeyWrod.resx">
+      <DependentUpon>frmKeyWrod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Setup\frmMarketList.resx">
       <DependentUpon>frmMarketList.cs</DependentUpon>

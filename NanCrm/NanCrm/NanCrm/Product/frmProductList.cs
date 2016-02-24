@@ -42,7 +42,7 @@ namespace NanCrm.Product
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            frmProduct frmMktMd = new frmProduct(BOIDEnum.Market);
+            frmProduct frmMktMd = new frmProduct(BOIDEnum.Product);
             frmMktMd.MdiParent = this.MdiParent;
             FormExchangeParams param = new FormExchangeParams();
             param.Mode = FormMode.Add;
