@@ -191,6 +191,9 @@
     <EmbeddedResource Include="Setup\frmKeyWordList.resx">
       <DependentUpon>frmKeyWordList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Setup\frmKeyWordListMD.resx">
+      <DependentUpon>frmKeyWordListMD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Setup\frmKeyWrod.resx">
       <DependentUpon>frmKeyWrod.cs</DependentUpon>
     </EmbeddedResource>

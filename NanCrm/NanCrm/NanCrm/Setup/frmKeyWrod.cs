@@ -77,10 +77,10 @@ namespace NanCrm.Setup
 
         private void frmKeyWrod_OnModeChange(FormModeChangeArgs args)
         {
-            if (args.NewMode == NanCrm.FormMode.Ok)
-            {
-                LoadGridData();
-            }
+//             if (args.NewMode == NanCrm.FormMode.Ok)
+//             {
+//                 LoadGridData();
+//             }
         }
 
         private void objList_CellEditFinishing(object sender, BrightIdeasSoftware.CellEditEventArgs e)
@@ -92,7 +92,9 @@ namespace NanCrm.Setup
                     return;
                 }
                 KeyWordMD obj = (KeyWordMD)objList.AddEmptyRow();
-                obj.ID = BusinessObject.GetBONextID(BOIDEnum.KeyWord);
+                int maxIdInDb = BusinessObject.GetBONextID(BOIDEnum.KeyWord);
+                int maxIdOfUi = objList.Objects.Cast<KeyWordMD>().ToList().Max(x=>x.ID);
+                obj.ID = Math.Max(maxIdInDb,maxIdOfUi) + 1;
             }
         }
 

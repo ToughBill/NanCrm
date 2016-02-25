@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
+using Newtonsoft.Json.Linq;
 
 namespace Nan.BusinessObjects.BO
 {
@@ -11,6 +13,12 @@ namespace Nan.BusinessObjects.BO
         public string       Name { get; set; }
         public string       Desc { get; set; }
         public List<int>    KeyWrodIds {get;set;}
+
+        public KWListMD()
+        {
+            Name = Desc = string.Empty;
+            KeyWrodIds = new List<int>();
+        }
     }
     public class KWListDetailMD
     {
@@ -52,6 +60,27 @@ namespace Nan.BusinessObjects.BO
         public List<KWListDetailMD> GetDetialedMD()
         {
             List<KWListDetailMD> result = new List<KWListDetailMD>();
+            IList list = GetDataList();
+            IEnumerator iter = m_dataList.GetEnumerator();
+            string kwTbName = GetTableName(BOIDEnum.KeyWord);
+            while (iter.MoveNext())
+            {
+                KWListMD kwMd = ((JObject)iter.Current).ConvertToTarget<KWListMD>();
+                KWListDetailMD bo = new KWListDetailMD(kwMd);
+                string kwStr = string.Empty;
+                foreach (int kwId in kwMd.KeyWrodIds)
+                {
+                    JObject jo = m_dbConn.GetTableData(kwTbName, kwId);
+                    kwStr += jo.GetValue("Name").ToString() + ", ";
+                }
+                if (kwStr.Length > 0)
+                {
+                    kwStr = kwStr.Substring(0, kwStr.Length - 2);
+                }
+                bo.KeyWords = kwStr;
+
+                result.Add(bo);
+            }
             return result;
         }
     }

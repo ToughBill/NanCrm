@@ -54,6 +54,12 @@ namespace NanCrm.Global
                     frmTxt.UpdateProc = retProc;
                     frmTxt.Show();
                     break;
+                case BOIDEnum.KeyWord:
+                    frmKeyWrod frmKw = new frmKeyWrod();
+                    frmKw.MdiParent = mainForm;
+                    frmKw.UpdateProc = retProc;
+                    frmKw.Show();
+                    break;
                 default: break;
             }
             return result;

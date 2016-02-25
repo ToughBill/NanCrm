@@ -32,5 +32,21 @@ namespace NanCrm.Setup
             //objList.DataSourceType = typeof(KWListMD);
             //objList.AddEmptyRow();
         }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            frmKeyWordListMD frmmd = new frmKeyWordListMD(BOIDEnum.KeyWordList);
+            frmmd.MdiParent = this.MdiParent;
+            FormExchangeParams param = new FormExchangeParams();
+            param.Mode = NanCrm.FormMode.Add;
+            param.ReturnProc = KWListRetProc;
+            frmmd.SetFormExchangeParams(param);
+            frmmd.Show();
+        }
+
+        private void KWListRetProc(Form form, object data)
+        {
+
+        }
     }
 }

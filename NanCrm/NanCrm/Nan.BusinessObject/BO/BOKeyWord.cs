@@ -16,6 +16,7 @@ namespace Nan.BusinessObjects.BO
             Name = string.Empty;
         }
     }
+    [BOAttribute(Name = "关键字")]
     public class BOKeyWord : BusinessObject
     {
         public BOKeyWord()
@@ -29,6 +30,13 @@ namespace Nan.BusinessObjects.BO
             kwMd.ID = GetNextID();
 
             return base.Init();
+        }
+
+        public override bool GetById(int id)
+        {
+            m_boTable = m_dbConn.GetTableData(GetTableName(), id).ConvertToTarget<KeyWordMD>();
+
+            return m_boTable == null;
         }
     }
 }

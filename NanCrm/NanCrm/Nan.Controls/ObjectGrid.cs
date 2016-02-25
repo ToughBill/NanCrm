@@ -132,6 +132,8 @@ namespace Nan.Controls
                 olvCol.Groupable = false;
                 olvCol.Text = "#";
                 olvCol.IsRowNumberColumn = true;
+                olvCol.IsEditable = false;
+                olvCol.Width = 40;
                 this.AllColumns.Insert(0, olvCol);
                 this.Columns.Insert(0, olvCol);
                 this.RebuildColumns();
