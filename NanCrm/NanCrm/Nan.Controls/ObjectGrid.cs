@@ -188,6 +188,11 @@ namespace Nan.Controls
         public event DeleContextMenuClick DeleteRowMenuClick;
         private void sys_tsmDelRow_Click(object sender, EventArgs e)
         {
+            if (LastHitInfo.RowObject == EmptyObject)
+            {
+                return;
+            }
+
             if (base.SelectedObjects != null)
             {
                 base.RemoveObjects(base.SelectedObjects);
@@ -200,6 +205,7 @@ namespace Nan.Controls
             {
                 base.RemoveObject(base.LastHitInfo.RowObject);
             }
+            
 
             if (DeleteRowMenuClick != null)
             {
@@ -215,12 +221,12 @@ namespace Nan.Controls
                 AddRowMenuClick(sender, args);
             }
         }
-        private Type m_dataSourceType;
-        public Type DataSourceType
-        {
-            get { return m_dataSourceType; }
-            set { m_dataSourceType = value; }
-        }
+        //private Type m_dataSourceType;
+        //public Type DataSourceType
+        //{
+        //    get { return m_dataSourceType; }
+        //    set { m_dataSourceType = value; }
+        //}
         //private Dictionary<object, bool> m_isEmptyRowMap;
         //public Dictionary<object, bool> EmptyRowMap
         //{
@@ -233,30 +239,30 @@ namespace Nan.Controls
         //        return m_isEmptyRowMap;
         //    }
         //}
-        private object m_emptyObject;
-        public object EmptyObject
-        {
-            get { return m_emptyObject; }
-            set { m_emptyObject = value; }
-        }
-        public object AddEmptyRow()
-        {
-            if (this.DataSourceType == null)
-                return null;
-            if (EmptyObject != null)
-            {
-                return EmptyObject;
-            }
-            object newObj = Activator.CreateInstance(this.DataSourceType);
-            if (newObj == null)
-                return null;
-            base.AddObject(newObj);
-            //var method = newObj.GetType().GetMethod("Init");
-            //method.Invoke(newObj,null);
-            EmptyObject = newObj;
-            return newObj;
+        //private object m_emptyObject;
+        //public object EmptyObject
+        //{
+        //    get { return m_emptyObject; }
+        //    set { m_emptyObject = value; }
+        //}
+        //public object AddEmptyRow()
+        //{
+        //    if (this.DataSourceType == null)
+        //        return null;
+        //    if (EmptyObject != null)
+        //    {
+        //        return EmptyObject;
+        //    }
+        //    object newObj = Activator.CreateInstance(this.DataSourceType);
+        //    if (newObj == null)
+        //        return null;
+        //    base.AddObject(newObj);
+        //    //var method = newObj.GetType().GetMethod("Init");
+        //    //method.Invoke(newObj,null);
+        //    EmptyObject = newObj;
+        //    return newObj;
 
-        }
+        //}
         public bool IsEmptyRow(int rowIndex)
         {
             IList list = (IList)base.Objects;

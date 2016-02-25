@@ -839,6 +839,36 @@ namespace BrightIdeasSoftware
         
         #region Public properties
 
+        private bool m_autoAddEmptyRow;
+        /// <summary>
+        /// auto add a empty row
+        /// </summary>
+        public bool AutoAddEmptyRow
+        {
+            get { return m_autoAddEmptyRow; }
+            set { m_autoAddEmptyRow = value; }
+        }
+
+        private Type m_dataSourceType;
+        /// <summary>
+        /// type of the source data
+        /// </summary>
+        public Type DataSourceType
+        {
+            get { return m_dataSourceType; }
+            set { m_dataSourceType = value; }
+        }
+
+        private object m_emptyObject;
+        /// <summary>
+        /// row object of the empty row
+        /// </summary>
+        public object EmptyObject
+        {
+            get { return m_emptyObject; }
+            set { m_emptyObject = value; }
+        }
+
         private object m_removedObject;
         /// <summary>
         /// save the removed object
@@ -9763,9 +9793,34 @@ namespace BrightIdeasSoftware
                 {
                     this.OnItemsChanged(new ItemsChangedEventArgs());
                 }
+                //if (AutoAddEmptyRow && this.CellEditEventArgs.ListViewItem.Index == this.Items.Count - 1)
+                //{
+                //    AddEmptyRow();
+                //}
             }
 
             this.CleanupCellEdit(expectingCellEdit, this.CellEditEventArgs.AutoDispose);
+        }
+
+        /// <summary>
+        /// add a empty row at the last
+        /// </summary>
+        /// <returns></returns>
+        public virtual object AddEmptyRow()
+        {
+            if (this.DataSourceType == null)
+                return null;
+//             if (EmptyObject != null)
+//             {
+//                 return EmptyObject;
+//             }
+            object newObj = Activator.CreateInstance(this.DataSourceType);
+            if (newObj == null)
+                return null;
+            this.AddObject(newObj);
+            EmptyObject = newObj;
+            return newObj;
+
         }
 
         /// <summary>

@@ -82,5 +82,31 @@ namespace NanCrm.Setup
                 LoadGridData();
             }
         }
+
+        private void objList_CellEditFinishing(object sender, BrightIdeasSoftware.CellEditEventArgs e)
+        {
+            if (e.ListViewItem.Index == objList.Items.Count - 1)
+            {
+                if (string.IsNullOrWhiteSpace(e.NewValue.ToString()))
+                {
+                    return;
+                }
+                KeyWordMD obj = (KeyWordMD)objList.AddEmptyRow();
+                obj.ID = BusinessObject.GetBONextID(BOIDEnum.KeyWord);
+            }
+        }
+
+        private void objList_CellEditValidating(object sender, BrightIdeasSoftware.CellEditEventArgs e)
+        {
+            if (e.ListViewItem.Index == objList.Items.Count - 1)
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(e.NewValue.ToString()))
+            {
+                GetStatusBar().DisplayMessage(MessageType.Error, "关键字名称不能为空！");
+                e.Cancel = true;
+            }
+        }
     }
 }
