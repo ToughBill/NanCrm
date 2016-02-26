@@ -4889,7 +4889,8 @@ namespace BrightIdeasSoftware
                     }
                 }
                 this.PostProcessRows();
-                UpdateRowNumber();
+                //UpdateRowNumber();
+                BuildList();
                 // Tell the world that the list has changed
                 this.UnsubscribeNotifications(modelObjects);
                 this.OnItemsChanged(new ItemsChangedEventArgs());
