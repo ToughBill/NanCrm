@@ -77,7 +77,16 @@ namespace NanCrm
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            FormManager.DisplayForm(m_boId, "", FormMode.Add, true);
+            FormManager.DisplayForm(m_boId, "", FormMode.Add, true, CFLDefineNewRetProc);
+        }
+
+        private void CFLDefineNewRetProc(Form form, object data)
+        {
+            objList.ClearObjects();
+            IList list = m_bo.GetDataList(true);
+            if (list.Count <= 0)
+                return;
+            objList.SetObjects(list);
         }
 
         protected override object BuildReturnParams()

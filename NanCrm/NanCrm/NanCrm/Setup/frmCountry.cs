@@ -60,14 +60,22 @@ namespace NanCrm.Setup
 
         private void objList_CellEditValidating(object sender, CellEditEventArgs e)
         {
-            if (e.SubItemIndex != 1 || e.ListViewItem.Index == e.ListViewItem.ListView.Items.Count-1)
+            if (string.IsNullOrWhiteSpace(e.NewValue.ToString()))
             {
-                return;
+                if (e.ListViewItem.Index != objList.Items.Count - 1)
+                {
+                    GetStatusBar().DisplayMessage(MessageType.Error, "国家名字不能为空！");
+                    e.Cancel = true;
+                }
             }
-            if (string.IsNullOrEmpty((string)e.NewValue))
+            else
             {
-                e.Cancel = true;
-                MessageBox.Show("input error!");
+                var find = objList.Objects.Cast<CountryMD>().ToList().Find(x => x.Name == e.NewValue.ToString());
+                if (find != null && objList.ModelToItem(find).Index != e.ListViewItem.Index)
+                {
+                    GetStatusBar().DisplayMessage(MessageType.Error, "国家 \"" + e.NewValue.ToString() + "\" 已存在！");
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -79,6 +87,16 @@ namespace NanCrm.Setup
             frmCty.Show();
 
             return result;
+        }
+
+        private void objList_CellClick(object sender, CellClickEventArgs e)
+        {
+            CountryMD cty = (CountryMD)e.HitTest.RowObject;
+            if (cty != null && e.HitTest.ColumnIndex != 1 && string.IsNullOrWhiteSpace(cty.Name))
+            {
+                GetStatusBar().DisplayMessage(MessageType.Error, "国家名字不能为空！");
+                objList.EditSubItem(objList.GetItem(e.RowIndex), 1);
+            }
         }
     }
 }

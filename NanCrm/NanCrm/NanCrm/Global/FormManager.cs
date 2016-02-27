@@ -22,19 +22,19 @@ namespace NanCrm.Global
                 case BOIDEnum.Country:
                     frmCountry cty = new frmCountry(BOIDEnum.Country);
                     cty.MdiParent = mainForm;
-                    cty.UpdateProc = retProc;
+                    cty.ReturnProc = retProc;
                     cty.Show();
                     break;
                 case BOIDEnum.Market:
                     frmMarketList mkt = new frmMarketList();
                     mkt.MdiParent = mainForm;
-                    mkt.UpdateProc = retProc;
+                    mkt.ReturnProc = retProc;
                     mkt.Show();
                     break;
                 case BOIDEnum.BP:
                     BPMD bpmd = new BPMD(BOIDEnum.BP);
                     bpmd.MdiParent = mainForm;
-                    bpmd.UpdateProc = retProc;
+                    bpmd.ReturnProc = retProc;
                     bpmd.Show();
                     break;
                 case BOIDEnum.ProductGroup:
@@ -45,19 +45,19 @@ namespace NanCrm.Global
                 case BOIDEnum.Product:
                     frmProduct frmPro = new frmProduct(BOIDEnum.Product);
                     frmPro.MdiParent = mainForm;
-                    frmPro.UpdateProc = retProc;
+                    frmPro.ReturnProc = retProc;
                     frmPro.Show();
                     break;
                 case BOIDEnum.Texture:
                     frmTexture frmTxt = new frmTexture(BOIDEnum.Texture);
                     frmTxt.MdiParent = mainForm;
-                    frmTxt.UpdateProc = retProc;
+                    frmTxt.ReturnProc = retProc;
                     frmTxt.Show();
                     break;
                 case BOIDEnum.KeyWord:
                     frmKeyWrod frmKw = new frmKeyWrod();
                     frmKw.MdiParent = mainForm;
-                    frmKw.UpdateProc = retProc;
+                    frmKw.ReturnProc = retProc;
                     frmKw.Show();
                     break;
                 default: break;

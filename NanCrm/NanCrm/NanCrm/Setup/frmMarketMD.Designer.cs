@@ -82,6 +82,7 @@
             this.txtId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtId.BOField = "ID";
             this.txtId.BOID = Nan.BusinessObjects.BOIDEnum.Market;
+            this.txtId.Enabled = false;
             this.txtId.Location = new System.Drawing.Point(507, 11);
             this.txtId.Name = "txtId";
             this.txtId.ShowChoose = false;
@@ -110,6 +111,7 @@
             this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.objList.AutoAddEmptyRow = false;
             this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Country;
             this.objList.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -117,14 +119,20 @@
             this.olvcFName,
             this.olvcAlias,
             this.olvcCapital});
+            this.objList.DataSourceType = null;
+            this.objList.EmptyObject = null;
             this.objList.FullRowSelect = true;
             this.objList.GridLines = true;
             this.objList.HideSelection = false;
+            this.objList.LastHitInfo = null;
             this.objList.Location = new System.Drawing.Point(10, 57);
             this.objList.Name = "objList";
             this.objList.OwnerDraw = true;
+            this.objList.RemovedObject = null;
+            this.objList.RemovedObjects = ((System.Collections.IList)(resources.GetObject("objList.RemovedObjects")));
             this.objList.ShowAddRowMenu = true;
             this.objList.ShowDeleteRowMenu = true;
+            this.objList.ShowGroups = false;
             this.objList.ShowRowNumber = true;
             this.objList.ShowSysMenu = true;
             this.objList.Size = new System.Drawing.Size(667, 250);

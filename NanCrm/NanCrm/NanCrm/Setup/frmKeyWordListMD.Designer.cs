@@ -47,6 +47,7 @@
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(12, 458);
+            this.btnOk.Clicking += new Nan.Controls.ClickingEvent(this.btnOk_Clicking);
             // 
             // btnCancel
             // 
@@ -58,6 +59,7 @@
             this.txtName.BOID = Nan.BusinessObjects.BOIDEnum.KeyWordList;
             this.txtName.Location = new System.Drawing.Point(69, 12);
             this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = false;
             this.txtName.ShowChoose = false;
             this.txtName.ShowLink = false;
             this.txtName.Size = new System.Drawing.Size(170, 18);
@@ -80,6 +82,7 @@
             this.txtId.BOID = Nan.BusinessObjects.BOIDEnum.KeyWordList;
             this.txtId.Location = new System.Drawing.Point(537, 12);
             this.txtId.Name = "txtId";
+            this.txtId.ReadOnly = true;
             this.txtId.ShowChoose = false;
             this.txtId.ShowLink = false;
             this.txtId.Size = new System.Drawing.Size(170, 18);
@@ -129,6 +132,8 @@
             this.objList.UseAlternatingBackColors = true;
             this.objList.UseCompatibleStateImageBehavior = false;
             this.objList.View = System.Windows.Forms.View.Details;
+            this.objList.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.objList_CellEditFinishing);
+            this.objList.CellEditValidating += new BrightIdeasSoftware.CellEditEventHandler(this.objList_CellEditValidating);
             this.objList.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.objList_CellClick);
             // 
             // olvcName
@@ -136,6 +141,7 @@
             this.olvcName.AspectName = "Name";
             this.olvcName.Groupable = false;
             this.olvcName.IsRowNumberColumn = false;
+            this.olvcName.Sortable = false;
             this.olvcName.Text = "关键字";
             this.olvcName.Width = 563;
             // 
@@ -145,6 +151,7 @@
             this.olvcID.Groupable = false;
             this.olvcID.IsRowNumberColumn = false;
             this.olvcID.IsVisible = false;
+            this.olvcID.Sortable = false;
             this.olvcID.Text = "ID";
             // 
             // label2

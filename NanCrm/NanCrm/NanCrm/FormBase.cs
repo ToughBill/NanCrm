@@ -214,6 +214,7 @@ namespace NanCrm
         protected virtual bool btnCancel_Clicked(object sender, ClickedEventArgs e)
         {
             m_needCallRetProc = false;
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Close();
             m_needCallRetProc = true;
             return true;
@@ -221,6 +222,7 @@ namespace NanCrm
 
         private bool btnOk_Clicked(object sender, ClickedEventArgs e)
         {
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
             if (m_formMode == FormMode.Ok)
             {
                 this.Close();
@@ -240,10 +242,22 @@ namespace NanCrm
             }
             return true;
         }
+        protected bool m_isCloseBySysMenu;
+        protected override void WndProc(ref Message msg)
+        {
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_CLOSE = 0xF060;
+
+            if (msg.Msg == WM_SYSCOMMAND && ((int)msg.WParam == SC_CLOSE))
+            {
+                m_isCloseBySysMenu = true;
+            }
+            base.WndProc(ref msg);
+        }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (ReturnProc != null && m_needCallRetProc)
+            if (!m_isCloseBySysMenu && ReturnProc != null && m_needCallRetProc)
             {
                 ReturnProc(this, BuildReturnParams());
             }
@@ -425,5 +439,14 @@ namespace NanCrm
         public FormMode Mode;
         public object Data;
         public DeleReturnProc ReturnProc;
+        public DeleReturnProc UpdateProc;
+
+        public FormExchangeParams()
+        {
+            Mode = FormMode.Ok;
+            Data = null;
+            ReturnProc = null;
+            UpdateProc = null;
+        }
     }
 }

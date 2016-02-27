@@ -99,6 +99,7 @@ namespace Nan.Controls
             this.HideSelection = false;
             this.View = View.Details;
             this.UseAlternatingBackColors = true;
+            this.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ShowGroups = false;
             
             ShowRowNumber = true;
@@ -133,6 +134,7 @@ namespace Nan.Controls
                 olvCol.Text = "#";
                 olvCol.IsRowNumberColumn = true;
                 olvCol.IsEditable = false;
+                olvCol.Sortable = false;
                 olvCol.Width = 40;
                 this.AllColumns.Insert(0, olvCol);
                 this.Columns.Insert(0, olvCol);

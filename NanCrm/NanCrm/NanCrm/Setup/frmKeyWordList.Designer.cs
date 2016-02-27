@@ -41,6 +41,7 @@
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(12, 417);
+            this.btnOk.Clicking += new Nan.Controls.ClickingEvent(this.btnOk_Clicking);
             // 
             // btnCancel
             // 
@@ -52,6 +53,7 @@
             this.objList.AllColumns.Add(this.olvcKwyWrods);
             this.objList.AllColumns.Add(this.olvcDesc);
             this.objList.AllColumns.Add(this.olvcID);
+            this.objList.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -72,21 +74,23 @@
             this.objList.RemovedObject = null;
             this.objList.RemovedObjects = ((System.Collections.IList)(resources.GetObject("objList.RemovedObjects")));
             this.objList.ShowAddRowMenu = false;
-            this.objList.ShowDeleteRowMenu = false;
+            this.objList.ShowDeleteRowMenu = true;
             this.objList.ShowGroups = false;
             this.objList.ShowRowNumber = true;
-            this.objList.ShowSysMenu = false;
+            this.objList.ShowSysMenu = true;
             this.objList.Size = new System.Drawing.Size(692, 400);
             this.objList.TabIndex = 2;
             this.objList.UseAlternatingBackColors = true;
             this.objList.UseCompatibleStateImageBehavior = false;
             this.objList.View = System.Windows.Forms.View.Details;
+            this.objList.RowNumberDblClick += new Nan.Controls.DeleRowNoColumnClick(this.objList_RowNumberDblClick);
             // 
             // olvcName
             // 
             this.olvcName.AspectName = "Name";
             this.olvcName.Groupable = false;
             this.olvcName.IsRowNumberColumn = false;
+            this.olvcName.Sortable = false;
             this.olvcName.Text = "列表名称";
             this.olvcName.Width = 129;
             // 
@@ -95,6 +99,7 @@
             this.olvcKwyWrods.AspectName = "KeyWords";
             this.olvcKwyWrods.Groupable = false;
             this.olvcKwyWrods.IsRowNumberColumn = false;
+            this.olvcKwyWrods.Sortable = false;
             this.olvcKwyWrods.Text = "关键词";
             this.olvcKwyWrods.Width = 308;
             // 
@@ -103,6 +108,7 @@
             this.olvcDesc.AspectName = "Desc";
             this.olvcDesc.Groupable = false;
             this.olvcDesc.IsRowNumberColumn = false;
+            this.olvcDesc.Sortable = false;
             this.olvcDesc.Text = "描述";
             this.olvcDesc.Width = 199;
             // 
@@ -113,10 +119,12 @@
             this.olvcID.Groupable = false;
             this.olvcID.IsRowNumberColumn = false;
             this.olvcID.IsVisible = false;
+            this.olvcID.Sortable = false;
             this.olvcID.Text = "ID";
             // 
             // btnNew
             // 
+            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNew.Location = new System.Drawing.Point(629, 417);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 28);

@@ -47,6 +47,17 @@ namespace Nan.Controls
             set { m_tableSource = value; }
         }
 
+        private bool m_readOnly;
+        public bool ReadOnly
+        {
+            get { return m_readOnly; }
+            set 
+            {
+                m_readOnly = value;
+                txtBox.ReadOnly = value;
+            }
+        }
+
         public BOIDEnum BOID { get; set; }
         public string BOField { get; set; }
 

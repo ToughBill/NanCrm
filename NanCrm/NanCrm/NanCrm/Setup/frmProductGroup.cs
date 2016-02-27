@@ -74,7 +74,7 @@ namespace NanCrm.Setup
                 ProductGroupMD pg = (ProductGroupMD)item.RowObject;
                 if (string.IsNullOrEmpty(pg.Name) && !objList.IsEmptyRow(item.RowObject))
                 {
-                    GetStatusBar().DisplayMessage(MessageType.Error,"名称不能为空！");
+                    GetStatusBar().DisplayMessage(MessageType.Error,"分组名称不能为空！");
                     result = false;
                     break;
                 }
@@ -88,6 +88,37 @@ namespace NanCrm.Setup
             ProductGroupMD proGrp = (ProductGroupMD)list[list.Count - 1];
             if (string.IsNullOrEmpty(proGrp.Name) && objList.IsEmptyRow(list.Count - 1))
                 list.RemoveAt(list.Count - 1);
+        }
+
+        private void objList_CellEditValidating(object sender, CellEditEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(e.NewValue.ToString()))
+            {
+                if (e.ListViewItem.Index != objList.Items.Count - 1)
+                {
+                    GetStatusBar().DisplayMessage(MessageType.Error, "分组名称不能为空！");
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                var find = objList.Objects.Cast<ProductGroupMD>().ToList().Find(x => x.Name == e.NewValue.ToString());
+                if (find != null && objList.ModelToItem(find).Index != e.ListViewItem.Index)
+                {
+                    GetStatusBar().DisplayMessage(MessageType.Error, "分组 \"" + e.NewValue.ToString() + "\" 已存在！");
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void objList_CellClick(object sender, CellClickEventArgs e)
+        {
+            ProductGroupMD pg = (ProductGroupMD)e.HitTest.RowObject;
+            if (pg!=null && e.HitTest.ColumnIndex != 1 && string.IsNullOrWhiteSpace(pg.Name))
+            {
+                GetStatusBar().DisplayMessage(MessageType.Error, "分组名称不能为空！");
+                objList.EditSubItem(objList.GetItem(e.RowIndex), 1);
+            }
         }
     }
 }
