@@ -198,9 +198,9 @@ namespace Nan.BusinessObjects.BO
             return m_boTable == null;
         }
 
-        public IList GetDataList()
+        public IList GetDataList(bool forceReload = false)
         {
-            if (m_dataList == null)
+            if (m_dataList == null || forceReload)
             {
                 m_dataList = m_dbConn.GetTableData(GetTableName());
                 //if (!BusinessObject.BODataPool.ContainsKey(m_boId))
