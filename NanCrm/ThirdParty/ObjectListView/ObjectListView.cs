@@ -4478,15 +4478,19 @@ namespace BrightIdeasSoftware
         /// <summary>
         /// update row number column after update data
         /// </summary>
-        public virtual void UpdateRowNumber()
+        public virtual void UpdateRowNumber(int startRow = 0)
         {
             if(this.AllColumns.Count > 0 && GetColumn(0).IsRowNumberColumn)
             {
-                foreach (OLVListItem item in this.Items)
+                for (int i = startRow; i < this.Items.Count; i++)
                 {
-                    item.GetSubItem(0).Text = (item.Index+1).ToString();
-                    item.SubItems[0].Text = (item.Index + 1).ToString();
+                    this.RefreshItem(this.GetItem(i));
                 }
+//                     foreach (OLVListItem item in this.Items)
+//                     {
+//                         item.GetSubItem(0).Text = (item.Index + 1).ToString();
+//                         item.SubItems[0].Text = (item.Index + 1).ToString();
+//                     }
             }
             
         }
@@ -4889,8 +4893,8 @@ namespace BrightIdeasSoftware
                     }
                 }
                 this.PostProcessRows();
-                //UpdateRowNumber();
-                BuildList();
+                UpdateRowNumber();
+                //BuildList();
                 // Tell the world that the list has changed
                 this.UnsubscribeNotifications(modelObjects);
                 this.OnItemsChanged(new ItemsChangedEventArgs());
