@@ -83,5 +83,24 @@ namespace Nan.BusinessObjects.BO
             }
             return result;
         }
+
+        public string GetKetWordString()
+        {
+            string result = string.Empty;
+
+            KWListMD tb = (KWListMD)m_boTable;
+            foreach (int id in tb.KeyWrodIds)
+            {
+                BOKeyWord kwBo = (BOKeyWord)BOFactory.GetBO(BOIDEnum.KeyWord);
+                kwBo.GetById(id);
+                result += ((KeyWordMD)kwBo.GetBOTable()).Name + ", ";
+            }
+            if (result.Length > 0)
+            {
+                result = result.Substring(0, result.Length - 2);
+            }
+
+            return result;
+        }
     }
 }

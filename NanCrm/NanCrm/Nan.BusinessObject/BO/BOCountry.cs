@@ -22,6 +22,10 @@ namespace Nan.BusinessObjects.BO
         [BOFieldAttribute(CFL = true, Desc = "首都")]
         public string Capital { get; set; }
 
+        public CountryMD()
+        {
+            this.Name = this.ForeName = this.Alias = this.Capital =string.Empty;
+        }
         public override bool Equals(object obj)
         {
             if (obj == null)
