@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCountry));
             this.objList = new Nan.Controls.ObjectGrid();
-            this.olvcID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvcName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvcFName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvcAlias = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvcCaptial = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvcID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.objList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,9 +56,9 @@
             this.objList.AllColumns.Add(this.olvcCaptial);
             this.objList.AllColumns.Add(this.olvcID);
             this.objList.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objList.AutoAddEmptyRow = false;
             this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Invalid;
             this.objList.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
@@ -77,27 +78,18 @@
             this.objList.RemovedObject = null;
             this.objList.RemovedObjects = ((System.Collections.IList)(resources.GetObject("objList.RemovedObjects")));
             this.objList.ShowAddRowMenu = false;
-            this.objList.ShowDeleteRowMenu = false;
+            this.objList.ShowDeleteRowMenu = true;
             this.objList.ShowGroups = false;
             this.objList.ShowRowNumber = true;
-            this.objList.ShowSysMenu = false;
+            this.objList.ShowSysMenu = true;
             this.objList.Size = new System.Drawing.Size(573, 310);
             this.objList.TabIndex = 0;
             this.objList.UseAlternatingBackColors = true;
             this.objList.UseCompatibleStateImageBehavior = false;
             this.objList.View = System.Windows.Forms.View.Details;
+            this.objList.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.objList_CellEditFinishing);
             this.objList.CellEditValidating += new BrightIdeasSoftware.CellEditEventHandler(this.objList_CellEditValidating);
             this.objList.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.objList_CellClick);
-            // 
-            // olvcID
-            // 
-            this.olvcID.AspectName = "ID";
-            this.olvcID.DisplayIndex = 1;
-            this.olvcID.Groupable = false;
-            this.olvcID.IsRowNumberColumn = false;
-            this.olvcID.IsVisible = false;
-            this.olvcID.Text = "#";
-            this.olvcID.Width = 36;
             // 
             // olvcName
             // 
@@ -131,6 +123,16 @@
             this.olvcCaptial.Text = "首都";
             this.olvcCaptial.Width = 114;
             // 
+            // olvcID
+            // 
+            this.olvcID.AspectName = "ID";
+            this.olvcID.DisplayIndex = 1;
+            this.olvcID.Groupable = false;
+            this.olvcID.IsRowNumberColumn = false;
+            this.olvcID.IsVisible = false;
+            this.olvcID.Text = "#";
+            this.olvcID.Width = 36;
+            // 
             // frmCountry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -138,7 +140,7 @@
             this.ClientSize = new System.Drawing.Size(597, 358);
             this.Controls.Add(this.objList);
             this.Name = "frmCountry";
-            this.Text = "Country";
+            this.Text = "国家";
             this.Load += new System.EventHandler(this.Country_Load);
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnCancel, 0);

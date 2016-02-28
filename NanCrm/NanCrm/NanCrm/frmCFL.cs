@@ -54,6 +54,7 @@ namespace NanCrm
                 col.AspectName = info.Name;
                 col.DisplayIndex = disIdx++;
                 col.Groupable = false;
+                col.Sortable = false;
                 col.IsRowNumberColumn = false;
                 col.Text = fieldAttr.Desc;
                 objList.AllColumns.Add(col);

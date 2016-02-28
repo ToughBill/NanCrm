@@ -10,7 +10,7 @@ using Nan.BusinessObjects;
 
 namespace Nan.BusinessObjects.BO
 {
-    public class CountryMD
+    public class CountryMD: ICopyFrom
     {
         public int ID { get; set; }
         [BOFieldAttribute(CFL=true,Desc="国家")]
@@ -40,6 +40,17 @@ namespace Nan.BusinessObjects.BO
                     && cty.ForeName == this.ForeName
                     && cty.Alias == this.Alias
                     && cty.Capital == this.Capital);
+        }
+
+        public object CopyFrom(object fromObj)
+        {
+            CountryMD from = (CountryMD)fromObj;
+            this.ID = from.ID;
+            this.Name = from.Name;
+            this.ForeName = from.ForeName;
+            this.Alias = from.Alias;
+            this.Capital = from.Capital;
+            return this;
         }
     }
     [BOAttribute(Name="城市")]
@@ -97,6 +108,13 @@ namespace Nan.BusinessObjects.BO
         {
             CountryMD mkt = m_dbConn.GetTableData(GetTableName(), id).ConvertToTarget<CountryMD>();
             m_boTable = mkt;
+
+            return m_boTable == null;
+        }
+        public bool GetByName(string ctyName)
+        {
+            JObject mkt = GetDataList().Cast<JObject>().ToList().Find(x=>(x.ConvertToTarget<CountryMD>()).Name==ctyName);
+            m_boTable = mkt.ConvertToTarget<CountryMD>(); ;
 
             return m_boTable == null;
         }

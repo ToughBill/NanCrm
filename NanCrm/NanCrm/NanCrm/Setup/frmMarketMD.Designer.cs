@@ -62,6 +62,7 @@
             this.txtName.BOID = Nan.BusinessObjects.BOIDEnum.Market;
             this.txtName.Location = new System.Drawing.Point(66, 11);
             this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = false;
             this.txtName.ShowChoose = false;
             this.txtName.ShowLink = false;
             this.txtName.Size = new System.Drawing.Size(170, 18);
@@ -85,6 +86,7 @@
             this.txtId.Enabled = false;
             this.txtId.Location = new System.Drawing.Point(507, 11);
             this.txtId.Name = "txtId";
+            this.txtId.ReadOnly = false;
             this.txtId.ShowChoose = false;
             this.txtId.ShowLink = false;
             this.txtId.Size = new System.Drawing.Size(170, 18);
@@ -108,9 +110,10 @@
             this.objList.AllColumns.Add(this.olvcFName);
             this.objList.AllColumns.Add(this.olvcAlias);
             this.objList.AllColumns.Add(this.olvcCapital);
-            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.objList.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.objList.AutoAddEmptyRow = false;
             this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Country;
             this.objList.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
@@ -130,7 +133,7 @@
             this.objList.OwnerDraw = true;
             this.objList.RemovedObject = null;
             this.objList.RemovedObjects = ((System.Collections.IList)(resources.GetObject("objList.RemovedObjects")));
-            this.objList.ShowAddRowMenu = true;
+            this.objList.ShowAddRowMenu = false;
             this.objList.ShowDeleteRowMenu = true;
             this.objList.ShowGroups = false;
             this.objList.ShowRowNumber = true;
@@ -140,6 +143,8 @@
             this.objList.UseAlternatingBackColors = true;
             this.objList.UseCompatibleStateImageBehavior = false;
             this.objList.View = System.Windows.Forms.View.Details;
+            this.objList.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.objList_CellEditFinishing);
+            this.objList.CellEditValidating += new BrightIdeasSoftware.CellEditEventHandler(this.objList_CellEditValidating);
             this.objList.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.objList_CellClick);
             // 
             // olvcID
@@ -148,6 +153,7 @@
             this.olvcID.Groupable = false;
             this.olvcID.IsRowNumberColumn = false;
             this.olvcID.IsVisible = false;
+            this.olvcID.Sortable = false;
             this.olvcID.Text = "ID";
             // 
             // olvcName
@@ -155,6 +161,7 @@
             this.olvcName.AspectName = "Name";
             this.olvcName.Groupable = false;
             this.olvcName.IsRowNumberColumn = false;
+            this.olvcName.Sortable = false;
             this.olvcName.Text = "国家";
             this.olvcName.Width = 169;
             // 
@@ -163,6 +170,7 @@
             this.olvcFName.AspectName = "ForeName";
             this.olvcFName.Groupable = false;
             this.olvcFName.IsRowNumberColumn = false;
+            this.olvcFName.Sortable = false;
             this.olvcFName.Text = "外文名";
             this.olvcFName.Width = 182;
             // 
@@ -171,6 +179,7 @@
             this.olvcAlias.AspectName = "Alias";
             this.olvcAlias.Groupable = false;
             this.olvcAlias.IsRowNumberColumn = false;
+            this.olvcAlias.Sortable = false;
             this.olvcAlias.Text = "简称";
             this.olvcAlias.Width = 85;
             // 
@@ -179,6 +188,7 @@
             this.olvcCapital.AspectName = "Capital";
             this.olvcCapital.Groupable = false;
             this.olvcCapital.IsRowNumberColumn = false;
+            this.olvcCapital.Sortable = false;
             this.olvcCapital.Text = "首都";
             this.olvcCapital.Width = 161;
             // 
@@ -193,6 +203,9 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 318);
             this.label3.Name = "label3";
@@ -202,9 +215,8 @@
             // 
             // richTxtDesc
             // 
-            this.richTxtDesc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTxtDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTxtDesc.BOField = "Desc";
             this.richTxtDesc.BOID = Nan.BusinessObjects.BOIDEnum.Market;
             this.richTxtDesc.Location = new System.Drawing.Point(10, 332);

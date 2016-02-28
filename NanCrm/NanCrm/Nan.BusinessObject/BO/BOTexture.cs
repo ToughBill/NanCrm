@@ -12,6 +12,10 @@ namespace Nan.BusinessObjects.BO
         public int ID { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }
+        public TextureMD()
+        {
+            Name = Desc = string.Empty;
+        }
     }
 
     public class BOTexture : BusinessObject

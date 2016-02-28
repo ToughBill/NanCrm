@@ -39,6 +39,7 @@ namespace NanCrm.Setup
                 newCty.ID = BusinessObject.GetBONextID(m_boId);
                 ctyList.Add(newCty);
                 objList.SetObjects(ctyList);
+                objList.DataSourceType = typeof(CountryMD);
             }
             catch (Exception e)
             {
@@ -54,31 +55,49 @@ namespace NanCrm.Setup
             }
             IList obj = (IList)objList.Objects;
             BOCountry objCty = (BOCountry)m_bo;
-            objCty.SetDataList(obj);
+            objCty.SetDataList(obj.Cast<CountryMD>().Where(x=>x.ID>0 && !string.IsNullOrWhiteSpace(x.Name)).ToList(), objList.RemovedObjects);
             return objCty.UpdateBatch();
         }
 
         private void objList_CellEditValidating(object sender, CellEditEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(e.NewValue.ToString()))
+            if(e.ListViewItem.Index == objList.Items.Count - 1)
             {
-                if (e.ListViewItem.Index != objList.Items.Count - 1)
+                if(!string.IsNullOrWhiteSpace(e.NewValue.ToString()))
                 {
-                    GetStatusBar().DisplayMessage(MessageType.Error, "国家名字不能为空！");
-                    e.Cancel = true;
+                    if (IsCountryNameExist(e.NewValue.ToString(), e.ListViewItem.Index))
+                    {
+                        GetStatusBar().DisplayMessage(MessageType.Error, "国家 \"" + e.NewValue.ToString() + "\" 已存在！");
+                        e.Cancel = true;
+                    }
                 }
             }
             else
             {
-                var find = objList.Objects.Cast<CountryMD>().ToList().Find(x => x.Name == e.NewValue.ToString());
-                if (find != null && objList.ModelToItem(find).Index != e.ListViewItem.Index)
+                if(e.SubItemIndex == 1)
                 {
-                    GetStatusBar().DisplayMessage(MessageType.Error, "国家 \"" + e.NewValue.ToString() + "\" 已存在！");
-                    e.Cancel = true;
+                    if(string.IsNullOrWhiteSpace(e.NewValue.ToString()))
+                    {
+                        GetStatusBar().DisplayMessage(MessageType.Error, "国家名字不能为空！");
+                        e.Cancel = true;
+                    }
+                    else if (IsCountryNameExist(e.NewValue.ToString(), e.ListViewItem.Index))
+                    {
+                        GetStatusBar().DisplayMessage(MessageType.Error, "国家 \"" + e.NewValue.ToString() + "\" 已存在！");
+                        e.Cancel = true;
+                    }
                 }
             }
         }
-
+        private bool IsCountryNameExist(string name, int curRowIndex)
+        {
+            var find = objList.Objects.Cast<CountryMD>().ToList().Find(x => x.Name == name);
+            if (find != null && objList.ModelToItem(find).Index != curRowIndex)
+            {
+                return true;
+            }
+            return false;
+        }
         public static bool DisplayCountryBo(BOIDEnum boid, string key, bool isReport)
         {
             bool result = true;
@@ -96,6 +115,21 @@ namespace NanCrm.Setup
             {
                 GetStatusBar().DisplayMessage(MessageType.Error, "国家名字不能为空！");
                 objList.EditSubItem(objList.GetItem(e.RowIndex), 1);
+            }
+        }
+
+        private void objList_CellEditFinishing(object sender, CellEditEventArgs e)
+        {
+            if (e.ListViewItem.Index == objList.Items.Count - 1)
+            {
+                if (string.IsNullOrWhiteSpace(e.NewValue.ToString()))
+                {
+                    return;
+                }
+                CountryMD obj = (CountryMD)objList.AddEmptyRow();
+                int maxIdInDb = BusinessObject.GetBONextID(BOIDEnum.Country);
+                int maxIdOfUi = objList.Objects.Cast<CountryMD>().ToList().Max(x => x.ID);
+                obj.ID = Math.Max(maxIdInDb, maxIdOfUi) + 1;
             }
         }
     }
