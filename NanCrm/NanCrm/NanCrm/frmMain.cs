@@ -10,6 +10,8 @@ using System.IO;
 using Nan.BusinessObjects.Database;
 using NanCrm.Global;
 using Nan.Controls;
+using Nan.BusinessObjects.BO;
+using Nan.BusinessObjects;
 
 namespace NanCrm
 {
@@ -27,6 +29,7 @@ namespace NanCrm
             NanDataBase.InitDatabase(Path.Combine(Application.StartupPath, "../../Database"), "NanCrm_v2");
             InitMainMenu();
             FormManager.SetMainForm(this);
+            BusinessObject.OnErrorHandler = HandleBOError;
         }
 
         private void InitMainMenu()
@@ -42,6 +45,11 @@ namespace NanCrm
         public StatusBarEx GetStatusBar()
         {
             return statusBar;
+        }
+
+        public void HandleBOError(SatusMessageInfo err)
+        {
+            GetStatusBar().DisplayMessage(err.MsgType,err.Message);
         }
     }
 }

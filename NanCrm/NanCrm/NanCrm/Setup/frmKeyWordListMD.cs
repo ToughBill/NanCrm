@@ -155,7 +155,7 @@ namespace NanCrm.Setup
                     return;
                 if (e.ListViewItem.Index < objList.Items.Count - 1)
                 {
-                    GetStatusBar().DisplayMessage( Nan.Controls.MessageType.Error,"关键字不能为空！");
+                    GetStatusBar().DisplayMessage(MessageType.Error,"关键字不能为空！");
                     e.Cancel=true;
                     return;
                 }
@@ -163,7 +163,7 @@ namespace NanCrm.Setup
             KeyWordMD md = objList.Objects.Cast<KeyWordMD>().ToList().Find(x=>x.Name == e.NewValue.ToString());
             if(md != null && e.ListViewItem.Index != objList.ModelToItem(md).Index)
             {
-                GetStatusBar().DisplayMessage(Nan.Controls.MessageType.Warming,"关键字 \""+e.NewValue.ToString()+"\" 已存在！");
+                GetStatusBar().DisplayMessage(MessageType.Warming,"关键字 \""+e.NewValue.ToString()+"\" 已存在！");
                 e.Cancel=true;
                 return;
             }

@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Nan.BusinessObjects;
 
 namespace Nan.Controls
 {
@@ -77,12 +78,5 @@ namespace Nan.Controls
              timer.Enabled = true; 
          } 
 
-    }
-
-    public enum MessageType
-    {
-        Info,
-        Warming,
-        Error
     }
 }

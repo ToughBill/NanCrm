@@ -24,6 +24,14 @@ namespace Nan.BusinessObjects.BO
         protected IList m_removedDataList;
         public static Dictionary<BOIDEnum, IList> BODataPool = new Dictionary<BOIDEnum, IList>();
 
+        public static DeleBoErrorHandler OnErrorHandler;
+        public void ReportStatusMessage(SatusMessageInfo err)
+        {
+            if (BusinessObject.OnErrorHandler != null)
+            {
+                BusinessObject.OnErrorHandler(err);
+            }
+        }
         public virtual List<ValidValue> GetValieValue(string keyField, string descField)
         {
             List<ValidValue> result = new List<ValidValue>();
@@ -120,12 +128,21 @@ namespace Nan.BusinessObjects.BO
                     return false;
                 }
             }
-
+            if(ret)
+            {
+                ReportStatusMessage(new SatusMessageInfo(MessageType.Info,MessageCode.None,this,"更新成功！"));
+            }
+            else
+            {
+                ReportStatusMessage(new SatusMessageInfo(MessageType.Error, MessageCode.None, this, "更新失败！"));
+            }
             return ret; 
         }
 
         public virtual bool UpdateBatch()
         {
+            if (!OnIsValidBatch())
+                return false;
             bool ret = true;
             if (m_newDataList != null && m_newDataList.Count > 0)
             {
@@ -145,6 +162,16 @@ namespace Nan.BusinessObjects.BO
                 }
                 m_removedDataList.Clear();
             }
+
+            if (ret)
+            {
+                ReportStatusMessage(new SatusMessageInfo(MessageType.Info, MessageCode.None, this, "更新成功！"));
+            }
+            else
+            {
+                ReportStatusMessage(new SatusMessageInfo(MessageType.Error, MessageCode.None, this, "更新失败！"));
+            }
+
             return ret;
         }
 
@@ -153,6 +180,10 @@ namespace Nan.BusinessObjects.BO
             return true;
         }
         public virtual bool OnIsValid()
+        {
+            return true;
+        }
+        public virtual bool OnIsValidBatch()
         {
             return true;
         }
@@ -292,4 +323,5 @@ namespace Nan.BusinessObjects.BO
         }
 
     }
+
 }
