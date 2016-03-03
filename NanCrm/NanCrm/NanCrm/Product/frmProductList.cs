@@ -53,14 +53,6 @@ namespace NanCrm.Product
 
         private void NewProductMDRetProc(Form form, object data)
         {
-<<<<<<< .mine
-            BOProduct bo = (BOProduct)data;
-            if (bo == null)
-                return;
-            objList.AddObject((ProductMD)bo.GetBOTable());
-||||||| .r30
-
-=======
             BOProduct proBo = (BOProduct)data;
             if (proBo == null)
             {
@@ -68,7 +60,6 @@ namespace NanCrm.Product
             }
             ProductMD proMd = (ProductMD)proBo.GetBOTable();
             objList.AddObject(proMd);
->>>>>>> .r33
         }
 
         private void objList_RowNumberDblClick(BrightIdeasSoftware.OlvListViewHitTestInfo hti)
@@ -82,7 +73,6 @@ namespace NanCrm.Product
             frmPro.SetFormExchangeParams(args);
             frmPro.Show();
         }
-<<<<<<< .mine
 
         private bool btnOk_Clicking(object sender, EventArgs e)
         {
@@ -90,8 +80,6 @@ namespace NanCrm.Product
             m_proList.SetDataList(list,objList.RemovedObjects);
             return m_proList.UpdateBatch();
         }
-||||||| .r30
-=======
         private void UpdateProMdRetProc(Form form, object data)
         {
             BOProduct proBo = (BOProduct)data;
@@ -105,6 +93,5 @@ namespace NanCrm.Product
             md.CopyFrom(proMd);
             objList.RefreshObject(md);
         }
->>>>>>> .r33
     }
 }
