@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMarketList));
             this.objList = new Nan.Controls.ObjectGrid();
             this.olvId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -53,14 +54,17 @@
             this.objList.AllColumns.Add(this.olvcName);
             this.objList.AllColumns.Add(this.olvColCties);
             this.objList.AllColumns.Add(this.olvcDesc);
-            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.objList.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.objList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.objList.AutoAddEmptyRow = false;
             this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Market;
-            this.objList.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
             this.objList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvcName,
             this.olvColCties,
             this.olvcDesc});
+            this.objList.DataSourceType = null;
+            this.objList.EmptyObject = null;
             this.objList.FullRowSelect = true;
             this.objList.GridLines = true;
             this.objList.HideSelection = false;
@@ -71,6 +75,7 @@
             this.objList.RemovedObjects = ((System.Collections.IList)(resources.GetObject("objList.RemovedObjects")));
             this.objList.ShowAddRowMenu = false;
             this.objList.ShowDeleteRowMenu = true;
+            this.objList.ShowGroups = false;
             this.objList.ShowRowNumber = true;
             this.objList.ShowSysMenu = true;
             this.objList.Size = new System.Drawing.Size(734, 414);

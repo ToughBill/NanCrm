@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProductList));
             this.objList = new Nan.Controls.ObjectGrid();
             this.olvcCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -49,6 +50,7 @@
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(12, 404);
+            this.btnOk.Clicking += new Nan.Controls.ClickingEvent(this.btnOk_Clicking);
             // 
             // btnCancel
             // 
@@ -68,12 +70,12 @@
             this.objList.AllColumns.Add(this.olvcLength);
             this.objList.AllColumns.Add(this.olvcWeight);
             this.objList.AllColumns.Add(this.olvcRemark);
+            this.objList.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.objList.AutoAddEmptyRow = false;
             this.objList.BOID = Nan.BusinessObjects.BOIDEnum.Invalid;
             this.objList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvcCode,
             this.olvcName,
-            this.olvcGroup,
-            this.olvcTexture,
             this.olvcPrice,
             this.olvcRefund,
             this.olvcHeight,
@@ -82,6 +84,7 @@
             this.olvcWeight,
             this.olvcRemark});
             this.objList.DataSourceType = null;
+            this.objList.EmptyObject = null;
             this.objList.FullRowSelect = true;
             this.objList.GridLines = true;
             this.objList.HideSelection = false;
@@ -91,10 +94,10 @@
             this.objList.RemovedObject = null;
             this.objList.RemovedObjects = ((System.Collections.IList)(resources.GetObject("objList.RemovedObjects")));
             this.objList.ShowAddRowMenu = false;
-            this.objList.ShowDeleteRowMenu = false;
+            this.objList.ShowDeleteRowMenu = true;
             this.objList.ShowGroups = false;
             this.objList.ShowRowNumber = true;
-            this.objList.ShowSysMenu = false;
+            this.objList.ShowSysMenu = true;
             this.objList.Size = new System.Drawing.Size(652, 386);
             this.objList.TabIndex = 2;
             this.objList.UseAlternatingBackColors = true;
@@ -129,14 +132,18 @@
             // olvcGroup
             // 
             this.olvcGroup.AspectName = "Group";
+            this.olvcGroup.DisplayIndex = 3;
             this.olvcGroup.IsRowNumberColumn = false;
+            this.olvcGroup.IsVisible = false;
             this.olvcGroup.Text = "产品分组";
             this.olvcGroup.Width = 84;
             // 
             // olvcTexture
             // 
             this.olvcTexture.AspectName = "Texture";
+            this.olvcTexture.DisplayIndex = 4;
             this.olvcTexture.IsRowNumberColumn = false;
+            this.olvcTexture.IsVisible = false;
             this.olvcTexture.Text = "材质";
             this.olvcTexture.Width = 80;
             // 

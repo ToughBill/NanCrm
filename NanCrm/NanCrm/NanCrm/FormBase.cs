@@ -322,7 +322,10 @@ namespace NanCrm
                     {
                         if (saveData)
                         {
-                            result = SetFieldData(cmb.BOField, cmb.SelectedValue);
+                            if (cmb.SelectedValue != null)
+                            {
+                                result = SetFieldData(cmb.BOField, cmb.SelectedValue);
+                            }
                         }
                         else
                         {
@@ -436,11 +439,11 @@ namespace NanCrm
     }
     public class FormExchangeParams
     {
-        public FormMode Mode;
-        public object Data;
-        public DeleReturnProc ReturnProc;
-        public DeleReturnProc UpdateProc;
-
+        public FormMode Mode { get; set; }
+        public object Data { get; set; }
+        public DeleReturnProc ReturnProc { get; set; }
+        public DeleReturnProc UpdateProc { get; set; }
+        public Form CallerForm { get; set; }
         public FormExchangeParams()
         {
             Mode = FormMode.Ok;
