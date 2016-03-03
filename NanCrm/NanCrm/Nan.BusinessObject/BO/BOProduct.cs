@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nan.BusinessObjects.BO
 {
-    public class ProductMD
+    public class ProductMD:ICopyFrom
     {
         public int ID { get; set; }
         public string Code { get; set; }
@@ -26,6 +26,30 @@ namespace Nan.BusinessObjects.BO
             Code = Name = FName = Refundrate
                 = Price = Length = Width = Height
                 = Weight = Remark = string.Empty;
+        }
+
+        public object CopyFrom(object fromObj)
+        {
+            ProductMD source = (ProductMD)fromObj;
+            if (source == null)
+            {
+                return this;
+            }
+            this.ID = source.ID;
+            this.Code = source.Code;
+            this.Name = source.Name;
+            this.FName = source.FName;
+            this.Group = source.Group;
+            this.Refundrate = source.Refundrate;
+            this.Price = source.Price;
+            this.Length = source.Length;
+            this.Width = source.Width;
+            this.Height = source.Height;
+            this.Weight = source.Weight;
+            this.Texture = source.Texture;
+            this.Remark = source.Remark;
+
+            return this;
         }
     }
     public class BOProduct : BusinessObject

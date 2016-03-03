@@ -46,14 +46,20 @@ namespace NanCrm.Product
             frmMktMd.MdiParent = this.MdiParent;
             FormExchangeParams param = new FormExchangeParams();
             param.Mode = FormMode.Add;
-            param.ReturnProc = ProductMDRetProc;
+            param.ReturnProc = NewProductMDRetProc;
             frmMktMd.SetFormExchangeParams(param);
             frmMktMd.Show();
         }
 
-        private void ProductMDRetProc(Form form, object data)
+        private void NewProductMDRetProc(Form form, object data)
         {
-
+            BOProduct proBo = (BOProduct)data;
+            if (proBo == null)
+            {
+                return;
+            }
+            ProductMD proMd = (ProductMD)proBo.GetBOTable();
+            objList.AddObject(proMd);
         }
 
         private void objList_RowNumberDblClick(BrightIdeasSoftware.OlvListViewHitTestInfo hti)
@@ -63,18 +69,22 @@ namespace NanCrm.Product
             FormExchangeParams args = new FormExchangeParams();
             args.Data = hti.RowObject;
             args.Mode = FormMode.Ok;
+            args.ReturnProc = UpdateProMdRetProc;
             frmPro.SetFormExchangeParams(args);
             frmPro.Show();
-
-            //MarketDetaiedlMD obj = (MarketDetaiedlMD)hti.RowObject;
-            //frmMarketMD frmMktMd = new frmMarketMD(BOIDEnum.Market);
-            //frmMktMd.MdiParent = this.MdiParent;
-            //frmMktMd.FormMode = NanCrm.FormMode.Ok;
-            //frmMktMd.UpdateProc = MarketMDUpdateProc;
-            ////int id = ((MarketDetaiedlMD)hti.RowObject).ID;
-            ////frmMktMd.LoadDataById(id);
-            //frmMktMd.SetBOTable(((MarketDetaiedlMD)hti.RowObject).GetOrignalMD());
-            //frmMktMd.Show();
+        }
+        private void UpdateProMdRetProc(Form form, object data)
+        {
+            BOProduct proBo = (BOProduct)data;
+            if (proBo == null)
+            {
+                return;
+            }
+            ProductMD proMd = (ProductMD)proBo.GetBOTable();
+            IList list = (IList)objList.Objects;
+            ProductMD md = (ProductMD)list[objList.LastHitInfo.RowIndex];
+            md.CopyFrom(proMd);
+            objList.RefreshObject(md);
         }
     }
 }

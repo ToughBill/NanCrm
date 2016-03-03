@@ -28,8 +28,8 @@ namespace Nan.BusinessObjects
                 case BOIDEnum.MarketDetail:
                     bo = new BOMarketDetail();
                     break;
-                case BOIDEnum.Product:
-                    bo = new BOProduct();
+                case BOIDEnum.SearchPlantf:
+                    bo = new BOBPSearchPlan();
                     break;
                 case BOIDEnum.Texture:
                     bo = new BOTexture();
@@ -39,6 +39,18 @@ namespace Nan.BusinessObjects
                     break;
                 case BOIDEnum.KeyWordList:
                     bo = new BOKWList();
+                    break;
+                case BOIDEnum.Product:
+                    bo = new BOProduct();
+                    break;
+                case BOIDEnum.PSearchPlan:
+                    bo = new BOProductSearchPlan();
+                    break;
+                case BOIDEnum.PSearchResult:
+                    bo = new BOBPSearchResult();
+                    break;
+                case BOIDEnum.BP:
+                    bo = new BOBP();
                     break;
                 default: break;
             }
