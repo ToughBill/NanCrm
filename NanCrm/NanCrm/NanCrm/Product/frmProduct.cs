@@ -36,6 +36,10 @@ namespace NanCrm.Product
                     ProductMD md = (ProductMD)this.ExchangeParam.Data;
                     mktBo.SetBOTable(md);
                 }
+                if(this.ExchangeParam.ReturnProc != null)
+                {
+                    this.ReturnProc = this.ExchangeParam.ReturnProc;
+                }
             }
             UpdateData(false);
         }

@@ -121,6 +121,8 @@ namespace NanCrm
                     frmKwl.MdiParent = this.MdiParent;
                     frmKwl.Show();
                     break;
+                case MenuID.Setup_SearchPlatform:
+                    break;
                 case MenuID.BP_MD:
                     BPMD bpmd = new BPMD(BOIDEnum.BP);
                     bpmd.MdiParent = this.MdiParent;

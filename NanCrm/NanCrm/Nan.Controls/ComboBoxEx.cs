@@ -30,6 +30,32 @@ namespace Nan.Controls
         public bool AddDefineNew { get; set; }
         public DeleDefineNewProc DefineNewProc{get;set;}
 
+        //public new string SelectedValue
+        //{
+        //    get
+        //    {
+        //        if(AddEmptyRow && base.SelectedIndex == 0)
+        //        {
+        //            return string.Empty;
+        //        }
+        //        else
+        //        {
+        //            return base.SelectedValue.ToString();
+        //        }
+        //    }
+        //    set
+        //    {
+        //        if (AddEmptyRow && string.IsNullOrWhiteSpace(value))
+        //        {
+        //            base.SelectedValue = "-1";
+        //        }
+        //        else
+        //        {
+        //            base.SelectedValue = value;
+        //        }
+        //    }
+        //}
+
         private List<ValidValue> m_vv;
 
         public void InitSource()
@@ -42,11 +68,11 @@ namespace Nan.Controls
             m_vv = bo.GetValieValue(KeyField, DesField);
             if (AddEmptyRow)
             {
-                m_vv.Insert(0, new ValidValue("ER", ""));
+                m_vv.Insert(0, new ValidValue("-1", ""));
             }
             if (AddDefineNew)
             {
-                m_vv.Insert(m_vv.Count, new ValidValue("DE", "---添加新项---"));
+                m_vv.Insert(m_vv.Count, new ValidValue("999999", "---添加新项---"));
             }
             this.DataSource = m_vv;
             this.ValueMember = "Value";

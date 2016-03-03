@@ -145,6 +145,12 @@
     <Compile Include="Setup\frmProductGroup.Designer.cs">
       <DependentUpon>frmProductGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setup\frmSearchPlantform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setup\frmSearchPlantform.Designer.cs">
+      <DependentUpon>frmSearchPlantform.cs</DependentUpon>
+    </Compile>
     <Compile Include="Setup\frmTexture.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Setup\frmProductGroup.resx">
       <DependentUpon>frmProductGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setup\frmSearchPlantform.resx">
+      <DependentUpon>frmSearchPlantform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Setup\frmTexture.resx">
       <DependentUpon>frmTexture.cs</DependentUpon>
