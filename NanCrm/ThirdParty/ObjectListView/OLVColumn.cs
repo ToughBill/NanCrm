@@ -35,6 +35,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Collections;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace BrightIdeasSoftware {
 
@@ -120,6 +121,26 @@ namespace BrightIdeasSoftware {
             set { isRowNumberColumn = value; }
         }
         private bool isRowNumberColumn;
+
+        /// <summary>
+        /// use this column with a combobox
+        /// </summary>
+        public bool EditAsCombBox
+        {
+            get { return editAsCombBox; }
+            set { editAsCombBox = value; }
+        }
+        private bool editAsCombBox;
+
+        /// <summary>
+        /// data source of combbox editor
+        /// </summary>
+        public IList DataSource
+        {
+            get { return dataSource; }
+            set { dataSource = value; }
+        }
+        private IList dataSource;
 
         /// <summary>
         /// This delegate will be used to extract a value to be displayed in this column.
@@ -1431,6 +1452,24 @@ namespace BrightIdeasSoftware {
         /// <param name="value">The value of the aspect that should be displayed</param>
         /// <returns>A string representation of the aspect</returns>
         public string ValueToString(object value) {
+            if(this.EditAsCombBox)
+            {
+                string result = string.Empty;
+                if (this.DataSource != null)
+                {
+                    foreach(var item in this.DataSource)
+                    {
+                        PropertyInfo[] info = item.GetType().GetProperties();
+                        var val = info[0].GetValue(item, null);
+                        if(val.ToString() == value.ToString())
+                        {
+                            result = info[1].GetValue(item, null).ToString();
+                            break;
+                        }
+                    }
+                }
+                return result;
+            }
             // Give the installed converter a chance to work (even if the value is null)
             if (this.AspectToStringConverter != null)
                 return this.AspectToStringConverter(value) ?? String.Empty;

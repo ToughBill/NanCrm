@@ -8,6 +8,7 @@ using NanCrm.Product;
 using System.Windows.Forms;
 using Nan.Controls;
 using Nan.BusinessObjects.BO;
+using NanCrm.BP;
 
 namespace NanCrm.Global
 {
@@ -32,7 +33,7 @@ namespace NanCrm.Global
                     mkt.Show();
                     break;
                 case BOIDEnum.BP:
-                    BPMD bpmd = new BPMD(BOIDEnum.BP);
+                    frmBP bpmd = new frmBP(BOIDEnum.BP);
                     bpmd.MdiParent = mainForm;
                     bpmd.ReturnProc = retProc;
                     bpmd.Show();

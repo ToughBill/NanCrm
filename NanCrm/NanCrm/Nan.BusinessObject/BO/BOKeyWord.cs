@@ -55,7 +55,7 @@ namespace Nan.BusinessObjects.BO
                     {
                         result = false;
                         ReportStatusMessage(new SatusMessageInfo(MessageType.Error, MessageCode.RefenenceError,this,
-                            "关键字 \""+md.Name+"\" 在关键字列表 "+ kwlMd.Name+"\" 被引用！"));
+                            "删除失败！关键字 \"" + md.Name+"\" 在关键字列表 \""+ kwlMd.Name+"\" 中被引用！"));
                         break;
                     }
                 }

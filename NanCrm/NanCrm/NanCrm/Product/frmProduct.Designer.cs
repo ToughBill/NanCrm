@@ -223,7 +223,7 @@
             this.cmbTexture.KeyField = "ID";
             this.cmbTexture.Location = new System.Drawing.Point(386, 81);
             this.cmbTexture.Name = "cmbTexture";
-            this.cmbTexture.Size = new System.Drawing.Size(186, 20);
+            this.cmbTexture.Size = new System.Drawing.Size(213, 20);
             this.cmbTexture.TabIndex = 15;
             // 
             // txtHeight
@@ -354,7 +354,7 @@
             this.cmbGroup.KeyField = "ID";
             this.cmbGroup.Location = new System.Drawing.Point(71, 81);
             this.cmbGroup.Name = "cmbGroup";
-            this.cmbGroup.Size = new System.Drawing.Size(177, 20);
+            this.cmbGroup.Size = new System.Drawing.Size(204, 20);
             this.cmbGroup.TabIndex = 27;
             this.cmbGroup.SelectedIndexChanged += new System.EventHandler(this.cmbGroup_SelectedIndexChanged);
             // 

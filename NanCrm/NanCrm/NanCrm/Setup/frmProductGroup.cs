@@ -114,7 +114,7 @@ namespace NanCrm.Setup
         private void objList_CellClick(object sender, CellClickEventArgs e)
         {
             ProductGroupMD pg = (ProductGroupMD)e.HitTest.RowObject;
-            if (pg!=null && e.HitTest.ColumnIndex != 1 && string.IsNullOrWhiteSpace(pg.Name))
+            if (pg!=null && !(e.HitTest.ColumnIndex == 1 || e.HitTest.ColumnIndex == 0) && string.IsNullOrWhiteSpace(pg.Name))
             {
                 GetStatusBar().DisplayMessage(MessageType.Error, "分组名称不能为空！");
                 objList.EditSubItem(objList.GetItem(e.RowIndex), 1);

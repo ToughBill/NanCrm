@@ -188,6 +188,21 @@ namespace Nan.Controls
             }
             return true;
         }
+
+        protected override Control GetCellEditor(OLVListItem item, int subItemIndex)
+        {
+            OLVColumn col = GetColumn(subItemIndex);
+            if(!col.EditAsCombBox)
+            {
+                return base.GetCellEditor(item,subItemIndex);
+            }
+            ComboBoxEx cb = new ComboBoxEx();
+            cb.DataSource = col.DataSource;
+            cb.DisplayMember = "Description";
+            cb.ValueMember = "Value";
+
+            return cb;
+        }
         public event DeleContextMenuClick AddRowMenuClick;
         public event DeleContextMenuClick DeleteRowMenuClick;
         private void sys_tsmDelRow_Click(object sender, EventArgs e)

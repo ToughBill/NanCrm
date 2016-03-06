@@ -16,6 +16,7 @@ using Nan.BusinessObjects;
 using Nan.BusinessObjects.BO;
 using System.Collections;
 using NanCrm.Product;
+using NanCrm.BP;
 
 namespace NanCrm
 {
@@ -124,9 +125,14 @@ namespace NanCrm
                 case MenuID.Setup_SearchPlatform:
                     break;
                 case MenuID.BP_MD:
-                    BPMD bpmd = new BPMD(BOIDEnum.BP);
+                    frmBP bpmd = new frmBP(BOIDEnum.BP);
                     bpmd.MdiParent = this.MdiParent;
                     bpmd.Show();
+                    break;
+                case MenuID.BP_List:
+                    frmBpList bpList = new frmBpList();
+                    bpList.MdiParent = this.MdiParent;
+                    bpList.Show();
                     break;
                 case MenuID.PR_MD:
                      frmProduct frmPro = new frmProduct(BOIDEnum.Product);

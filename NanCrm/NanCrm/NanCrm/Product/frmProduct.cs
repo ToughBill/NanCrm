@@ -52,15 +52,16 @@ namespace NanCrm.Product
             {
                 return false;
             }
+            bool result = true;
             if (this.FormMode == NanCrm.FormMode.Add)
             {
-                m_bo.Add();
+                result = m_bo.Add();
             }
             else if (this.FormMode == NanCrm.FormMode.Update)
             {
-                m_bo.Update();
+                result = m_bo.Update();
             }
-            return true;
+            return result;
         }
 
         private bool ValidateData()

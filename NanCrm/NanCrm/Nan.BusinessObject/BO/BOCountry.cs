@@ -74,25 +74,6 @@ namespace Nan.BusinessObjects.BO
         public override bool OnIsValid()
         {
             bool isValid = true;
-            
-            //List<CountryMD> list = new List<CountryMD>((IEnumerable<CountryMD>)m_newDataList);
-            //int i = 0;
-            //for (; i < list.Count;i++ )
-            //{
-            //    if (string.IsNullOrEmpty(list[i].Name))
-            //    {
-            //        if (i < list.Count - 1)
-            //        {
-            //            isValid = false;
-            //            break;
-            //        }
-            //        else
-            //        {
-            //            m_newDataList.RemoveAt(i);
-            //        }
-            //        break;
-            //    }
-            //}
             CountryMD ctyTb = (CountryMD)m_boTable;
             if (string.IsNullOrEmpty(ctyTb.Name))
             {
@@ -100,10 +81,30 @@ namespace Nan.BusinessObjects.BO
             }
             return isValid;
         }
-        //public override object GetBOTable()
-        //{
-        //    return m_boCty;
-        //}
+
+        protected override bool OnCheckData(object data, BOAction action = BOAction.Add)
+        {
+            bool result = true;
+            if(action == BOAction.Delete)
+            {
+                CountryMD delMd = (CountryMD)data;
+                BOMarket mktBo = (BOMarket)BOFactory.GetBO(BOIDEnum.Market);
+                List<MarketMD> mktList = mktBo.GetDataList().Cast<JObject>().Select(x => x.ConvertToTarget<MarketMD>()).ToList(); ;
+                MarketMD find = mktList.Find(x => x.CountryIds.Contains(delMd.ID));
+                if(find != null)
+                {
+                    result = false;
+                    ReportStatusMessage(new SatusMessageInfo(MessageType.Error, MessageCode.RefenenceError, this,
+                        "删除失败！国家 \"" + delMd.Name + "\" 在市场区域 \"" + find.Name + "\" 中被引用！"));
+                }
+            }
+            else
+            {
+
+            }
+            return result;
+        }
+
         public override bool GetById(int id)
         {
             CountryMD mkt = m_dbConn.GetTableData(GetTableName(), id).ConvertToTarget<CountryMD>();

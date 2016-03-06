@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -72,6 +74,19 @@ namespace Nan.BusinessObjects.BO
             boPro.ID = GetNextID();
             
 
+            return true;
+        }
+
+        public override bool OnIsValid()
+        {
+            ProductMD md = (ProductMD)m_boTable;
+            IList list = GetDataList();
+            JObject find = list.Cast<JObject>().ToList().Find(x => x.ConvertToTarget<ProductMD>().Code == md.Code);
+            if(find != null)
+            {
+                ReportStatusMessage(new SatusMessageInfo(MessageType.Error, MessageCode.EntryExist, this,"产品 \""+md.Code+"\" 已存在！"));
+                return false;
+            }
             return true;
         }
     }

@@ -181,9 +181,39 @@ namespace Nan.BusinessObjects.BO
         }
         public virtual bool OnIsValid()
         {
-            return true;
+            return OnCheckData(m_boTable);
         }
         public virtual bool OnIsValidBatch()
+        {
+            bool result = true;
+            if (m_newDataList != null)
+            {
+                foreach (var item in m_newDataList)
+                {
+                    result = OnCheckData(item);
+                    if(!result)
+                    {
+                        break;
+                    }
+                }
+            }
+            if (!result)
+                return result;
+
+            if(this.m_removedDataList != null)
+            {
+                foreach(var item in this.m_removedDataList)
+                {
+                    result = OnCheckData(item, BOAction.Delete);
+                    if (!result)
+                    {
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+        protected virtual bool OnCheckData(object data, BOAction action = BOAction.Add)
         {
             return true;
         }
@@ -231,24 +261,25 @@ namespace Nan.BusinessObjects.BO
 
         public IList GetDataList(bool forceReload = false)
         {
-            if (m_dataList == null || forceReload)
+            if(forceReload)
             {
                 m_dataList = m_dbConn.GetTableData(GetTableName());
-                //if (!BusinessObject.BODataPool.ContainsKey(m_boId))
-                //{
-                //    BusinessObject.BODataPool[m_boId] = m_dataList;
-                //}
-                
-                //foreach (BOIDEnum id in m_relatedBO)
-                //{
-                //    if (!BusinessObject.BODataPool.ContainsKey(id))
-                //    {
-                //        BusinessObject bo = BOFactory.GetBO(id);
-                //        BusinessObject.BODataPool[id] = bo.GetDataList();
-                //    }
-                //}
-                
+                BusinessObject.BODataPool[m_boId] = m_dataList;
             }
+            else
+            {
+                if(BusinessObject.BODataPool.ContainsKey(m_boId))
+                {
+                    if(m_dataList == null)
+                        m_dataList = BusinessObject.BODataPool[m_boId];
+                }
+                else
+                {
+                    m_dataList = m_dbConn.GetTableData(GetTableName());
+                    BusinessObject.BODataPool[m_boId] = m_dataList;
+                }
+            }
+
             return m_dataList;
         }
         public virtual void SetDataList(IList list)
@@ -279,6 +310,13 @@ namespace Nan.BusinessObjects.BO
         }
     }
 
+    public enum BOAction
+    {
+        None,
+        Add,
+        Update,
+        Delete
+    }
     public static class BOConvertor
     {
         public static T ConvertToTarget<T>(this JObject source) where T : new()

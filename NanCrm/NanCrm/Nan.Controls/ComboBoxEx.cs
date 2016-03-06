@@ -79,24 +79,43 @@ namespace Nan.Controls
             this.DisplayMember = "Description";
         }
 
-        protected override void OnSelectedIndexChanged(EventArgs e)
+        private int m_prevSelectedIndex = -1;
+        protected override void OnSelectionChangeCommitted(EventArgs e)
         {
             if (!AddDefineNew)
             {
-                base.OnSelectedIndexChanged(e);
                 return;
             }
-            if (SelectedIndex == m_vv.Count-1)
+
+            if (this.SelectedIndex == m_vv.Count - 1)
             {
-                //BusinessObject.DisplayBo(DataSourceBO);
                 if (DefineNewProc != null)
                 {
                     DefineNewProc(this, DefineNewReturnProc);
                 }
+                this.SelectedIndex = m_prevSelectedIndex;
             }
-            base.OnSelectedIndexChanged(e);
-            
+            m_prevSelectedIndex = this.SelectedIndex;
         }
+//         protected override void OnSelectedIndexChanged(EventArgs e)
+//         {
+//             m_prevSelectedIndex = this.SelectedIndex;
+//             if (!AddDefineNew)
+//             {
+//                 base.OnSelectedIndexChanged(e);
+//                 return;
+//             }
+//             if (SelectedIndex == m_vv.Count-1)
+//             {
+//                 //BusinessObject.DisplayBo(DataSourceBO);
+//                 if (DefineNewProc != null)
+//                 {
+//                     DefineNewProc(this, DefineNewReturnProc);
+//                 }
+//             }
+//             base.OnSelectedIndexChanged(e);
+//             
+//         }
 
         protected virtual void DefineNewReturnProc(Form form, object data)
         {

@@ -28,16 +28,12 @@ namespace NanCrm.Product
 
         private void LoadGrid()
         {
-            try
-            {
-                m_proList = (BOProduct)BOFactory.GetBO(BOIDEnum.Product);
-                List<ProductMD> listObj = Utilities.ConvertList<ProductMD>(m_proList.GetDataList());
-                objList.SetObjects(listObj);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
+            olvcTexture.DataSource = BOFactory.GetBO(BOIDEnum.Texture).GetValieValue("ID","Name");
+            olvcGroup.DataSource= BOFactory.GetBO(BOIDEnum.ProductGroup).GetValieValue("ID", "Name");
+
+            m_proList = (BOProduct)BOFactory.GetBO(BOIDEnum.Product);
+            List<ProductMD> listObj = Utilities.ConvertList<ProductMD>(m_proList.GetDataList());
+            objList.SetObjects(listObj);
         }
 
         private void btnNew_Click(object sender, EventArgs e)

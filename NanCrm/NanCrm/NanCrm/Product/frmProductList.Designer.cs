@@ -76,6 +76,8 @@
             this.objList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvcCode,
             this.olvcName,
+            this.olvcGroup,
+            this.olvcTexture,
             this.olvcPrice,
             this.olvcRefund,
             this.olvcHeight,
@@ -108,6 +110,8 @@
             // olvcCode
             // 
             this.olvcCode.AspectName = "Code";
+            this.olvcCode.DataSource = null;
+            this.olvcCode.EditAsCombBox = false;
             this.olvcCode.IsRowNumberColumn = false;
             this.olvcCode.Text = "产品编号";
             this.olvcCode.Width = 93;
@@ -115,6 +119,8 @@
             // olvcName
             // 
             this.olvcName.AspectName = "Name";
+            this.olvcName.DataSource = null;
+            this.olvcName.EditAsCombBox = false;
             this.olvcName.Groupable = false;
             this.olvcName.IsRowNumberColumn = false;
             this.olvcName.Text = "产品名称";
@@ -122,8 +128,10 @@
             // 
             // olvcFName
             // 
-            this.olvcFName.AspectName = "Fname";
+            this.olvcFName.AspectName = "FName";
+            this.olvcFName.DataSource = null;
             this.olvcFName.DisplayIndex = 3;
+            this.olvcFName.EditAsCombBox = false;
             this.olvcFName.Groupable = false;
             this.olvcFName.IsRowNumberColumn = false;
             this.olvcFName.IsVisible = false;
@@ -132,24 +140,26 @@
             // olvcGroup
             // 
             this.olvcGroup.AspectName = "Group";
-            this.olvcGroup.DisplayIndex = 3;
+            this.olvcGroup.DataSource = null;
+            this.olvcGroup.EditAsCombBox = true;
             this.olvcGroup.IsRowNumberColumn = false;
-            this.olvcGroup.IsVisible = false;
             this.olvcGroup.Text = "产品分组";
             this.olvcGroup.Width = 84;
             // 
             // olvcTexture
             // 
             this.olvcTexture.AspectName = "Texture";
-            this.olvcTexture.DisplayIndex = 4;
+            this.olvcTexture.DataSource = null;
+            this.olvcTexture.EditAsCombBox = true;
             this.olvcTexture.IsRowNumberColumn = false;
-            this.olvcTexture.IsVisible = false;
             this.olvcTexture.Text = "材质";
             this.olvcTexture.Width = 80;
             // 
             // olvcPrice
             // 
             this.olvcPrice.AspectName = "Price";
+            this.olvcPrice.DataSource = null;
+            this.olvcPrice.EditAsCombBox = false;
             this.olvcPrice.IsRowNumberColumn = false;
             this.olvcPrice.Text = "价格";
             this.olvcPrice.Width = 90;
@@ -157,6 +167,8 @@
             // olvcRefund
             // 
             this.olvcRefund.AspectName = "Refundrate";
+            this.olvcRefund.DataSource = null;
+            this.olvcRefund.EditAsCombBox = false;
             this.olvcRefund.IsRowNumberColumn = false;
             this.olvcRefund.Text = "退税率";
             this.olvcRefund.Width = 81;
@@ -164,30 +176,40 @@
             // olvcHeight
             // 
             this.olvcHeight.AspectName = "Height";
+            this.olvcHeight.DataSource = null;
+            this.olvcHeight.EditAsCombBox = false;
             this.olvcHeight.IsRowNumberColumn = false;
             this.olvcHeight.Text = "高度";
             // 
             // olvcWidth
             // 
             this.olvcWidth.AspectName = "Width";
+            this.olvcWidth.DataSource = null;
+            this.olvcWidth.EditAsCombBox = false;
             this.olvcWidth.IsRowNumberColumn = false;
             this.olvcWidth.Text = "宽度";
             // 
             // olvcLength
             // 
             this.olvcLength.AspectName = "Length";
+            this.olvcLength.DataSource = null;
+            this.olvcLength.EditAsCombBox = false;
             this.olvcLength.IsRowNumberColumn = false;
             this.olvcLength.Text = "长度";
             // 
             // olvcWeight
             // 
             this.olvcWeight.AspectName = "Weight";
+            this.olvcWeight.DataSource = null;
+            this.olvcWeight.EditAsCombBox = false;
             this.olvcWeight.IsRowNumberColumn = false;
             this.olvcWeight.Text = "宽度";
             // 
             // olvcRemark
             // 
             this.olvcRemark.AspectName = "Remark";
+            this.olvcRemark.DataSource = null;
+            this.olvcRemark.EditAsCombBox = false;
             this.olvcRemark.IsRowNumberColumn = false;
             this.olvcRemark.Text = "备注";
             // 

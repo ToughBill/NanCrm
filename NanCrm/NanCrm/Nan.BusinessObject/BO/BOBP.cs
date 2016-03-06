@@ -65,5 +65,12 @@ namespace Nan.BusinessObjects.BO
 
             return true;
         }
+
+        public List<ValidValue> GetBPTypeValidValue()
+        {
+            return new List<ValidValue>() { new ValidValue(BOBP.Potential.ToString(),"潜在客户"),
+                                            new ValidValue(BOBP.Customer.ToString(),"客户"),
+                                            new ValidValue(BOBP.Vendor.ToString(),"供应商") };
+        }
     }
 }

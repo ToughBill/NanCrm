@@ -94,6 +94,8 @@
             // olvcName
             // 
             this.olvcName.AspectName = "Name";
+            this.olvcName.DataSource = null;
+            this.olvcName.EditAsCombBox = false;
             this.olvcName.Groupable = false;
             this.olvcName.IsRowNumberColumn = false;
             this.olvcName.Text = "国家";
@@ -102,6 +104,8 @@
             // olvcFName
             // 
             this.olvcFName.AspectName = "ForeName";
+            this.olvcFName.DataSource = null;
+            this.olvcFName.EditAsCombBox = false;
             this.olvcFName.Groupable = false;
             this.olvcFName.IsRowNumberColumn = false;
             this.olvcFName.Text = "外文名";
@@ -110,6 +114,8 @@
             // olvcAlias
             // 
             this.olvcAlias.AspectName = "Alias";
+            this.olvcAlias.DataSource = null;
+            this.olvcAlias.EditAsCombBox = false;
             this.olvcAlias.Groupable = false;
             this.olvcAlias.IsRowNumberColumn = false;
             this.olvcAlias.Text = "简写";
@@ -118,6 +124,8 @@
             // olvcCaptial
             // 
             this.olvcCaptial.AspectName = "Capital";
+            this.olvcCaptial.DataSource = null;
+            this.olvcCaptial.EditAsCombBox = false;
             this.olvcCaptial.Groupable = false;
             this.olvcCaptial.IsRowNumberColumn = false;
             this.olvcCaptial.Text = "首都";
@@ -126,11 +134,13 @@
             // olvcID
             // 
             this.olvcID.AspectName = "ID";
+            this.olvcID.DataSource = null;
             this.olvcID.DisplayIndex = 1;
+            this.olvcID.EditAsCombBox = false;
             this.olvcID.Groupable = false;
             this.olvcID.IsRowNumberColumn = false;
             this.olvcID.IsVisible = false;
-            this.olvcID.Text = "#";
+            this.olvcID.Text = "ID";
             this.olvcID.Width = 36;
             // 
             // frmCountry

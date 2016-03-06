@@ -48,17 +48,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BOFieldAttribute.cs" />
-    <Compile Include="BPMD.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BPMD.Designer.cs">
-      <DependentUpon>BPMD.cs</DependentUpon>
-    </Compile>
     <Compile Include="BP\frmBP.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BP\frmBP.Designer.cs">
       <DependentUpon>frmBP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BP\frmBpList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BP\frmBpList.Designer.cs">
+      <DependentUpon>frmBpList.cs</DependentUpon>
     </Compile>
     <Compile Include="FormBase.cs">
       <SubType>Form</SubType>
@@ -157,11 +157,11 @@
     <Compile Include="Setup\frmTexture.Designer.cs">
       <DependentUpon>frmTexture.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BPMD.resx">
-      <DependentUpon>BPMD.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BP\frmBP.resx">
       <DependentUpon>frmBP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BP\frmBpList.resx">
+      <DependentUpon>frmBpList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBase.resx">
       <DependentUpon>FormBase.cs</DependentUpon>

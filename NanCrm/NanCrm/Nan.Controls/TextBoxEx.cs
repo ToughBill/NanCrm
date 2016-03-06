@@ -78,7 +78,7 @@ namespace Nan.Controls
 
             txtBox.Left = ShowLink ? btnLink.Width : 0;
             txtBox.Top = 0;
-            txtBox.Width = this.Width - btnLink.Width - btnChoose.Width;
+            txtBox.Width = this.Width - (m_showLink ? btnLink.Width : 0) - (m_showChoose ? btnChoose.Width : 0);
         }
 
         public event PickerClickHandler LinkClick;
