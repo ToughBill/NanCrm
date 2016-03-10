@@ -27,7 +27,7 @@ namespace Nan.BusinessObjects.BO
         public object CopyFrom(object fromObj)
         {
             BPMD source = (BPMD)fromObj;
-            if (source == null)
+            if (source == null || source == this)
             {
                 return this;
             }

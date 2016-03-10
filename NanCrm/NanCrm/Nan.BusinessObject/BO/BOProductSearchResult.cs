@@ -18,7 +18,7 @@ namespace Nan.BusinessObjects.BO
         public object CopyFrom(object fromObj)
         {
             ProductSearchResultMD source = (ProductSearchResultMD)fromObj;
-            if (source == null)
+            if (source == null || source == this)
             {
                 return this;
             }

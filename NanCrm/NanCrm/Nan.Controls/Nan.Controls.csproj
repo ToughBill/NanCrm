@@ -60,6 +60,12 @@
     <Compile Include="ObjectGrid.Designer.cs">
       <DependentUpon>ObjectGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="PictureBoxEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PictureBoxEx.Designer.cs">
+      <DependentUpon>PictureBoxEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -102,6 +108,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="PictureBoxEx.resx">
+      <DependentUpon>PictureBoxEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

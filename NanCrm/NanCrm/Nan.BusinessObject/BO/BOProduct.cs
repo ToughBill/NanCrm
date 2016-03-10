@@ -22,12 +22,14 @@ namespace Nan.BusinessObjects.BO
         public string Weight { get; set; }
         public int Texture { get; set; }
         public string Remark { get; set; }
+        public List<int> Images { get; set; }
 
         public ProductMD()
         {
             Code = Name = FName = Refundrate
                 = Price = Length = Width = Height
                 = Weight = Remark = string.Empty;
+            Images = new List<int>();
         }
 
         public object CopyFrom(object fromObj)
@@ -50,6 +52,8 @@ namespace Nan.BusinessObjects.BO
             this.Weight = source.Weight;
             this.Texture = source.Texture;
             this.Remark = source.Remark;
+            this.Images.Clear();
+            this.Images.AddRange(source.Images);
 
             return this;
         }
